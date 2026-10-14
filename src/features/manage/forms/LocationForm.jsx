@@ -1,0 +1,33 @@
+import React, { useState } from "react";
+import { uid } from "../../../utils/ids.js";
+import { Field, TextInput, NumberInput, TextArea } from "../../../components/ui/FormFields.jsx";
+import { MiniMapPicker } from "../../../components/maps/MiniMapPicker.jsx";
+import { FormFooter } from "./FormFooter.jsx";
+
+function LocationForm({ value, onSave, onCancel }) {
+  const init = value || { id: uid("loc"), name: "", region: "", lat: "", lng: "", x: 500, y: 280, desc: "" };
+  const [f, setF] = useState(init); const [err, setErr] = useState({});
+  const up = (k, v) => setF((s) => ({ ...s, [k]: v }));
+  function save() {
+    const e = {}; if (!f.name.trim()) e.name = "Required";
+    if (typeof f.x !== "number" || typeof f.y !== "number") e.x = "Pick a map position";
+    setErr(e); if (Object.keys(e).length) return;
+    onSave({ ...f, lat: f.lat === "" ? null : Number(f.lat), lng: f.lng === "" ? null : Number(f.lng) });
+  }
+  return (
+    <>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+        <Field label="Location name" required error={err.name}><TextInput value={f.name} onChange={(v) => up("name", v)} error={err.name} placeholder="e.g. Lisbon" /></Field>
+        <Field label="Country / region"><TextInput value={f.region} onChange={(v) => up("region", v)} placeholder="e.g. Portugal" /></Field>
+        <Field label="Latitude (optional)"><NumberInput value={f.lat} onChange={(v) => up("lat", v)} placeholder="e.g. 38.7" /></Field>
+        <Field label="Longitude (optional)"><NumberInput value={f.lng} onChange={(v) => up("lng", v)} placeholder="e.g. -9.1" /></Field>
+      </div>
+      <Field label="Map position" required error={err.x} hint="Click the map to place this location's pin"><MiniMapPicker x={f.x} y={f.y} lat={f.lat === "" ? null : Number(f.lat)} lng={f.lng === "" ? null : Number(f.lng)} onPick={(x, y, ll) => setF((s) => ({ ...s, x, y, ...(ll ? { lat: Number(ll.lat.toFixed(4)), lng: Number(ll.lng.toFixed(4)) } : {}) }))} /></Field>
+      <Field label="Description"><TextArea value={f.desc} onChange={(v) => up("desc", v)} rows={2} /></Field>
+      <FormFooter onCancel={onCancel} onSave={save} />
+    </>
+  );
+}
+
+
+export { LocationForm };
