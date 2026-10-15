@@ -13,6 +13,14 @@ npm run dev
 
 Vite prints the development server address. The app needs no backend or credentials.
 
+## Windows installation notes
+
+In Command Prompt, `npm.cmd ci` and `npm.cmd run dev` are equivalent to the commands above. If you downloaded a ZIP, download and extract the latest `main` archive to receive dependency updates; rerunning `npm ci` in an older extracted copy keeps its older lockfile.
+
+An ESLint 9 deprecation warning is currently expected: the React lint plugin has not declared support for ESLint 10. It does not mean installation failed. Vitest is updated separately to resolve the reported security advisories; do not use `npm audit fix --force` as a general setup step.
+
+If your npm version reports that esbuild's install script needs approval, review it with `npm.cmd install-scripts ls`. If startup fails because that script was withheld, approve the listed esbuild package with `npm.cmd install-scripts approve esbuild`, then retry. This command applies only to npm versions exposing the `install-scripts` approval workflow.
+
 ## Validate
 
 ```sh
