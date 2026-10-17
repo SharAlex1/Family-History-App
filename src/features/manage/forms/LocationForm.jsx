@@ -14,7 +14,7 @@ function LocationForm({ value, onSave, onCancel }) {
     const lat = f.lat === "" || f.lat == null ? null : Number(f.lat), lng = f.lng === "" || f.lng == null ? null : Number(f.lng);
     if ((lat === null) !== (lng === null) || (lat !== null && (!Number.isFinite(lat) || Math.abs(lat) > 90 || !Number.isFinite(lng) || Math.abs(lng) > 180))) e.coords = "Supply both coordinates: latitude -90 to 90, longitude -180 to 180.";
     setErr(e); if (Object.keys(e).length) return;
-    onSave({ ...f, lat, lng });
+    onSave({ ...f, lat, lng, unmapped: f.unmapped ? lat == null : false });
   }
   return (
     <>
@@ -24,7 +24,7 @@ function LocationForm({ value, onSave, onCancel }) {
         <Field label="Latitude (optional)" error={err.coords}><NumberInput value={f.lat} onChange={(v) => up("lat", v)} placeholder="e.g. 38.7" /></Field>
         <Field label="Longitude (optional)"><NumberInput value={f.lng} onChange={(v) => up("lng", v)} placeholder="e.g. -9.1" /></Field>
       </div>
-      <Field label="Map position" required error={err.x} hint="Click the map to place this location's pin"><MiniMapPicker x={f.x} y={f.y} lat={f.lat === "" || f.lat == null ? null : Number(f.lat)} lng={f.lng === "" || f.lng == null ? null : Number(f.lng)} onPick={(x, y, ll) => setF((s) => ({ ...s, x, y, ...(ll ? { lat: Number(ll.lat.toFixed(4)), lng: Number(ll.lng.toFixed(4)) } : {}) }))} /></Field>
+      <Field label="Map position" required error={err.x} hint="Click the map to place this location's pin"><MiniMapPicker x={f.x} y={f.y} lat={f.lat === "" || f.lat == null ? null : Number(f.lat)} lng={f.lng === "" || f.lng == null ? null : Number(f.lng)} onPick={(x, y, ll) => setF((s) => ({ ...s, x, y, unmapped: false, ...(ll ? { lat: Number(ll.lat.toFixed(4)), lng: Number(ll.lng.toFixed(4)) } : {}) }))} /></Field>
       <Field label="Description"><TextArea value={f.desc} onChange={(v) => up("desc", v)} rows={2} /></Field>
       <FormFooter onCancel={onCancel} onSave={save} />
     </>

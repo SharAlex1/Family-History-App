@@ -1,0 +1,44 @@
+0 HEAD
+1 SOUR Family Atlas test fixture
+1 GEDC
+2 VERS 5.5.1
+1 CHAR UTF-8
+0 @S1@ SOUR
+1 TITL Civil register
+1 AUTH County archive
+0 @I1@ INDI
+1 NAME Ada /Example/
+1 SEX F
+1 BIRT
+2 DATE 12 MAY 1900
+2 PLAC York, England
+2 SOUR @S1@
+3 PAGE 12
+3 DATA
+4 TEXT Date recorded in register
+1 RESI
+2 DATE 1925
+2 PLAC Toronto, Canada
+1 NOTE First generation
+0 @I2@ INDI
+1 NAME Ben /Example/
+1 SEX M
+1 BIRT
+2 DATE ABT 1898
+0 @I3@ INDI
+1 NAME Casey /Example/
+1 BIRT
+2 DATE 1930
+1 FAMC @F1@
+2 PEDI adopted
+0 @I4@ INDI
+1 NAME Dana /Unknown/
+1 DEAT Y
+0 @F1@ FAM
+1 HUSB @I2@
+1 WIFE @I1@
+1 CHIL @I3@
+1 MARR
+2 DATE 1920
+2 PLAC York, England
+0 TRLR

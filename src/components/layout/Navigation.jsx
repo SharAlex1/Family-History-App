@@ -1,5 +1,5 @@
 import React, { useState, useRef, useId } from "react";
-import { Home, GitBranch, Clock, MapPin, Users, FileText, Search, Filter, Compass, Database, Check } from "lucide-react";
+import { Home, GitBranch, Clock, MapPin, Users, FileText, Search, Filter, Compass, Database, Check, Route, Mic, BookOpen, Link2, NotebookPen, MessageCircle, Sparkles, Import } from "lucide-react";
 import { C } from "../../config/theme.js";
 import { fullName } from "../../utils/people.js";
 import { useData } from "../../state/DataContext.jsx";
@@ -12,12 +12,20 @@ const NAV = [
   { id: "map", label: "Map", Icon: MapPin },
   { id: "people", label: "People", Icon: Users },
   { id: "documents", label: "Documents", Icon: FileText },
+  { id: "journey", label: "Follow a Journey", Icon: Route },
+  { id: "interviews", label: "Oral History", Icon: Mic },
+  { id: "stories", label: "Stories & Books", Icon: BookOpen },
+  { id: "relationships", label: "Relationship Finder", Icon: Link2 },
+  { id: "research", label: "Research & Evidence", Icon: NotebookPen },
+  { id: "memories", label: "Family Memories", Icon: MessageCircle },
+  { id: "discoveries", label: "On This Day", Icon: Sparkles },
+  { id: "import", label: "Import & Merge", Icon: Import },
   { id: "manage", label: "Manage Data", Icon: Database },
 ];
 
 function Sidebar({ view, setView }) {
   return (
-    <nav className="fa-sidebar">
+    <nav className="fa-sidebar" aria-label="Primary navigation">
       <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "4px 6px 22px" }}>
         <div style={{ width: 34, height: 34, borderRadius: 9, background: `linear-gradient(135deg,${C.amber},#b07a2e)`, display: "flex", alignItems: "center", justifyContent: "center" }}><Compass size={19} color="#1a1206" /></div>
         <div className="fa-label">

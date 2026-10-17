@@ -4,6 +4,7 @@ import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {execFileSync} from 'node:child_process';
 
 const baseURL = process.env.AUDIT_URL || 'http://127.0.0.1:5173';
 const out = path.resolve(process.env.AUDIT_OUTPUT || 'docs/audit/verification');
@@ -66,7 +67,7 @@ async function run(id, name, fn, options = {}) {
  results.push(record);
  console.log(`${status.toUpperCase()} ${id}: ${name}${detail ? '\n  '+detail.split('\n')[0] : ''}`);
  await context.close();
- await fs.writeFile(path.join(out, 'results.json'), JSON.stringify({ commit: process.env.AUDIT_REVISION || 'working tree after 1a194f1', environment: 'Linux Chromium; isolated local browser storage', results }, null, 2)+'\n');
+ await fs.writeFile(path.join(out, 'results.json'), JSON.stringify({ commit: process.env.AUDIT_REVISION || `working tree based on ${execFileSync('git',['rev-parse','--short','HEAD'],{encoding:'utf8'}).trim()}`, environment: 'Linux Chromium; isolated local browser storage', results }, null, 2)+'\n');
 }
 
 // Normal navigation and historical views.

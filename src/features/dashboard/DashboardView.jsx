@@ -46,7 +46,7 @@ function DashboardView({ year, setView }) {
     );
   }
   const living = people.filter((p) => statusAt(p, year) === "alive");
-  const earliest = people.reduce((a, b) => (b.birth < a.birth ? b : a));
+  const earliest = people.filter(p=>Number.isFinite(p.birth)).reduce((a,b)=>!a||b.birth<a.birth?b:a,null) || people[0];
   const regions = uniq(people.flatMap((p) => (p.residences || []).map((r) => getL(r.at).region)).filter(Boolean));
   const path = (earliest.residences || []).map((r) => getL(r.at).name);
   const highlights = [...data.events].filter((e) => ["milestone", "migration", "marriage"].includes(e.type)).sort((a, b) => b.year - a.year).slice(0, 4);
@@ -66,7 +66,7 @@ function DashboardView({ year, setView }) {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 14, marginTop: 26 }}>
         <Stat k="Family members" v={people.length} sub="across the archive" />
         <Stat k="Branches" v={data.branches.length} sub={data.branches.map((b) => b.name).join(" · ") || "—"} accent={C.amber} />
-        <Stat k="Earliest ancestor" v={earliest.birth} sub={`${fullName(earliest)}, ${getL(earliest.born).name}`} />
+        <Stat k="Earliest ancestor" v={earliest.birth??"Unknown"} sub={`${fullName(earliest)}, ${getL(earliest.born).name}`} />
         <Stat k="Regions" v={regions.length} sub={regions.join(" · ") || "—"} accent={C.teal} />
         <Stat k="Migrations" v={data.migrations.length} sub="recorded paths" />
       </div>

@@ -170,7 +170,7 @@ function EntityRow({ kind, row, getL, getP, onEdit, onDelete, onOpenPerson }) {
   if (kind === "people") {
     lead = <Avatar p={row} size={36} status="alive" />;
     title = fullName(row);
-    meta = `${row.birth}${row.death != null ? ` – ${row.death}` : " – present"} · ${(row.residences || []).length} residence${(row.residences || []).length === 1 ? "" : "s"}`;
+    meta = `${row.birth ?? "Unknown"}${row.death != null ? ` – ${row.death}` : row.deceased ? " – unknown" : " – present"} · ${(row.residences || []).length} residence${(row.residences || []).length === 1 ? "" : "s"}`;
   } else if (kind === "locations") {
     lead = <div style={{ width: 36, height: 36, borderRadius: 9, background: `${C.amber}1a`, color: C.amber, display: "flex", alignItems: "center", justifyContent: "center" }}><MapPin size={17} /></div>;
     title = row.name; meta = `${row.region || "—"} · map ${row.x},${row.y}`;
@@ -189,7 +189,7 @@ function EntityRow({ kind, row, getL, getP, onEdit, onDelete, onOpenPerson }) {
     title = row.name; meta = `${data.people.filter((p) => (p.branches || []).includes(row.id)).length} members`;
   }
   return (
-    <div className="fa-card" style={{ display: "flex", alignItems: "center", gap: 12, padding: 12, borderRadius: 12, background: C.panelSolid, border: `1px solid ${C.border}` }}>
+    <div className="fa-card fa-entity-row" style={{ display: "flex", alignItems: "center", gap: 12, padding: 12, borderRadius: 12, background: C.panelSolid, border: `1px solid ${C.border}` }}>
       {lead}
       <div style={{ minWidth: 0, flex: 1 }}>
         <div style={{ fontSize: 14, color: C.text, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{title}</div>

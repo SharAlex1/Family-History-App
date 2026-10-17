@@ -44,7 +44,7 @@ function TimelineView({ year, openPerson, typeFilter, setTypeFilter, branchSel, 
               <div key={e.id} style={{ position: "relative", marginBottom: 16, opacity, transition: "opacity .3s" }}>
                 <div style={{ position: "absolute", left: -30, top: 4, width: 16, height: 16, borderRadius: "50%", background: C.bg, border: `2px solid ${m.color}`, display: "flex", alignItems: "center", justifyContent: "center" }}><span style={{ width: 6, height: 6, borderRadius: "50%", background: m.color }} /></div>
                 <div className="fa-card" style={{ background: e.historical ? "transparent" : C.panelSolid, border: `1px solid ${near ? m.color + "66" : e.historical ? C.borderSoft : C.border}`, borderStyle: e.historical ? "dashed" : "solid", borderRadius: 13, padding: "12px 14px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div className="timeline-event-header" style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <span style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 17, fontWeight: 600, color: near ? m.color : C.text, width: 48, flexShrink: 0 }}>{e.year}</span>
                     <m.Icon size={15} color={m.color} />
                     <span style={{ fontSize: 14, color: e.historical ? C.sub : C.text, fontStyle: e.historical ? "italic" : "normal" }}>{e.title}</span>

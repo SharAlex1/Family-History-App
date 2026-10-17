@@ -1,0 +1,485 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "view": "Overview",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "Family Tree",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "Timeline",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "Map",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "People",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "Documents",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "Follow a Journey",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "Oral History",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "Stories & Books",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "Relationship Finder",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "Research & Evidence",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "Family Memories",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "On This Day",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "Import & Merge",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 1440,
+      "view": "Manage Data",
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "contentWidth": 1216,
+      "contentScrollWidth": 1216
+    },
+    {
+      "width": 768,
+      "view": "Overview",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "Family Tree",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "Timeline",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "Map",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "People",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "Documents",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "Follow a Journey",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "Oral History",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "Stories & Books",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "Relationship Finder",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "Research & Evidence",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "Family Memories",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "On This Day",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "Import & Merge",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 768,
+      "view": "Manage Data",
+      "viewport": 768,
+      "pageWidth": 768,
+      "contentWidth": 708,
+      "contentScrollWidth": 708
+    },
+    {
+      "width": 390,
+      "view": "Overview",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "Family Tree",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "Timeline",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "Map",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "People",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "Documents",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "Follow a Journey",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "Oral History",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "Stories & Books",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "Relationship Finder",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "Research & Evidence",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "Family Memories",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "On This Day",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "Import & Merge",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 390,
+      "view": "Manage Data",
+      "viewport": 390,
+      "pageWidth": 390,
+      "contentWidth": 330,
+      "contentScrollWidth": 330
+    },
+    {
+      "width": 320,
+      "view": "Overview",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "Family Tree",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "Timeline",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "Map",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "People",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "Documents",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "Follow a Journey",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "Oral History",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "Stories & Books",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "Relationship Finder",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "Research & Evidence",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "Family Memories",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "On This Day",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 261
+    },
+    {
+      "width": 320,
+      "view": "Import & Merge",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    },
+    {
+      "width": 320,
+      "view": "Manage Data",
+      "viewport": 320,
+      "pageWidth": 320,
+      "contentWidth": 260,
+      "contentScrollWidth": 260
+    }
+  ],
+  "pageErrors": []
+}

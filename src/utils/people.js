@@ -5,19 +5,20 @@ const fullName = (p) => `${p.first} ${p.last}`.trim();
 const initials = (p) => `${(p.first || "?")[0]}${(p.last || "")[0] || ""}`.toUpperCase();
 
 function statusAt(p, year) {
-  if (year < p.birth) return "unborn";
+  if (p.birth != null && year < p.birth) return "unborn";
   if (p.death != null && year > p.death) return "deceased";
+  if (p.birth == null || (p.deceased && p.death == null)) return "unknown";
   return "alive";
 }
 
 function ageAt(p, year) {
-  if (year < p.birth) return null;
+  if (p.birth == null || year < p.birth || (p.deceased && p.death == null)) return null;
   const cap = p.death != null ? Math.min(year, p.death) : year;
   return cap - p.birth;
 }
 
 function residenceAt(p, year) {
-  if (year < p.birth) return null;
+  if (p.birth != null && year < p.birth) return null;
   const ref = p.death != null ? Math.min(year, p.death) : year;
   let cur = null;
   const sorted = [...(p.residences || [])].sort((a, b) => a.from - b.from);

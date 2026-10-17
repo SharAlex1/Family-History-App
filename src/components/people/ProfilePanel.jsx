@@ -33,10 +33,11 @@ function ProfilePanel({ id, year, onClose, openPerson, setView, focusPerson, onE
           <Avatar p={p} size={56} status={status} selected />
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontFamily: "Fraunces, Georgia, serif", fontWeight: 600, fontSize: 21, color: C.text, lineHeight: 1.1 }}>{fullName(p)}</div>
-            <div style={{ fontSize: 12.5, color: C.sub, marginTop: 4 }}>{p.birth} – {p.death != null ? p.death : "present"} · born {getL(p.born).name}</div>
+            <div style={{ fontSize: 12.5, color: C.sub, marginTop: 4 }}>{p.birthDate || (p.birth ?? "Unknown")} – {p.deathDate || (p.death != null ? p.death : p.deceased ? "Unknown" : "present")} · born {getL(p.born).name}</div>
             <div style={{ marginTop: 8 }}>
               {status === "alive" && <Pill color={C.teal} bg={`${C.teal}1a`}>{age} in {year} · {where ? getL(where).name : "—"}</Pill>}
               {status === "deceased" && <Pill color={C.gray}>Deceased before {year}</Pill>}
+              {status === "unknown" && <Pill>Dates unknown</Pill>}
               {status === "unborn" && <Pill color={C.faint}>Not yet born in {year}</Pill>}
             </div>
           </div>

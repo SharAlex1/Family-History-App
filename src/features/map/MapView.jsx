@@ -29,7 +29,7 @@ function MapView({ year, selectedId, openPerson, branchSel }) {
   const clusters = {};
   living.forEach((p) => { const at = residenceAt(p, year); if (at) (clusters[at] = clusters[at] || []).push(p); });
   // migration arcs from editable migrations that have occurred
-  const occurred = data.migrations.filter((mg) => mg.startYear <= year).filter((mg) => branchSel.length === 0 || (mg.mode === "person" ? matchBranch(getP(mg.personId), branchSel) : branchSel.includes(mg.branch)));
+  const occurred = data.migrations.filter(mg => !getL(mg.from).unmapped && !getL(mg.to).unmapped).filter((mg) => mg.startYear <= year).filter((mg) => branchSel.length === 0 || (mg.mode === "person" ? matchBranch(getP(mg.personId), branchSel) : branchSel.includes(mg.branch)));
   const sel = selectedId ? getP(selectedId) : null;
   const selSet = new Set((data.migrations).filter((mg) => sel && ((mg.mode === "person" && mg.personId === sel.id) || (mg.mode === "branch" && (sel.branches || []).includes(mg.branch)))).map((mg) => mg.id));
   if (data.locations.length === 0) return <EmptyState icon={MapPin} title="No locations yet" msg="Add locations in Manage Data to populate the map." />;
@@ -37,7 +37,7 @@ function MapView({ year, selectedId, openPerson, branchSel }) {
     <div style={{ padding: "22px 24px 130px" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8, marginBottom: 6 }}>
         <h2 style={{ fontFamily: "Fraunces, Georgia, serif", fontWeight: 600, fontSize: 22, color: C.text, margin: 0 }}>Migration Map</h2>
-        <div style={{ display: "flex", gap: 16, fontSize: 12, color: C.sub }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 16, fontSize: 12, color: C.sub }}>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style={{ width: 9, height: 9, borderRadius: "50%", background: C.teal }} />Living here in {year}</span>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style={{ width: 16, height: 2, background: C.amber, display: "inline-block" }} />Migration path</span>
         </div>
@@ -59,7 +59,7 @@ function MapView({ year, selectedId, openPerson, branchSel }) {
             const a = ptOf(getL(mg.from)), b = ptOf(getL(mg.to)); const isSel = selSet.has(mg.id);
             return <path key={mg.id} d={arcPath(a, b)} fill="none" stroke={isSel ? "url(#arc)" : C.amberLine} strokeWidth={isSel ? 3 : 1.4} className={isSel ? "fa-flow" : ""} opacity={isSel ? 1 : 0.26} />;
           })}
-          {Object.entries(clusters).map(([locId, ppl]) => {
+          {Object.entries(clusters).filter(([locId])=>!getL(locId).unmapped).map(([locId, ppl]) => {
             const l = getL(locId); const pt = ptOf(l); const hasSel = sel && ppl.some((p) => p.id === sel.id); const r = 7 + Math.min(ppl.length, 5) * 2.2;
             return (
               <g key={locId}>
@@ -76,7 +76,7 @@ function MapView({ year, selectedId, openPerson, branchSel }) {
         {Object.entries(clusters).sort((a, b) => b[1].length - a[1].length).map(([locId, ppl]) => (
           <div key={locId} className="fa-card" style={{ padding: 14, borderRadius: 13, background: C.panelSolid, border: `1px solid ${C.border}` }}>
             <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 9 }}>
-              <MapPin size={14} color={C.amber} /><span style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 15, color: C.text }}>{getL(locId).name}</span>
+              <MapPin size={14} color={C.amber} /><span style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 15, color: C.text }}>{getL(locId).name}{getL(locId).unmapped ? " (needs coordinates)" : ""}</span>
               <span style={{ marginLeft: "auto" }}><Pill color={C.teal}>{ppl.length}</Pill></span>
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>

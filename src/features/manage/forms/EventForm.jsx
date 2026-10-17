@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { parseFamilyDate } from "../../../lib/dates.js";
 import { isYear, yearError } from "../../../lib/archive.js";
 import { uid } from "../../../utils/ids.js";
 import { TYPE } from "../../../config/eventTypes.js";
@@ -14,6 +15,7 @@ function EventForm({ value, onSave, onCancel }) {
   const up = (k, v) => setF((s) => ({ ...s, [k]: v }));
   function save() {
     const e = {}; if (!f.title.trim()) e.title = "Required"; if (!isYear(f.year)) e.year = yearError; if (!f.at) e.at = "Location required";
+    if(f.date){try{if(parseFamilyDate(f.date).year!==Number(f.year))e.year="Date and year must agree";}catch(error){e.year=error.message;}}
     setErr(e); if (Object.keys(e).length) return;
     onSave({ ...f, year: Number(f.year) });
   }
@@ -25,6 +27,7 @@ function EventForm({ value, onSave, onCancel }) {
         <Field label="Year" required error={err.year}><NumberInput value={f.year} onChange={(v) => up("year", v)} error={err.year} placeholder="e.g. 1952" /></Field>
         <Field label="Location" required error={err.at}><SelectInput value={f.at} onChange={(v) => up("at", v)} options={data.locations.map((l) => ({ value: l.id, label: l.name }))} placeholder="—" error={err.at} /></Field>
       </div>
+<Field label="Event date (optional)"><TextInput value={f.date||""} onChange={v=>{up("date",v);try{const d=parseFamilyDate(v);if(d.year!=null)up("year",d.year);}catch{/* validate on save */}}} placeholder="1947-06-18 or ABT 1947"/></Field>
       <Field label="Description"><TextArea value={f.desc} onChange={(v) => up("desc", v)} rows={2} /></Field>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
         <Field label="Related people"><MultiSelect value={f.people} onChange={(v) => up("people", v)} options={data.people.map((p) => ({ value: p.id, label: fullName(p) }))} /></Field>

@@ -1,17 +1,19 @@
 import React from "react";
 import { C } from "../../config/theme.js";
+import { useMediaUrl } from "../media/MediaPreview.jsx";
 import { initials } from "../../utils/people.js";
 
 function Avatar({ p, size = 38, status = "alive", selected = false }) {
+  const {url} = useMediaUrl(p.photoFileId);
   const ring = status === "alive" ? C.teal : status === "deceased" ? C.gray : C.faint;
   const bg = p.gender === "f" ? "#2a2230" : p.gender === "m" ? "#222a32" : C.panel2;
   return (
-    <div style={{ width: size, height: size, borderRadius: "50%", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Fraunces, Georgia, serif", fontWeight: 600, fontSize: size * 0.36, color: status === "unborn" ? C.faint : C.text, background: bg, opacity: status === "unborn" ? 0.5 : 1, border: `2px solid ${selected ? C.amber : ring}`, boxShadow: selected ? `0 0 0 3px ${C.amber}33` : "none", transition: "all .25s ease" }}>{initials(p)}</div>
+    <div style={{ width: size, height: size, borderRadius: "50%", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Fraunces, Georgia, serif", fontWeight: 600, fontSize: size * 0.36, color: status === "unborn" ? C.faint : C.text, background: bg, opacity: status === "unborn" ? 0.5 : 1, border: `2px solid ${selected ? C.amber : ring}`, boxShadow: selected ? `0 0 0 3px ${C.amber}33` : "none", transition: "all .25s ease" }}>{url?<img src={url} alt="" style={{width:"100%",height:"100%",objectFit:"cover",borderRadius:"50%"}}/>:initials(p)}</div>
   );
 }
 
 function StatusDot({ status }) {
-  const m = { alive: [C.teal, "Living"], deceased: [C.gray, "Deceased"], unborn: [C.faint, "Not yet born"] };
+  const m = { unknown: [C.faint, "Dates unknown"], alive: [C.teal, "Living"], deceased: [C.gray, "Deceased"], unborn: [C.faint, "Not yet born"] };
   const [col, label] = m[status];
   return <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 11.5, color: C.sub }}><span style={{ width: 7, height: 7, borderRadius: "50%", background: col }} />{label}</span>;
 }

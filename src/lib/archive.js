@@ -1,3 +1,4 @@
+import { EXTRA_COLLECTIONS, validateExtensions, cleanExtensions } from "./extensions.js";
 import { TYPE, DOC_TYPES } from "../config/eventTypes.js";
 import { uid, uniq } from "../utils/ids.js";
 
@@ -34,7 +35,7 @@ const year = (value, label) => {
 export function validateArchive(d) {
   if (!record(d))
     fail("Choose a Family Atlas archive, not an unrelated JSON file.");
-  if (d.schemaVersion != null && d.schemaVersion !== 1)
+  if (d.schemaVersion != null && ![1, 2].includes(d.schemaVersion))
     fail("This archive version is not supported.");
   for (const key of COLLECTIONS) {
     if (!Array.isArray(d[key]))
@@ -62,10 +63,10 @@ export function validateArchive(d) {
   for (const p of d.people) {
     text(p.first, "First name", true);
     text(p.last, "Last name", true);
-    year(p.birth, "Birth year");
+    if (p.birth != null) year(p.birth, "Birth year");
     if (p.death != null) {
       year(p.death, "Death year");
-      if (p.death < p.birth) fail("Death precedes birth.");
+      if (p.birth != null && p.death < p.birth) fail("Death precedes birth.");
     }
     for (const key of ["gender", "bio", "avatar"])
       if (p[key] != null) text(p[key], key);
@@ -82,7 +83,7 @@ export function validateArchive(d) {
       if (!record(r)) fail("Invalid residence record.");
       ref(r.at, "locations", "Residence");
       year(r.from, "Residence year");
-      if (r.from < p.birth || (p.death != null && r.from > p.death))
+      if ((p.birth != null && r.from < p.birth) || (p.death != null && r.from > p.death))
         fail("Residence year must be within the person’s lifetime.");
     }
   }
@@ -150,7 +151,7 @@ export function validateArchive(d) {
       ref(m.personId, "people", "Migration person");
       const p = d.people.find((p) => p.id === m.personId);
       if (
-        m.startYear < p.birth ||
+        (p.birth != null && m.startYear < p.birth) ||
         (p.death != null && m.startYear > p.death) ||
         (m.endYear != null && p.death != null && m.endYear > p.death)
       )
@@ -162,6 +163,7 @@ export function validateArchive(d) {
       fail("Choose a branch for a branch-wide migration.");
     text(m.description ?? "", "Migration description");
   }
+  validateExtensions(d);
   validateRelationships(d.people);
   return d;
 }
@@ -183,7 +185,7 @@ export function validateRelationships(people) {
       const p = byId.get(parentId),
         child = byId.get(id);
       if (!p) fail("Parent does not exist.");
-      if (p.birth >= child.birth)
+      if (p.birth != null && child.birth != null && p.birth >= child.birth)
         fail("A parent must be born before their child.");
       visit(parentId);
     }
@@ -243,7 +245,9 @@ export function reconcile(d) {
       ? { ...m, source: "residence" }
       : m;
   });
-  next.schemaVersion = 1;
+  for (const key of EXTRA_COLLECTIONS) next[key] ||= [];
+  next.people.forEach(p => { if(p.parentTypes) p.parentTypes=Object.fromEntries(Object.entries(p.parentTypes).filter(([id])=>p.parents.includes(id))); });
+  next.schemaVersion = 2;
   return next;
 }
 
@@ -331,6 +335,7 @@ export function saveEntity(d, key, item) {
         ? uniq([...e.docs, item.id])
         : e.docs.filter((id) => id !== item.id),
     }));
+  if (key === 'documents') next = cleanExtensions(next, '', '');
   if (key === "migrations" && item.source === "residence") {
     const previous = d.migrations.find((m) => m.id === item.id);
     const person = d.people.find((p) => p.id === previous?.personId);

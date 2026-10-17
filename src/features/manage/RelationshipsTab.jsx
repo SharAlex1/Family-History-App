@@ -11,6 +11,7 @@ function RelationshipsTab() {
   const { data, actions, getP } = useData();
   const [aId, setAId] = useState(data.people[0]?.id || "");
   const [type, setType] = useState("parent");
+  const [parentType,setParentType]=useState("biological");
   const [bId, setBId] = useState("");
   useEffect(() => { if (!data.people.some(p => p.id === aId)) setAId(data.people[0]?.id || ""); if (bId === aId || !data.people.some(p => p.id === bId)) setBId(""); }, [data.people, aId, bId]);
   if (data.people.length === 0) return <EmptyState inline icon={Link2} title="No people to connect" msg="Add at least two people first." />;
@@ -51,7 +52,8 @@ function RelationshipsTab() {
           ]} />
         </Field>
         <Field label="…this person"><SelectInput value={bId} onChange={setBId} options={otherOpts} placeholder="Choose a person" /></Field>
-        <Btn kind="primary" icon={Plus} disabled={!bId || bId === aId} onClick={async () => { if (await actions.addRelationship(aId, type, bId)) setBId(""); }}>Add connection</Btn>
+        {(type==="parent"||type==="child")&&<Field label="Parentage type"><SelectInput value={parentType} onChange={setParentType} options={["biological","adoptive","step","unknown"].map(value=>({value,label:value}))}/></Field>}
+        <Btn kind="primary" icon={Plus} disabled={!bId || bId === aId} onClick={async () => { if (await actions.addRelationship(aId, type, bId, parentType)) setBId(""); }}>Add connection</Btn>
         <p style={{ fontSize: 11.5, color: C.faint, marginTop: 12, lineHeight: 1.5 }}>Connections update both people automatically and flow straight into the family tree.</p>
       </div>
     </div>

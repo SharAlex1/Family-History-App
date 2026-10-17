@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { DataCtx } from "./DataContext.jsx";
+import { cleanExtensions } from "../lib/extensions.js";
 import { MIN_YEAR } from "../config/theme.js";
 import { makeSeed } from "../data/seed.js";
 import { uniq } from "../utils/ids.js";
@@ -263,7 +264,7 @@ export function DataProvider({ children }) {
             next = syncResidences(next, p.id, p);
           }
         }
-        return next;
+        return cleanExtensions(next,kind,id);
       }),
     countRefs: (kind, id) =>
       kind === "branches"
@@ -317,8 +318,8 @@ export function DataProvider({ children }) {
           ),
         };
       }),
-    addRelationship: (a, type, b) =>
-      mutate((d) => changeRelationship(d, a, type, b)),
+    addRelationship: (a, type, b, parentType = 'biological') =>
+      mutate((d) => { const next=changeRelationship(d,a,type,b);if(type==='parent'||type==='child'){const child=type==='parent'?b:a,parent=type==='parent'?a:b;next.people=next.people.map(p=>p.id===child?{...p,parentTypes:{...p.parentTypes,[parent]:parentType}}:p);}return next;}),
     removeRelationship: (a, type, b) =>
       mutate((d) =>
         changeRelationship(
@@ -346,6 +347,8 @@ export function DataProvider({ children }) {
       }
       return mutate(() => parsed, { backup: true, replace: true });
     },
+    mergeData: operation => mutate(operation,{backup:true}),
+    reportError: message => setNotice(message),
     restoreBackup: async () => {
       try {
         return await actions.importData(readBackup());

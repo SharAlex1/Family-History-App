@@ -77,7 +77,7 @@ export function writeArchive(data, expectedRevision, backup = false) {
       "Another tab changed this archive. Export your unsaved work, then load the latest archive.",
     );
   if (backup) backupArchive(raw);
-  const saved = { ...data, schemaVersion: 1, _revision: expectedRevision + 1 };
+  const saved = { ...data, schemaVersion: 2, _revision: expectedRevision + 1 };
   window.localStorage.setItem(LS_KEY, JSON.stringify(saved));
   return saved;
 }

@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-17",
+  "baseCommit": "7f56c075bc70b028da0089ae5d4cc8baf607992d",
+  "environment": {
+    "node": "24.19.0",
+    "browser": "System Chromium on Linux"
+  },
+  "lint": "passed",
+  "unit": {
+    "passed": 54,
+    "files": 3
+  },
+  "browser": {
+    "passed": 21,
+    "failed": 0
+  },
+  "legacyAudit": {
+    "passed": 71,
+    "failed": 0
+  },
+  "responsive": {
+    "passed": 60,
+    "widths": [
+      320,
+      390,
+      768,
+      1440
+    ]
+  },
+  "production": {
+    "views": 15,
+    "pageErrors": 0
+  },
+  "build": "passed",
+  "npmAudit": {
+    "vulnerabilities": 0
+  },
+  "finalGedcomRegression": {
+    "unitPolicies": [
+      "keep",
+      "incoming"
+    ],
+    "browser": "passed"
+  }
+}

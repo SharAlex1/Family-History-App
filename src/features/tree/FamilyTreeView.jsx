@@ -1,4 +1,6 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
+import { TreeExplorer } from "./TreeExplorer.jsx";
+import { Btn } from "../../components/ui/Primitives.jsx";
 import { GitBranch, Heart } from "lucide-react";
 import { C } from "../../config/theme.js";
 import { matchBranch } from "../../utils/people.js";
@@ -7,6 +9,7 @@ import { EmptyState } from "../../components/ui/Primitives.jsx";
 import { PersonCard } from "../../components/people/PersonCard.jsx";
 
 function FamilyTreeView({ year, selectedId, openPerson, branchSel }) {
+  const [explore,setExplore]=useState(false);
   const { data, getP } = useData();
   const people = data.people;
   const gens = useMemo(() => computeGenerations(people), [people]);
@@ -20,6 +23,7 @@ function FamilyTreeView({ year, selectedId, openPerson, branchSel }) {
   };
   const dimmed = (p) => branchSel.length > 0 && !matchBranch(p, branchSel);
   if (people.length === 0) return <EmptyState icon={GitBranch} title="No people yet" msg="Add family members in Manage Data to build the tree." />;
+  if(explore) return <div className="feature-page"><div className="feature-heading"><h2>Family Tree</h2><Btn onClick={()=>setExplore(false)}>Generation cards</Btn></div><TreeExplorer year={year} openPerson={openPerson} branchSel={branchSel}/></div>;
   return (
     <div style={{ padding: "22px 24px 130px", overflow: "auto" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
@@ -32,6 +36,7 @@ function FamilyTreeView({ year, selectedId, openPerson, branchSel }) {
           </div>
         )}
       </div>
+      <Btn onClick={()=>setExplore(true)}>Explore connected tree</Btn>
       <p style={{ color: C.faint, fontSize: 13, margin: "0 0 18px" }}>Cards reflect {year}. Select anyone to trace their relations through the generations.</p>
       <div style={{ display: "flex", flexDirection: "column", gap: 30, minWidth: "fit-content" }}>
         {gens.map((row, gi) => (

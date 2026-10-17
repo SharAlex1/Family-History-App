@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { timeBounds } from "./utils/time.js";
 import { ErrorBoundary } from "./components/ui/ErrorBoundary.jsx";
 import { useData } from "./state/DataContext.jsx";
@@ -15,6 +15,14 @@ import { PersonForm } from "./features/manage/forms/PersonForm.jsx";
 import { ManageView } from "./features/manage/ManageView.jsx";
 import { Sidebar, TopBar } from "./components/layout/Navigation.jsx";
 import { TimeSlider } from "./components/layout/TimeSlider.jsx";
+const JourneyView = lazy(() => import("./features/journeys/JourneyView.jsx").then(module => ({default: module.JourneyView})));
+const InterviewView = lazy(() => import("./features/interviews/InterviewView.jsx").then(module => ({default: module.InterviewView})));
+const StoriesView = lazy(() => import("./features/stories/StoriesView.jsx").then(module => ({default: module.StoriesView})));
+const RelationshipView = lazy(() => import("./features/relationships/RelationshipView.jsx").then(module => ({default: module.RelationshipView})));
+const ResearchView = lazy(() => import("./features/research/ResearchView.jsx").then(module => ({default: module.ResearchView})));
+const MemoryView = lazy(() => import("./features/memories/MemoryView.jsx").then(module => ({default: module.MemoryView})));
+const DiscoveriesView = lazy(() => import("./features/discoveries/DiscoveriesView.jsx").then(module => ({default: module.DiscoveriesView})));
+const ImportView = lazy(() => import("./features/import/ImportView.jsx").then(module => ({default: module.ImportView})));
 import { CSS } from "./styles/appStyles.js";
 
 function AppShell() {
@@ -54,15 +62,23 @@ function AppShell() {
         <div className="fa-main">
           {notice && <div role="alert" className="fa-notice"><span>{notice}</span><div><button onClick={actions.exportData}>Export current work</button><button onClick={actions.exportOriginal}>Export original</button>{dirty && <button onClick={actions.retrySave}>Retry save</button>}<button onClick={() => { if (!dirty || window.confirm('Discard unsaved changes and load the latest saved archive?')) actions.loadLatest(); }}>Load latest archive</button>{!dirty && <button onClick={actions.dismissNotice}>Dismiss</button>}</div></div>}
           <TopBar branchSel={branchSel} setBranchSel={setBranchSel} query={query} setQuery={setQuery} openPerson={openPerson} />
-          <div className="fa-content">
+          <div className="fa-content"><Suspense fallback={<p role="status" style={{padding:28}}>Loading workspace…</p>}>
             {view === "dashboard" && <DashboardView year={year} setView={setView} />}
             {view === "tree" && <FamilyTreeView year={year} selectedId={selectedId} openPerson={openPerson} branchSel={branchSel} />}
             {view === "timeline" && <TimelineView year={year} openPerson={openPerson} typeFilter={typeFilter} setTypeFilter={setTypeFilter} branchSel={branchSel} focusId={focusId} clearFocus={() => setFocusId(null)} />}
             {view === "map" && <MapView year={year} selectedId={selectedId} openPerson={openPerson} branchSel={branchSel} />}
             {view === "people" && <PeopleView clearFilters={() => {setQuery("");setBranchSel([]);}} year={year} openPerson={openPerson} branchSel={branchSel} query={query} />}
             {view === "documents" && <DocumentsView openPerson={openPerson} />}
+            {view === "journey" && <JourneyView setYear={setYear} openPerson={openPerson}/>}
+            {view === "interviews" && <InterviewView/>}
+            {view === "stories" && <StoriesView/>}
+            {view === "relationships" && <RelationshipView openPerson={openPerson}/>}
+            {view === "research" && <ResearchView openPerson={openPerson}/>}
+            {view === "memories" && <MemoryView/>}
+            {view === "discoveries" && <DiscoveriesView openPerson={openPerson} setView={setView}/>}
+            {view === "import" && <ImportView/>}
             {view === "manage" && <ManageView openPerson={openPerson} />}
-          </div>
+          </Suspense></div>
           {showSlider && <TimeSlider year={year} setYear={setYear} playing={playing} setPlaying={setPlaying} />}
         </div>
         {panelId && (

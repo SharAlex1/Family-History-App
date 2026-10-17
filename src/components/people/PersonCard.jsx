@@ -16,7 +16,7 @@ function PersonCard({ p, year, onClick, selected, dim }) {
         <Avatar p={p} size={40} status={status} selected={selected} />
         <div style={{ minWidth: 0 }}>
           <div style={{ fontFamily: "Fraunces, Georgia, serif", fontWeight: 600, fontSize: 15, color: C.text, lineHeight: 1.15, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{fullName(p)}</div>
-          <div style={{ fontSize: 11.5, color: C.faint, marginTop: 2 }}>{p.birth}{p.death != null ? ` – ${p.death}` : ""}</div>
+          <div style={{ fontSize: 11.5, color: C.faint, marginTop: 2 }}>{p.birth ?? "?"}{p.death != null ? ` – ${p.death}` : ""}</div>
         </div>
       </div>
       <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 6 }}>
