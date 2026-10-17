@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { X, Plus, Link2 } from "lucide-react";
 import { C } from "../../config/theme.js";
 import { uniq } from "../../utils/ids.js";
@@ -12,6 +12,7 @@ function RelationshipsTab() {
   const [aId, setAId] = useState(data.people[0]?.id || "");
   const [type, setType] = useState("parent");
   const [bId, setBId] = useState("");
+  useEffect(() => { if (!data.people.some(p => p.id === aId)) setAId(data.people[0]?.id || ""); if (bId === aId || !data.people.some(p => p.id === bId)) setBId(""); }, [data.people, aId, bId]);
   if (data.people.length === 0) return <EmptyState inline icon={Link2} title="No people to connect" msg="Add at least two people first." />;
   const a = getP(aId);
   const otherOpts = data.people.filter((p) => p.id !== aId).map((p) => ({ value: p.id, label: fullName(p) }));
@@ -34,10 +35,11 @@ function RelationshipsTab() {
   return (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }} className="fa-rel-grid">
       <div className="fa-card" style={{ padding: 18, borderRadius: 14, background: C.panelSolid, border: `1px solid ${C.border}` }}>
-        <Field label="Person"><SelectInput value={aId} onChange={setAId} options={data.people.map((p) => ({ value: p.id, label: fullName(p) }))} /></Field>
+        <Field label="Person"><SelectInput value={aId} onChange={id => { setAId(id); setBId(""); }} options={data.people.map((p) => ({ value: p.id, label: fullName(p) }))} /></Field>
         {relRow("Parents", a.parents || [], "parent", C.sky)}
         {relRow("Spouses", a.spouses || [], "spouse", C.rose)}
         {relRow("Children", a.children || [], "child", C.teal)}
+        {relRow("Recorded siblings", a.siblings || [], "sibling", C.amber)}
         {relRow("Siblings (shared parents)", siblings, null, C.amber)}
       </div>
       <div className="fa-card" style={{ padding: 18, borderRadius: 14, background: C.panelSolid, border: `1px solid ${C.border}`, height: "fit-content" }}>
@@ -45,11 +47,11 @@ function RelationshipsTab() {
         <Field label={`${a ? fullName(a) : "This person"} is the…`}>
           <SelectInput value={type} onChange={setType} options={[
             { value: "parent", label: "parent of →" }, { value: "child", label: "child of →" },
-            { value: "spouse", label: "spouse of ↔" }, { value: "sibling", label: "sibling of ↔ (shares parents)" },
+            { value: "spouse", label: "spouse of ↔" }, { value: "sibling", label: "sibling of ↔ (explicit connection)" },
           ]} />
         </Field>
         <Field label="…this person"><SelectInput value={bId} onChange={setBId} options={otherOpts} placeholder="Choose a person" /></Field>
-        <Btn kind="primary" icon={Plus} disabled={!bId} onClick={() => { actions.addRelationship(aId, type, bId); setBId(""); }}>Add connection</Btn>
+        <Btn kind="primary" icon={Plus} disabled={!bId || bId === aId} onClick={async () => { if (await actions.addRelationship(aId, type, bId)) setBId(""); }}>Add connection</Btn>
         <p style={{ fontSize: 11.5, color: C.faint, marginTop: 12, lineHeight: 1.5 }}>Connections update both people automatically and flow straight into the family tree.</p>
       </div>
     </div>

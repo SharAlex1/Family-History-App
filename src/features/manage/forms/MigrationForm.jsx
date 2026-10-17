@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { isYear, yearError } from "../../../lib/archive.js";
 import { uid } from "../../../utils/ids.js";
 import { fullName } from "../../../utils/people.js";
 import { useData } from "../../../state/DataContext.jsx";
@@ -15,13 +16,16 @@ function MigrationForm({ value, onSave, onCancel }) {
     if (f.mode === "person" && !f.personId) e.personId = "Pick a person";
     if (f.mode === "branch" && !f.branch) e.branch = "Pick a branch";
     if (!f.from) e.from = "Required"; if (!f.to) e.to = "Required";
-    if (f.startYear === "" || isNaN(f.startYear)) e.startYear = "Start year required";
+    if (!isYear(f.startYear)) e.startYear = yearError;
+    if (f.endYear !== "" && f.endYear != null && (!isYear(f.endYear) || Number(f.endYear) < Number(f.startYear))) e.endYear = "End year must be a whole year at or after the start.";
+    if (f.from === f.to) e.to = "Origin and destination must differ";
     setErr(e); if (Object.keys(e).length) return;
     const branch = f.mode === "person" ? (data.people.find((p) => p.id === f.personId)?.branches?.[0] || "") : f.branch;
-    onSave({ ...f, branch, startYear: Number(f.startYear), endYear: f.endYear === "" ? null : Number(f.endYear) });
+    onSave({ ...f, branch, startYear: Number(f.startYear), endYear: f.endYear === "" || f.endYear == null ? null : Number(f.endYear) });
   }
   return (
     <>
+      <p style={{fontSize:12}}>Routes generated from residences update that residence when edited or deleted. Additional routes are separate historical records and do not change residences.</p>
       <Field label="Applies to"><SelectInput value={f.mode} onChange={(v) => up("mode", v)} options={[{ value: "person", label: "A single person" }, { value: "branch", label: "A whole branch" }]} /></Field>
       {f.mode === "person"
         ? <Field label="Person" required error={err.personId}><SelectInput value={f.personId} onChange={(v) => up("personId", v)} options={data.people.map((p) => ({ value: p.id, label: fullName(p) }))} error={err.personId} placeholder="—" /></Field>
@@ -30,7 +34,7 @@ function MigrationForm({ value, onSave, onCancel }) {
         <Field label="From" required error={err.from}><SelectInput value={f.from} onChange={(v) => up("from", v)} options={data.locations.map((l) => ({ value: l.id, label: l.name }))} error={err.from} placeholder="—" /></Field>
         <Field label="To" required error={err.to}><SelectInput value={f.to} onChange={(v) => up("to", v)} options={data.locations.map((l) => ({ value: l.id, label: l.name }))} error={err.to} placeholder="—" /></Field>
         <Field label="Start year" required error={err.startYear}><NumberInput value={f.startYear} onChange={(v) => up("startYear", v)} error={err.startYear} /></Field>
-        <Field label="End year (optional)"><NumberInput value={f.endYear} onChange={(v) => up("endYear", v)} placeholder="—" /></Field>
+        <Field label="End year (optional)" error={err.endYear}><NumberInput value={f.endYear} onChange={(v) => up("endYear", v)} placeholder="—" /></Field>
       </div>
       <Field label="Description"><TextArea value={f.description} onChange={(v) => up("description", v)} rows={2} /></Field>
       <FormFooter onCancel={onCancel} onSave={save} />

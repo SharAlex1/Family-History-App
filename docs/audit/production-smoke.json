@@ -1,0 +1,12 @@
+{
+  "views": [
+    "Overview",
+    "Family Tree",
+    "Timeline",
+    "Map",
+    "People",
+    "Documents",
+    "Manage Data"
+  ],
+  "pageErrors": []
+}

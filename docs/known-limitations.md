@@ -1,18 +1,14 @@
-# Existing limitations retained from the prototype
+# Current feature boundaries
 
-These observations come from reading the original code. They are intentionally outside the behavior-preserving structural refactor.
+The 25 findings from the original audit have been corrected; see [verification and fixes](audit/README.md). These remaining boundaries describe features and test coverage, not unresolved claims that the old bugs still exist.
 
-- Data is local to a browser origin. There is no server, account system, multi-user synchronization, or automatic remote backup.
-- Documents and avatars are placeholders; document records contain metadata, not uploaded files. Avatar cards render initials.
-- The time range is fixed to 1896–2026, even when records use other years.
-- The dedicated relationship editor updates both participants. Editing parent/spouse/child fields in a person form saves only that person, allowing inconsistent reciprocal links.
-- Residence history drives living-person pins. Migration routes are a separate collection and are not regenerated when residences change. Migration `endYear` does not control map visibility.
-- Event-to-document and document-to-event links can be edited independently and become inconsistent.
-- Deleting a location removes residence and migration references but leaves event `at` references. Safe lookups display `Unknown` for missing records.
-- Adding a sibling relation merges parents; a sibling link between two people with no parents has no represented effect. Ancestor cycles and other genealogical constraints are not validated.
-- Import normalization checks top-level arrays but does not fully validate individual records. Malformed records can cause rendering errors.
-- Browser storage read/write errors are swallowed by the original helpers, so the interface does not report failed persistence.
-- The generational tree is a card layout with spouse grouping rather than a complete connecting-edge pedigree visualization.
-- Map data and fonts depend on external network requests, with fallbacks. The stylized landmass fallback is approximate.
-
-Handle fixes as explicit subsequent changes with tests and a migration plan where applicable.
+- Data is local to a browser origin. There are no accounts, server database, family permissions, remote backups or cross-device synchronization. Export JSON for durable copies; the automatic backup is one rolling local snapshot.
+- Document cards, audio/video categories and avatar fields are metadata/placeholders. They do not upload files, play media or render avatar photos.
+- Pins are static SVG markers; linked people open through the cards below the map. Pan/zoom and interactive pin tooltips are not implemented.
+- Residence-derived routes are synchronized. Additional historical routes remain explicitly separate records. A route's end year records duration, not an expiry date for its map arc.
+- Branch controls affect tree/timeline/map/people. Overview, documents and data management intentionally show the full archive; the filter group has an accessible scope label.
+- The tree uses generational cards and spouse grouping rather than a complete edge-based pedigree visualization. Complex adoption, uncertain dates and evidence confidence need a richer data model. Explicit sibling connections preserve unknown/half-parent information without inferring new parents.
+- Navigation/year/filter state is not encoded in the URL. Refresh and browser Back do not restore that UI state. Cancel/backdrop closes a form and discards its draft.
+- Fonts and detailed map geometry use external CDNs with fallbacks. All CDN failure permutations and offline font delivery have not been tested.
+- Validation was exercised in Chromium on Linux, with desktop/tablet/phone viewport widths. Native Windows, other browsers, real mobile touch, screen-reader sessions and large archives remain unverified. Modern browsers with native dialog, structuredClone and Web Locks support are recommended. Revision guards also run when Web Locks are unavailable, but simultaneous writes in that fallback have not been independently validated.
+- ESLint 9 remains pinned for React lint-plugin compatibility and can emit a deprecation notice. The dependency audit reports no known vulnerabilities at verification time.

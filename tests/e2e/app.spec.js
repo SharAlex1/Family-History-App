@@ -18,9 +18,9 @@ test('all views render, time changes, and edited data survives reload', async ({
     await page.locator('.fa-content').getByRole('button', { name: new RegExp(`^${tab}`) }).first().click();
   }
   await page.getByRole('button', { name: 'Add person', exact: true }).click();
-  await page.getByLabel('First name').fill('Test');
-  await page.getByLabel('Last name').fill('Relative');
-  await page.getByLabel('Birth year').fill('1990');
+  await page.getByRole('textbox', {name:'First name',exact:true}).fill('Test');
+  await page.getByRole('textbox', {name:'Last name',exact:true}).fill('Relative');
+  await page.getByRole('spinbutton', {name:'Birth year',exact:true}).fill('1990');
   await page.locator('.fa-modal').getByRole('button', { name: /Save/ }).click();
   await page.reload();
   await page.locator('nav').getByRole('button', { name: 'People', exact: true }).click();

@@ -76,7 +76,7 @@ function genMigrations(people, locations) {
   people.forEach((p) => {
     for (let i = 1; i < p.residences.length; i++) {
       const from = p.residences[i - 1].at, to = p.residences[i].at;
-      out.push({ id: uid("mig"), mode: "person", personId: p.id, branch: (p.branches && p.branches[0]) || "", from, to, startYear: p.residences[i].from, endYear: null, description: `${ln[from] || from} → ${ln[to] || to}` });
+      out.push({ id: uid("mig"), mode: "person", source: "residence", personId: p.id, branch: (p.branches && p.branches[0]) || "", from, to, startYear: p.residences[i].from, endYear: null, description: `${ln[from] || from} → ${ln[to] || to}` });
     }
   });
   return out;

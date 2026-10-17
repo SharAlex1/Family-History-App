@@ -74,8 +74,19 @@ function computeGenerations(people) {
   };
   people.filter((p) => (p.parents || []).length === 0).forEach((p) => visit(p.id, 0, new Set()));
   people.forEach((p) => { if (depth[p.id] == null) depth[p.id] = 0; });
-  // pull spouses to the deeper of the pair
-  people.forEach((p) => (p.spouses || []).forEach((s) => { if (byId[s]) { const m = Math.max(depth[p.id], depth[s]); depth[p.id] = m; depth[s] = m; } }));
+  // Align couples and propagate every changed parent depth to descendants.
+  // If spouse constraints contradict the ancestry DAG, preserve parent depths.
+  const ancestryDepth = {...depth};
+  let changed = true;
+  for (let pass=0; changed && pass<people.length; pass++) {
+    changed=false;
+    const raise=(id,d)=>{if(depth[id]<d){depth[id]=d;changed=true;}};
+    for(const p of people) {
+      for(const id of p.spouses || []) if(byId[id]) {const d=Math.max(depth[p.id],depth[id]);raise(p.id,d);raise(id,d);}
+      for(const id of p.children || []) if(byId[id])raise(id,depth[p.id]+1);
+    }
+  }
+  if(changed)Object.assign(depth,ancestryDepth);
   const maxD = Math.max(0, ...Object.values(depth));
   const rows = Array.from({ length: maxD + 1 }, () => []);
   people.forEach((p) => rows[depth[p.id]].push(p));

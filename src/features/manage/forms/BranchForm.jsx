@@ -14,7 +14,7 @@ function BranchForm({ value, onSave, onCancel }) {
       <Field label="Branch name" required error={err.name}><TextInput value={f.name} onChange={(v) => setF((s) => ({ ...s, name: v }))} error={err.name} placeholder="e.g. Alvarez line" /></Field>
       <Field label="Color">
         <div style={{ display: "flex", gap: 10 }}>
-          {colors.map((c) => <button key={c} type="button" onClick={() => setF((s) => ({ ...s, color: c }))} className="fa-click" style={{ width: 30, height: 30, borderRadius: 8, background: c, border: `2px solid ${f.color === c ? C.text : "transparent"}` }} />)}
+          {colors.map((c) => <button key={c} type="button" aria-label={`Use ${c} color`} aria-pressed={f.color === c} onClick={() => setF((s) => ({ ...s, color: c }))} className="fa-click" style={{ width: 30, height: 30, borderRadius: 8, background: c, border: `2px solid ${f.color === c ? C.text : "transparent"}` }} />)}
         </div>
       </Field>
       <FormFooter onCancel={onCancel} onSave={save} />

@@ -1,0 +1,22 @@
+{
+  "lint": "passed",
+  "unit_tests": {
+    "passed": 19,
+    "failed": 0
+  },
+  "browser_regression_tests": {
+    "passed": 7,
+    "failed": 0
+  },
+  "feature_audit": {
+    "scenarios": 71,
+    "passed": 71,
+    "failed": 0,
+    "skipped": 0
+  },
+  "production_build": "passed",
+  "production_smoke_views": 7,
+  "npm_audit_vulnerabilities": 0,
+  "runtime": "Chromium on Linux",
+  "native_windows_tested": false
+}

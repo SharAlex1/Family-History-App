@@ -60,7 +60,7 @@ function DashboardView({ year, setView }) {
         </div>
         <div style={{ textAlign: "right" }}>
           <div style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 52, fontWeight: 600, color: C.amber, lineHeight: 1 }}>{year}</div>
-          <div style={{ fontSize: 12.5, color: C.sub, marginTop: 2 }}>{living.length} living · {new Set(living.map((p) => residenceAt(p, year))).size} places</div>
+          <div style={{ fontSize: 12.5, color: C.sub, marginTop: 2 }}>{living.length} living · {new Set(living.map((p) => residenceAt(p, year)).filter(Boolean)).size} places</div>
         </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 14, marginTop: 26 }}>

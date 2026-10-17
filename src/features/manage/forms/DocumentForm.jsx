@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { isYear, yearError } from "../../../lib/archive.js";
 import { uid } from "../../../utils/ids.js";
 import { DOC_TYPES } from "../../../config/eventTypes.js";
 import { fullName } from "../../../utils/people.js";
@@ -12,7 +13,7 @@ function DocumentForm({ value, onSave, onCancel }) {
   const [f, setF] = useState(init); const [err, setErr] = useState({});
   const up = (k, v) => setF((s) => ({ ...s, [k]: v }));
   function save() {
-    const e = {}; if (!f.title.trim()) e.title = "Required"; if (f.year === "" || isNaN(f.year)) e.year = "Year required";
+    const e = {}; if (!f.title.trim()) e.title = "Required"; if (!isYear(f.year)) e.year = yearError;
     setErr(e); if (Object.keys(e).length) return;
     onSave({ ...f, year: Number(f.year) });
   }

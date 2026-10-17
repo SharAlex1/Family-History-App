@@ -4,7 +4,7 @@
 
 `src/main.jsx` mounts the React application. `App.jsx` wraps the application shell in `DataProvider`, selects the current feature view, and owns transient UI state: year, playback, selected person, open profile, filters, search, and edit dialog.
 
-`state/DataProvider.jsx` owns the archive, ID lookup tables, and all data mutations. `state/DataContext.jsx` exposes `useData()` to views and forms. Changes trigger React rendering and persist the archive through `lib/storage.js`.
+`state/DataProvider.jsx` owns archive state and user-facing mutation/persistence feedback. `lib/archive.js` validates records and enforces reciprocal links, ancestry invariants and residence-derived history. `state/DataContext.jsx` exposes these operations to views and forms. Mutations use the latest persisted state under a Web Lock when supported, with revision checks and conflict detection for stale record editors; storage events synchronize other tabs. Failed saves retain pending work in memory with visible recovery/export/retry options. `lib/storage.js` handles parsing, validation, backups, revisions and downloads.
 
 Feature views read the archive through context. Forms collect local draft values and hand them to provider actions on Save. Shared UI components render controls without creating a second archive store.
 
@@ -26,13 +26,13 @@ Feature views read the archive through context. Forms collect local draft values
 | `config` | Palette, year limits, event/document categories |
 | `data` | Demonstration archive and initial migration records |
 | `state` | Archive ownership, CRUD, reference cleanup, relationships |
-| `lib` | Persistence boundary and map loading/projection |
+| `lib` | Archive validation and transformations, recoverable persistence, map loading/projection |
 | `utils` | Historical calculations and identifier helpers |
 | `styles` | Original CSS template, using theme constants |
 
 ## Preservation decisions
 
-Component render bodies, seed records, styles, storage key, validation rules, and data operations were retained. Application state was moved into a provider without changing its action implementations. Styles remain a JavaScript template because they interpolate the shared theme; inline styles remain in their components.
+The initial refactor retained component bodies and behavior. The audit correction release preserves the familiar layout and sample records while centralizing data operations, tightening validation, synchronizing links and using native modal dialogs. The storage key remains compatible; schema/revision metadata and explicit sibling/route provenance fields are additive, with backups before upgrading existing valid archives. Styles remain a JavaScript template because they interpolate the shared theme; inline styles remain in their components.
 
 No router was introduced: navigation still selects a view in React state. No backend, placeholder service layer, authentication scaffolding, or empty directories were added. Documentation establishes the boundaries for future additions without suggesting those features already exist.
 

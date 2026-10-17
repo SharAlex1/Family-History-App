@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { isYear, yearError } from "../../../lib/archive.js";
 import { uid } from "../../../utils/ids.js";
 import { fullName } from "../../../utils/people.js";
 import { useData } from "../../../state/DataContext.jsx";
@@ -10,6 +11,7 @@ function PersonForm({ value, onSave, onCancel }) {
   const { data, getL } = useData();
   const base = value || { id: uid("p"), first: "", last: "", gender: "", branches: [], birth: "", death: "", born: data.locations[0]?.id || "", avatar: "", bio: "", parents: [], spouses: [], children: [], residences: [] };
   const init = { ...base, branches: Array.isArray(base.branches) ? base.branches : (base.branch ? [base.branch] : []) };
+  const original = useRef(value);
   const [f, setF] = useState(init);
   const [linkedEvents, setLinkedEvents] = useState((data.events.filter((e) => (e.people || []).includes(init.id))).map((e) => e.id));
   const [linkedDocs, setLinkedDocs] = useState((data.documents.filter((d) => (d.people || []).includes(init.id))).map((d) => d.id));
@@ -20,13 +22,15 @@ function PersonForm({ value, onSave, onCancel }) {
     const e = {};
     if (!f.first.trim()) e.first = "Required";
     if (!f.last.trim()) e.last = "Required";
-    if (f.birth === "" || isNaN(f.birth)) e.birth = "Birth year required";
+    if (!isYear(f.birth)) e.birth = yearError;
+    if (f.death !== "" && f.death !== null && !isYear(f.death)) e.death = yearError;
+    if (f.residences.some(r => !r.at || !isYear(r.from) || r.from < Number(f.birth) || (f.death !== "" && f.death != null && r.from > Number(f.death)))) e.residences = "Every residence needs a location and a whole year within this person’s lifetime.";
     if (f.death !== "" && f.death !== null && Number(f.death) < Number(f.birth)) e.death = "Death precedes birth";
     setErr(e);
     if (Object.keys(e).length) return;
     const { branch: _legacyBranch, ...rest } = f;
-    const person = { ...rest, branches: f.branches || [], birth: Number(f.birth), death: f.death === "" || f.death === null ? null : Number(f.death), residences: (f.residences || []).filter((r) => r.at).map((r) => ({ at: r.at, from: Number(r.from) || Number(f.birth) })) };
-    onSave({ person, linkedEventIds: linkedEvents, linkedDocIds: linkedDocs });
+    const person = { ...rest, branches: f.branches || [], birth: Number(f.birth), death: f.death === "" || f.death === null ? null : Number(f.death), residences: (f.residences || []).filter((r) => r.at).map((r) => ({ at: r.at, from: Number(r.from) })) };
+    onSave({ person, original: original.current, linkedEventIds: linkedEvents, linkedDocIds: linkedDocs });
   }
   return (
     <>
@@ -41,7 +45,7 @@ function PersonForm({ value, onSave, onCancel }) {
         <Field label="Avatar / photo placeholder" hint="Initials are used automatically"><TextInput value={f.avatar} onChange={(v) => up("avatar", v)} placeholder="(optional note or URL)" /></Field>
       </div>
       <Field label="Biography"><TextArea value={f.bio} onChange={(v) => up("bio", v)} rows={3} placeholder="A short life summary…" /></Field>
-      <Field label="Residences" hint="Each place this person lived, and the year they arrived — drives the map"><ResidenceEditor value={f.residences} onChange={(v) => up("residences", v)} locations={data.locations} /></Field>
+      <Field label="Residences" error={err.residences} hint="Each place this person lived, and the year they arrived — drives the map"><ResidenceEditor defaultYear={f.birth} value={f.residences} onChange={(v) => up("residences", v)} locations={data.locations} /></Field>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
         <Field label="Parents"><MultiSelect value={f.parents} onChange={(v) => up("parents", v)} options={peopleOpts} /></Field>
         <Field label="Spouses"><MultiSelect value={f.spouses} onChange={(v) => up("spouses", v)} options={peopleOpts} /></Field>

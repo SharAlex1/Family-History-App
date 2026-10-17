@@ -5,6 +5,7 @@ import { uniq } from "../../utils/ids.js";
 import { TYPE, DOC_ICON } from "../../config/eventTypes.js";
 import { fullName, statusAt, ageAt, residenceAt } from "../../utils/people.js";
 import { useData } from "../../state/DataContext.jsx";
+import { DialogFrame } from "../ui/DialogFrame.jsx";
 import { Avatar, Pill } from "../ui/Primitives.jsx";
 
 function ProfilePanel({ id, year, onClose, openPerson, setView, focusPerson, onEdit }) {
@@ -27,9 +28,7 @@ function ProfilePanel({ id, year, onClose, openPerson, setView, focusPerson, onE
   );
   const places = uniq((p.residences || []).map((r) => getL(r.at).name));
   return (
-    <>
-      <div onClick={onClose} className="fa-backdrop" />
-      <aside className="fa-panel">
+    <DialogFrame title={fullName(p)} onClose={onClose} className="fa-panel" element="aside" width={420} backdropClassName="fa-backdrop">
         <div style={{ padding: "18px 20px", borderBottom: `1px solid ${C.border}`, display: "flex", alignItems: "flex-start", gap: 14, position: "sticky", top: 0, background: C.panelSolid, zIndex: 2 }}>
           <Avatar p={p} size={56} status={status} selected />
           <div style={{ flex: 1, minWidth: 0 }}>
@@ -41,7 +40,7 @@ function ProfilePanel({ id, year, onClose, openPerson, setView, focusPerson, onE
               {status === "unborn" && <Pill color={C.faint}>Not yet born in {year}</Pill>}
             </div>
           </div>
-          <button onClick={onClose} className="fa-click" style={{ background: "transparent", border: "none", color: C.sub, padding: 4 }}><X size={20} /></button>
+          <button aria-label="Close profile" onClick={onClose} className="fa-click" style={{ background: "transparent", border: "none", color: C.sub, padding: 4 }}><X size={20} /></button>
         </div>
         <div style={{ padding: "16px 20px 40px" }}>
           {p.bio && <p style={{ fontSize: 13.5, color: C.sub, lineHeight: 1.6, margin: "0 0 18px" }}>{p.bio}</p>}
@@ -65,6 +64,7 @@ function ProfilePanel({ id, year, onClose, openPerson, setView, focusPerson, onE
           {relList(p.parents, "Parents")}
           {relList(p.spouses, "Spouse")}
           {relList(p.children, "Children")}
+          {relList(p.siblings || [], "Recorded siblings")}
           {places.length > 0 && (
             <div style={{ marginBottom: 18 }}>
               <div style={{ fontSize: 11, letterSpacing: 0.8, textTransform: "uppercase", color: C.faint, marginBottom: 7 }}>Places lived</div>
@@ -99,8 +99,7 @@ function ProfilePanel({ id, year, onClose, openPerson, setView, focusPerson, onE
             </div>
           )}
         </div>
-      </aside>
-    </>
+    </DialogFrame>
   );
 }
 

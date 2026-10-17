@@ -1,0 +1,583 @@
+{
+  "commit": "1a194f1",
+  "environment": "Linux Chromium; isolated local browser storage",
+  "results": [
+    {
+      "id": "N01",
+      "name": "Overview statistics and all dashboard navigation cards",
+      "status": "passed",
+      "durationMs": 1118,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N02",
+      "name": "All seven sidebar views and historical person states",
+      "status": "passed",
+      "durationMs": 1068,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N03",
+      "name": "Global search, mouse selection, profile relatives and dismiss",
+      "status": "passed",
+      "durationMs": 877,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N04",
+      "name": "Branch filter toggles, People filtering and tree dimming",
+      "status": "passed",
+      "durationMs": 729,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N05",
+      "name": "All timeline type filters, historical context and empty matches",
+      "status": "passed",
+      "durationMs": 1221,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N06",
+      "name": "Playback starts, pauses, reaches final year and stops",
+      "status": "passed",
+      "durationMs": 1373,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N07",
+      "name": "Map fallback, historical pins, route highlights and person buttons",
+      "status": "passed",
+      "durationMs": 669,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N08",
+      "name": "Accurate world map and inverse-coordinate location picker",
+      "status": "passed",
+      "durationMs": 1057,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N09",
+      "name": "Profile map/focus/edit actions and focused timeline clear",
+      "status": "passed",
+      "durationMs": 1765,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N10",
+      "name": "Documents sorted by year and linked people open profiles",
+      "status": "passed",
+      "durationMs": 519,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C01",
+      "name": "People: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 2201,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C02",
+      "name": "Locations: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 2150,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C03",
+      "name": "Events: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 2540,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C04",
+      "name": "Migrations: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 2901,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C05",
+      "name": "Documents: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 2831,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C06",
+      "name": "Branches: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 2402,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C07",
+      "name": "Person death-before-birth validation",
+      "status": "passed",
+      "durationMs": 985,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C08",
+      "name": "Residence rows: add, change location/year, remove and save",
+      "status": "passed",
+      "durationMs": 1502,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C09",
+      "name": "All event/document type choices persist and render",
+      "status": "passed",
+      "durationMs": 3295,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C10",
+      "name": "Branch-wide migration and required-empty selectors",
+      "status": "passed",
+      "durationMs": 701,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C11",
+      "name": "Modal cancel, close icon, and backdrop discard drafts",
+      "status": "passed",
+      "durationMs": 1361,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C12",
+      "name": "Empty multiselect search/no-match, select and keyboard-remove chip",
+      "status": "passed",
+      "durationMs": 1018,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R01",
+      "name": "Dedicated parent, child and spouse add/remove updates both people",
+      "status": "passed",
+      "durationMs": 936,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R02",
+      "name": "Deleting people removes relationships, document/event links and personal routes",
+      "status": "passed",
+      "durationMs": 898,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R03",
+      "name": "Deleting events and documents cleans reciprocal links",
+      "status": "passed",
+      "durationMs": 1262,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R04",
+      "name": "Delete populated branch: remove members, preserve people and routes",
+      "status": "passed",
+      "durationMs": 607,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R05",
+      "name": "Delete populated branch: move members, preserve people and routes",
+      "status": "passed",
+      "durationMs": 855,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "D01",
+      "name": "JSON export/import round-trip retains all collections",
+      "status": "passed",
+      "durationMs": 621,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "D02",
+      "name": "Invalid JSON rejected without replacing archive",
+      "status": "passed",
+      "durationMs": 471,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "D03",
+      "name": "Reset cancellation preserves data; confirmation restores sample",
+      "status": "passed",
+      "durationMs": 1421,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "D04",
+      "name": "Empty archive: all screens, management tabs, and first-person setup",
+      "status": "passed",
+      "durationMs": 1472,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "D05",
+      "name": "HTML-like user text is displayed as text, not executed",
+      "status": "passed",
+      "durationMs": 684,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B01",
+      "name": "Person form relationship changes must update the other person",
+      "status": "failed",
+      "durationMs": 1166,
+      "detail": "Miriam has no reciprocal spouse link",
+      "pageErrors": []
+    },
+    {
+      "id": "B02",
+      "name": "Adding a residence must keep the migration route collection synchronized",
+      "status": "failed",
+      "durationMs": 998,
+      "detail": "New residence has no migration route",
+      "pageErrors": []
+    },
+    {
+      "id": "B03",
+      "name": "Event document selector must update the document event links",
+      "status": "failed",
+      "durationMs": 971,
+      "detail": "Document does not reference newly linked event",
+      "pageErrors": []
+    },
+    {
+      "id": "B04",
+      "name": "Document event selector must update event document links",
+      "status": "failed",
+      "durationMs": 932,
+      "detail": "Event does not reference newly linked document",
+      "pageErrors": []
+    },
+    {
+      "id": "B05",
+      "name": "Deleting a location must clean event location references",
+      "status": "failed",
+      "durationMs": 843,
+      "detail": "Events retain deleted location IDs",
+      "pageErrors": []
+    },
+    {
+      "id": "B06",
+      "name": "Reject ancestor cycles",
+      "status": "failed",
+      "durationMs": 533,
+      "detail": "Noah became the parent of his ancestor Yosef",
+      "pageErrors": []
+    },
+    {
+      "id": "B07",
+      "name": "Changing relationship person must clear the target and reject self-links",
+      "status": "failed",
+      "durationMs": 567,
+      "detail": "Rivka became her own parent",
+      "pageErrors": []
+    },
+    {
+      "id": "B08",
+      "name": "Adding siblings without parents must not silently do nothing",
+      "status": "failed",
+      "durationMs": 611,
+      "detail": "Sibling request clears without creating a relationship or explaining why",
+      "pageErrors": []
+    },
+    {
+      "id": "B09",
+      "name": "Reject latitude and longitude outside geographic bounds",
+      "status": "failed",
+      "durationMs": 879,
+      "detail": "Invalid coordinates saved\n\n0 !== 1\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B10",
+      "name": "Reject a migration ending before it starts or going to its origin",
+      "status": "failed",
+      "durationMs": 893,
+      "detail": "Impossible route and reversed dates saved\n\n0 !== 1\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B11",
+      "name": "Reject fractional years",
+      "status": "failed",
+      "durationMs": 939,
+      "detail": "Fractional year saved\n\n0 !== 1\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B12",
+      "name": "Residence year must not precede birth",
+      "status": "failed",
+      "durationMs": 1076,
+      "detail": "Residence 120 years before birth saved\n\n0 !== 1\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B13",
+      "name": "A person outside fixed year bounds must be explorable in time",
+      "status": "failed",
+      "durationMs": 669,
+      "detail": "Slider remains fixed to 1896",
+      "pageErrors": []
+    },
+    {
+      "id": "B14",
+      "name": "Structurally invalid JSON must be rejected without changing the archive",
+      "status": "failed",
+      "durationMs": 595,
+      "detail": "Unrelated JSON replaced the archive\n+ actual - expected\n... Skipped lines\n\n  {\n    branches: [\n      {\n        color: '#5FB8A8',\n        id: 'kaminski',\n...\n    ],\n+   migrations: [],\n-   migrations: [\n-     {\n-       branch: 'kaminski',\n-       description: 'Minsk \u2192 Warsaw',\n-       endYear: null,\n-       from: 'minsk',\n-       id: 'mig_mv8xdutigoq',\n-       mode: 'person',\n-       personId: 'yosef',\n-       startYear: 1921,\n-       to: 'warsaw'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Warsaw \u2192 Berlin',\n-       endYear: null,\n-       from: 'warsaw',\n-       id: 'mig_mv8xdutihk0',\n-       mode: 'person',\n-       personId: 'yosef',\n-       startYear: 1933,\n-       to: 'berlin'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Berlin \u2192 Brooklyn, NY',\n-       endYear: null,\n-       from: 'berlin',\n-       id: 'mig_mv8xdutii79',\n-       mode: 'person',\n-       personId: 'yosef',\n-       startYear: 1938,\n-       to: 'brooklyn'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Minsk \u2192 Warsaw',\n-       endYear: null,\n-       from: 'minsk',\n-       id: 'mig_mv8xdutijls',\n-       mode: 'person',\n-       personId: 'rivka',\n-       startYear: 1921,\n-       to: 'warsaw'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Warsaw \u2192 Berlin',\n-       endYear: null,\n-       from: 'warsaw',\n-       id: 'mig_mv8xdutikzs',\n-       mode: 'person',\n-       personId: 'rivka',\n-       startYear: 1933,\n-       to: 'berlin'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Berlin \u2192 Brooklyn, NY',\n-       endYear: null,\n-       from: 'berlin',\n-       id: 'mig_mv8xdutilxu',\n-       mode: 'person',\n-       personId: 'rivka',\n-       startYear: 1938,\n-       to: 'brooklyn'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Warsaw \u2192 Berlin',\n-       endYear: null,\n-       from: 'warsaw',\n-       id: 'mig_mv8xdutimyn',\n-       mode: 'person',\n-       personId: 'avram',\n-       startYear: 1933,\n-       to: 'berlin'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Berlin \u2192 Brooklyn, NY',\n-       endYear: null,\n-       from: 'berlin',\n-       id: 'mig_mv8xdutin69',\n-       mode: 'person',\n-       personId: 'avram',\n-       startYear: 1938,\n-       to: 'brooklyn'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Warsaw \u2192 Brooklyn, NY',\n-       endYear: null,\n-       from: 'warsaw',\n-       id: 'mig_mv8xdutioj2',\n-       mode: 'person',\n-       personId: 'sara',\n-       startYear: 1947,\n-       to: 'brooklyn'\n-     },\n-     {\n-       branch: 'roth',\n-       description: 'Warsaw \u2192 Berlin',\n-       endYear: null,\n-       from: 'warsaw',\n-       id: 'mig_mv8xdutiplx',\n-       mode: 'person',\n-       personId: 'lena',\n-       startYear: 1933,\n-       to: 'berlin'\n-     },\n-     {\n-       branch: 'roth',\n-       description: 'Berlin \u2192 Brooklyn, NY',\n-       endYear: null,\n-       from: 'berlin',\n-       id: 'mig_mv8xdutiqge',\n-       mode: 'person',\n-       personId: 'lena',\n-       startYear: 1938,\n-       to: 'brooklyn'\n-     },\n-     {\n-       branch: 'roth',\n-       description: 'Brooklyn, NY \u2192 Tel Aviv',\n-       endYear: null,\n-       from: 'brooklyn',\n-       id: 'mig_mv8xdutirqe',\n-       mode: 'person',\n-       personId: 'lena',\n-       startYear: 1951,\n-       to: 'telaviv'\n-     },\n-     {\n-       branch: 'roth',\n-       description: 'Berlin \u2192 Tel Aviv',\n-       endYear: null,\n-       from: 'berlin',\n-       id: 'mig_mv8xdutisai',\n-       mode: 'person',\n-       personId: 'daniel',\n-       startYear: 1949,\n-       to: 'telaviv'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Brooklyn, NY \u2192 Los Angeles',\n-       endYear: null,\n-       from: 'brooklyn',\n-       id: 'mig_mv8xdutit2e',\n-       mode: 'person',\n-       personId: 'david',\n-       startYear: 1980,\n-       to: 'la'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Los Angeles \u2192 San Francisco',\n-       endYear: null,\n-       from: 'la',\n-       id: 'mig_mv8xdutiu3s',\n-       mode: 'person',\n-       personId: 'sam',\n-       startYear: 2010,\n-       to: 'sf'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Los Angeles \u2192 San Francisco',\n-       endYear: null,\n-       from: 'la',\n-       id: 'mig_mv8xdutivym',\n-       mode: 'person',\n-       personId: 'ella',\n-       startYear: 2014,\n-       to: 'sf'\n-     }\n-   ],\n    people: [\n      {\n        avatar: '',\n        bio: 'Patriarch of the line. A bookbinder from Minsk who carried the family west ahead of the wars.',\n        birth: 1896,\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B15",
+      "name": "Malformed person records must not crash the application",
+      "status": "failed",
+      "durationMs": 768,
+      "detail": "Malformed import caused browser error\n+ actual - expected\n\n+ [\n+   \"Cannot read properties of null (reading 'at')\"\n+ ]\n- []\n",
+      "pageErrors": [
+        "Cannot read properties of null (reading 'at')"
+      ]
+    },
+    {
+      "id": "B16",
+      "name": "Valid import replacing existing data must require confirmation",
+      "status": "failed",
+      "durationMs": 607,
+      "detail": "Archive immediately overwritten without confirmation\n+ actual - expected\n\n  {\n+   branches: [],\n+   documents: [],\n+   events: [],\n+   locations: [],\n+   migrations: [],\n+   people: []\n-   branches: [\n-     {\n-       color: '#5FB8A8',\n-       id: 'kaminski',\n-       name: 'Kaminski'\n-     },\n-     {\n-       color: '#A18BCB',\n-       id: 'roth',\n-       name: 'Roth'\n-     }\n-   ],\n-   documents: [\n-     {\n-       desc: 'Civil record of the marriage in Minsk.',\n-       events: [\n-         'e3'\n-       ],\n-       id: 'd1',\n-       people: [\n-         'yosef',\n-         'rivka'\n-       ],\n-       title: 'Marriage certificate',\n-       type: 'certificate',\n-       year: 1920\n-     },\n-     {\n-       desc: 'Passenger manifest from arrival in New York.',\n-       events: [\n-         'e10'\n-       ],\n-       id: 'd2',\n-       people: [\n-         'yosef',\n-         'rivka',\n-         'avram',\n-         'lena'\n-       ],\n-       title: 'Ship manifest \u2014 SS Manhattan',\n-       type: 'record',\n-       year: 1938\n-     },\n-     {\n-       desc: \"Avram's honorable discharge.\",\n-       events: [\n-         'e11'\n-       ],\n-       id: 'd3',\n-       people: [\n-         'avram'\n-       ],\n-       title: 'Army discharge papers',\n-       type: 'record',\n-       year: 1946\n-     },\n-     {\n-       desc: 'Issued for travel to Tel Aviv.',\n-       events: [\n-         'e16'\n-       ],\n-       id: 'd4',\n-       people: [\n-         'lena'\n-       ],\n-       title: 'Passport \u2014 Lena',\n-       type: 'passport',\n-       year: 1951\n-     },\n-     {\n-       desc: \"David's degree in architecture.\",\n-       events: [\n-         'e21'\n-       ],\n-       id: 'd5',\n-       people: [\n-         'david'\n-       ],\n-       title: 'University diploma',\n-       type: 'certificate',\n-       year: 1977\n-     },\n-     {\n-       desc: 'Feature on the opening of Kaminski Studio.',\n-       events: [\n-         'e24'\n-       ],\n-       id: 'd6',\n-       people: [\n-         'david'\n-       ],\n-       title: 'Newspaper clipping',\n-       type: 'clipping',\n-       year: 1985\n-     },\n-     {\n-       desc: 'Three branches together in San Francisco.',\n-       events: [\n-         'e36'\n-       ],\n-       id: 'd7',\n-       people: [\n-         'david',\n-         'ella',\n-         'sam',\n-         'hannah',\n-         'miriam',\n-         'noah'\n-       ],\n-       title: 'Reunion photograph',\n-       type: 'photo',\n-       year: 2023\n-     },\n-     {\n-       desc: 'A letter Yosef carried west.',\n-       events: [],\n-       id: 'd8',\n-       people: [\n-         'yosef'\n-       ],\n-       title: 'Letter from Minsk',\n-       type: 'letter',\n-       year: 1919\n-     }\n-   ],\n-   events: [\n-     {\n-       at: 'minsk',\n-       desc: 'Born in Minsk.',\n-       docs: [],\n-       historical: false,\n-       id: 'e1',\n-       people: [\n-         'yosef'\n-       ],\n-       title: 'Yosef Kaminski born',\n-       type: 'birth',\n-       year: 1896\n-     },\n-     {\n-       at: 'minsk',\n-       desc: 'Married in Minsk in 1920.',\n-       docs: [\n-         'd1'\n-       ],\n-       historical: false,\n-       id: 'e3',\n-       people: [\n-         'yosef',\n-         'rivka'\n-       ],\n-       title: 'Yosef & Rivka marry',\n-       type: 'marriage',\n-       year: 1920\n-     },\n-     {\n-       at: 'warsaw',\n-       desc: 'The young couple leaves for Warsaw.',\n-       docs: [\n-         'd8'\n-       ],\n-       historical: false,\n-       id: 'e4',\n-       people: [\n-         'yosef',\n-         'rivka'\n-       ],\n-       title: 'Minsk \u2192 Warsaw',\n-       type: 'migration',\n-       year: 1921\n-     },\n-     {\n-       at: 'warsaw',\n-       desc: 'Born in Warsaw.',\n-       docs: [],\n-       historical: false,\n-       id: 'e5',\n-       people: [\n-         'avram'\n-       ],\n-       title: 'Avram Kaminski born',\n-       type: 'birth',\n-       year: 1925\n-     },\n-     {\n-       at: 'warsaw',\n-       desc: 'Born in Warsaw.',\n-       docs: [],\n-       historical: false,\n-       id: 'e8',\n-       people: [\n-         'lena'\n-       ],\n-       title: 'Lena Kaminski born',\n-       type: 'birth',\n-       year: 1930\n-     },\n-     {\n-       at: 'berlin',\n-       desc: 'A short stay in Berlin for work.',\n-       docs: [],\n-       historical: false,\n-       id: 'e9',\n-       people: [\n-         'yosef',\n-         'rivka',\n-         'avram',\n-         'lena'\n-       ],\n-       title: 'Warsaw \u2192 Berlin',\n-       type: 'migration',\n-       year: 1933\n-     },\n-     {\n-       at: 'berlin',\n-       desc: \"Rising danger reshapes the family's plans.\",\n-       docs: [],\n-       historical: true,\n-       id: 'h1',\n-       people: [],\n-       title: 'Political upheaval in Germany',\n-       type: 'historical',\n-       year: 1933\n-     },\n-     {\n-       at: 'brooklyn',\n-       desc: 'The family emigrates aboard the SS Manhattan.',\n-       docs: [\n-         'd2'\n-       ],\n-       historical: false,\n-       id: 'e10',\n-       people: [\n-         'yosef',\n-         'rivka',\n-         'avram',\n-         'lena'\n-       ],\n-       title: 'Berlin \u2192 Brooklyn',\n-       type: 'migration',\n-       year: 1938\n-     },\n-     {\n-       at: 'berlin',\n-       desc: 'The Europe the family left goes to war.',\n-       docs: [],\n-       historical: true,\n-       id: 'h2',\n-       people: [],\n-       title: 'Second World War begins',\n-       type: 'historical',\n-       year: 1939\n-     },\n-     {\n-       at: 'brooklyn',\n-       desc: 'Serves in the European theater.',\n-       docs: [\n-         'd3'\n-       ],\n-       historical: false,\n-       id: 'e11',\n-       people: [\n-         'avram'\n-       ],\n-       title: 'Avram enlists, U.S. Army',\n-       type: 'military',\n-       year: 1944\n-     },\n-     {\n-       at: 'brooklyn',\n-       desc: 'Married in Brooklyn.',\n-       docs: [],\n-       historical: false,\n-       id: 'e13',\n-       people: [\n-         'avram',\n-         'sara'\n-       ],\n-       title: 'Avram & Sara marry',\n-       type: 'marriage',\n-       year: 1947\n-     },\n-     {\n-       at: 'brooklyn',\n-       desc: 'Married before relocating abroad.',\n-       docs: [],\n-       historical: false,\n-       id: 'e15',\n-       people: [\n-         'lena',\n-         'daniel'\n-       ],\n-       title: 'Lena & Daniel marry',\n-       type: 'marriage',\n-       year: 1950\n-     },\n-     {\n-       at: 'telaviv',\n-       desc: \"Lena founds the family's eastern branch.\",\n-       docs: [\n-         'd4'\n-       ],\n-       historical: false,\n-       id: 'e16',\n-       people: [\n-         'lena'\n-       ],\n-       title: 'Brooklyn \u2192 Tel Aviv',\n-       type: 'migration',\n-       year: 1951\n-     },\n-     {\n-       at: 'brooklyn',\n-       desc: 'First of the line born in America.',\n-       docs: [],\n-       historical: false,\n-       id: 'e17',\n-       people: [\n-         'david'\n-       ],\n-       title: 'David Kaminski born',\n-       type: 'birth',\n-       year: 1955\n-     },\n-     {\n-       at: 'brooklyn',\n-       desc: 'Earns his degree before heading west.',\n-       docs: [\n-         'd5'\n-       ],\n-       historical: false,\n-       id: 'e21',\n-       people: [\n-         'david'\n-       ],\n-       title: 'David graduates in architecture',\n-       type: 'education',\n-       year: 1977\n-     },\n-     {\n-       at: 'la',\n-       desc: 'David moves west to start his career.',\n-       docs: [],\n-       historical: false,\n-       id: 'e22',\n-       people: [\n-         'david'\n-       ],\n-       title: 'Brooklyn \u2192 Los Angeles',\n-       type: 'migration',\n-       year: 1980\n-     },\n-     {\n-       at: 'la',\n-       desc: 'David opens his own architecture practice.',\n-       docs: [\n-         'd6'\n-       ],\n-       historical: false,\n-       id: 'e24',\n-       people: [\n-         'david'\n-       ],\n-       title: 'Kaminski Studio founded',\n-       type: 'career',\n-       year: 1985\n-     },\n-     {\n-       at: 'la',\n-       desc: 'Born in Los Angeles.',\n-       docs: [],\n-       historical: false,\n-       id: 'e25',\n-       people: [\n-         'sam'\n-       ],\n-       title: 'Sam Kaminski born',\n-       type: 'birth',\n-       year: 1985\n-     },\n-     {\n-       at: 'brooklyn',\n-       desc: 'Dies in Brooklyn at 75.',\n-       docs: [],\n-       historical: false,\n-       id: 'e27',\n-       people: [\n-         'yosef'\n-       ],\n-       title: 'Yosef Kaminski dies',\n-       type: 'death',\n-       year: 1971\n-     },\n-     {\n-       at: 'telaviv',\n-       desc: 'Dies in Tel Aviv at 88.',\n-       docs: [],\n-       historical: false,\n-       id: 'e32',\n-       people: [\n-         'lena'\n-       ],\n-       title: 'Lena Roth dies',\n-       type: 'death',\n-       year: 2018\n-     },\n-     {\n-       at: 'sf',\n-       desc: 'Sam moves north for software work.',\n-       docs: [],\n-       historical: false,\n-       id: 'e33',\n-       people: [\n-         'sam'\n-       ],\n-       title: 'Los Angeles \u2192 San Francisco',\n-       type: 'migration',\n-       year: 2010\n-     },\n-     {\n-       at: 'sf',\n-       desc: 'The youngest in the archive.',\n-       docs: [],\n-       historical: false,\n-       id: 'e35',\n-       people: [\n-         'noah'\n-       ],\n-       title: 'Noah Kaminski born',\n-       type: 'birth',\n-       year: 2016\n-     },\n-     {\n-       at: 'sf',\n-       desc: 'Three branches gather to digitize the archive.',\n-       docs: [\n-         'd7'\n-       ],\n-       historical: false,\n-       id: 'e36',\n-       people: [\n-         'david',\n-         'ella',\n-         'sam',\n-         'hannah',\n-         'miriam',\n-         'noah'\n-       ],\n-       title: 'Family reunion, San Francisco',\n-       type: 'milestone',\n-       year: 2023\n-     }\n-   ],\n-   locations: [\n-     {\n-       desc: \"Where the family's story begins.\",\n-       id: 'minsk',\n-       lat: 53.9,\n-       lng: 27.6,\n-       name: 'Minsk',\n-       region: 'Belarus',\n-       x: 712,\n-       y: 196\n-     },\n-     {\n-       desc: 'A decade between the wars.',\n-       id: 'warsaw',\n-       lat: 52.2,\n-       lng: 21,\n-       name: 'Warsaw',\n-       region: 'Poland',\n-       x: 666,\n-       y: 206\n-     },\n-     {\n-       desc: 'A short, uneasy stay.',\n-       id: 'berlin',\n-       lat: 52.5,\n-       lng: 13.4,\n-       name: 'Berlin',\n-       region: 'Germany',\n-       x: 622,\n-       y: 212\n-     },\n-     {\n-       desc: 'The American anchor of the family.',\n-       id: 'brooklyn',\n-       lat: 40.6,\n-       lng: -73.9,\n-       name: 'Brooklyn, NY',\n-       region: 'United States',\n-       x: 288,\n-       y: 236\n-     },\n-     {\n-       desc: 'Where the western branch took root.',\n-       id: 'la',\n-       lat: 34,\n-       lng: -118.2,\n-       name: 'Los Angeles',\n-       region: 'United States',\n-       x: 150,\n-       y: 300\n-     },\n-     {\n-       desc: 'The present-day Bay Area branch.',\n-       id: 'sf',\n-       lat: 37.8,\n-       lng: -122.4,\n-       name: 'San Francisco',\n-       region: 'United States',\n-       x: 132,\n-       y: 262\n-     },\n-     {\n-       desc: 'The eastern branch founded by Lena.',\n-       id: 'telaviv',\n-       lat: 32.1,\n-       lng: 34.8,\n-       name: 'Tel Aviv',\n-       region: 'Israel',\n-       x: 694,\n-       y: 318\n-     }\n-   ],\n-   migrations: [\n-     {\n-       branch: 'kaminski',\n-       description: 'Minsk \u2192 Warsaw',\n-       endYear: null,\n-       from: 'minsk',\n-       id: 'mig_mv8xdutigoq',\n-       mode: 'person',\n-       personId: 'yosef',\n-       startYear: 1921,\n-       to: 'warsaw'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Warsaw \u2192 Berlin',\n-       endYear: null,\n-       from: 'warsaw',\n-       id: 'mig_mv8xdutihk0',\n-       mode: 'person',\n-       personId: 'yosef',\n-       startYear: 1933,\n-       to: 'berlin'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Berlin \u2192 Brooklyn, NY',\n-       endYear: null,\n-       from: 'berlin',\n-       id: 'mig_mv8xdutii79',\n-       mode: 'person',\n-       personId: 'yosef',\n-       startYear: 1938,\n-       to: 'brooklyn'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Minsk \u2192 Warsaw',\n-       endYear: null,\n-       from: 'minsk',\n-       id: 'mig_mv8xdutijls',\n-       mode: 'person',\n-       personId: 'rivka',\n-       startYear: 1921,\n-       to: 'warsaw'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Warsaw \u2192 Berlin',\n-       endYear: null,\n-       from: 'warsaw',\n-       id: 'mig_mv8xdutikzs',\n-       mode: 'person',\n-       personId: 'rivka',\n-       startYear: 1933,\n-       to: 'berlin'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Berlin \u2192 Brooklyn, NY',\n-       endYear: null,\n-       from: 'berlin',\n-       id: 'mig_mv8xdutilxu',\n-       mode: 'person',\n-       personId: 'rivka',\n-       startYear: 1938,\n-       to: 'brooklyn'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Warsaw \u2192 Berlin',\n-       endYear: null,\n-       from: 'warsaw',\n-       id: 'mig_mv8xdutimyn',\n-       mode: 'person',\n-       personId: 'avram',\n-       startYear: 1933,\n-       to: 'berlin'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Berlin \u2192 Brooklyn, NY',\n-       endYear: null,\n-       from: 'berlin',\n-       id: 'mig_mv8xdutin69',\n-       mode: 'person',\n-       personId: 'avram',\n-       startYear: 1938,\n-       to: 'brooklyn'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Warsaw \u2192 Brooklyn, NY',\n-       endYear: null,\n-       from: 'warsaw',\n-       id: 'mig_mv8xdutioj2',\n-       mode: 'person',\n-       personId: 'sara',\n-       startYear: 1947,\n-       to: 'brooklyn'\n-     },\n-     {\n-       branch: 'roth',\n-       description: 'Warsaw \u2192 Berlin',\n-       endYear: null,\n-       from: 'warsaw',\n-       id: 'mig_mv8xdutiplx',\n-       mode: 'person',\n-       personId: 'lena',\n-       startYear: 1933,\n-       to: 'berlin'\n-     },\n-     {\n-       branch: 'roth',\n-       description: 'Berlin \u2192 Brooklyn, NY',\n-       endYear: null,\n-       from: 'berlin',\n-       id: 'mig_mv8xdutiqge',\n-       mode: 'person',\n-       personId: 'lena',\n-       startYear: 1938,\n-       to: 'brooklyn'\n-     },\n-     {\n-       branch: 'roth',\n-       description: 'Brooklyn, NY \u2192 Tel Aviv',\n-       endYear: null,\n-       from: 'brooklyn',\n-       id: 'mig_mv8xdutirqe',\n-       mode: 'person',\n-       personId: 'lena',\n-       startYear: 1951,\n-       to: 'telaviv'\n-     },\n-     {\n-       branch: 'roth',\n-       description: 'Berlin \u2192 Tel Aviv',\n-       endYear: null,\n-       from: 'berlin',\n-       id: 'mig_mv8xdutisai',\n-       mode: 'person',\n-       personId: 'daniel',\n-       startYear: 1949,\n-       to: 'telaviv'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Brooklyn, NY \u2192 Los Angeles',\n-       endYear: null,\n-       from: 'brooklyn',\n-       id: 'mig_mv8xdutit2e',\n-       mode: 'person',\n-       personId: 'david',\n-       startYear: 1980,\n-       to: 'la'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Los Angeles \u2192 San Francisco',\n-       endYear: null,\n-       from: 'la',\n-       id: 'mig_mv8xdutiu3s',\n-       mode: 'person',\n-       personId: 'sam',\n-       startYear: 2010,\n-       to: 'sf'\n-     },\n-     {\n-       branch: 'kaminski',\n-       description: 'Los Angeles \u2192 San Francisco',\n-       endYear: null,\n-       from: 'la',\n-       id: 'mig_mv8xdutivym',\n-       mode: 'person',\n-       personId: 'ella',\n-       startYear: 2014,\n-       to: 'sf'\n-     }\n-   ],\n-   people: [\n-     {\n-       avatar: '',\n-       bio: 'Patriarch of the line. A bookbinder from Minsk who carried the family west ahead of the wars.',\n-       birth: 1896,\n-       born: 'minsk',\n-       branches: [\n-         'kaminski'\n-       ],\n-       children: [\n-         'avram',\n-         'lena'\n-       ],\n-       death: 1971,\n-       first: 'Yosef',\n-       gender: 'm',\n-       id: 'yosef',\n-       last: 'Kaminski',\n-       parents: [],\n-       residences: [\n-         {\n-           at: 'minsk',\n-           from: 1896\n-         },\n-         {\n-           at: 'warsaw',\n-           from: 1921\n-         },\n-         {\n-           at: 'berlin',\n-           from: 1933\n-         },\n-         {\n-           at: 'brooklyn',\n-           from: 1938\n-         }\n-       ],\n-       spouses: [\n-         'rivka'\n-       ]\n-     },\n-     {\n-       avatar: '',\n-       bio: \"N\u00e9e Levin. Kept the family's letters and photographs through four countries.\",\n-       birth: 1900,\n-       born: 'minsk',\n-       branches: [\n-         'kaminski'\n-       ],\n-       children: [\n-         'avram',\n-         'lena'\n-       ],\n-       death: 1979,\n-       first: 'Rivka',\n-       gender: 'f',\n-       id: 'rivka',\n-       last: 'Kaminski',\n-       parents: [],\n-       residences: [\n-         {\n-           at: 'minsk',\n-           from: 1900\n-         },\n-         {\n-           at: 'warsaw',\n-           from: 1921\n-         },\n-         {\n-           at: 'berlin',\n-           from: 1933\n-         },\n-         {\n-           at: 'brooklyn',\n-           from: 1938\n-         }\n-       ],\n-       spouses: [\n-         'yosef'\n-       ]\n-     },\n-     {\n-       avatar: '',\n-       bio: 'Came of age between languages. Served in the U.S. Army, then ran the family print shop.',\n-       birth: 1925,\n-       born: 'warsaw',\n-       branches: [\n-         'kaminski'\n-       ],\n-       children: [\n-         'david',\n-         'hannah'\n-       ],\n-       death: 2004,\n-       first: 'Avram',\n-       gender: 'm',\n-       id: 'avram',\n-       last: 'Kaminski',\n-       parents: [\n-         'yosef',\n-         'rivka'\n-       ],\n-       residences: [\n-         {\n-           at: 'warsaw',\n-           from: 1925\n-         },\n-         {\n-           at: 'berlin',\n-           from: 1933\n-         },\n-         {\n-           at: 'brooklyn',\n-           from: 1938\n-         }\n-       ],\n-       spouses: [\n-         'sara'\n-       ]\n-     },\n-     {\n-       avatar: '',\n-       bio: 'N\u00e9e Goldstein. Taught piano on Eastern Parkway for decades.',\n-       birth: 1928,\n-       born: 'warsaw',\n-       branches: [\n-         'kaminski'\n-       ],\n-       children: [\n-         'david',\n-         'hannah'\n-       ],\n-       death: 2011,\n-       first: 'Sara',\n-       gender: 'f',\n-       id: 'sara',\n-       last: 'Kaminski',\n-       parents: [],\n-       residences: [\n-         {\n-           at: 'warsaw',\n-           from: 1928\n-         },\n-         {\n-           at: 'brooklyn',\n-           from: 1947\n-         }\n-       ],\n-       spouses: [\n-         'avram'\n-       ]\n-     },\n-     {\n-       avatar: '',\n-       bio: 'Left Brooklyn at twenty-one to help build a new town outside Tel Aviv.',\n-       birth: 1930,\n-       born: 'warsaw',\n-       branches: [\n-         'roth'\n-       ],\n-       children: [\n-         'miriam'\n-       ],\n-       death: 2018,\n-       first: 'Lena',\n-       gender: 'f',\n-       id: 'lena',\n-       last: 'Roth',\n-       parents: [\n-         'yosef',\n-         'rivka'\n-       ],\n-       residences: [\n-         {\n-           at: 'warsaw',\n-           from: 1930\n-         },\n-         {\n-           at: 'berlin',\n-           from: 1933\n-         },\n-         {\n-           at: 'brooklyn',\n-           from: 1938\n-         },\n-         {\n-           at: 'telaviv',\n-           from: 1951\n-         }\n-       ],\n-       spouses: [\n-         'daniel'\n-       ]\n-     },\n-     {\n-       avatar: '',\n-       bio: 'An agronomist from Berlin who emigrated in 1949.',\n-       birth: 1927,\n-       born: 'berlin',\n-       branches: [\n-         'roth'\n-       ],\n-       children: [\n-         'miriam'\n-       ],\n-       death: 2009,\n-       first: 'Daniel',\n-       gender: 'm',\n-       id: 'daniel',\n-       last: 'Roth',\n-       parents: [],\n-       residences: [\n-         {\n-           at: 'berlin',\n-           from: 1927\n-         },\n-         {\n-           at: 'telaviv',\n-           from: 1949\n-         }\n-       ],\n-       spouses: [\n-         'lena'\n-       ]\n-     },\n-     {\n-       avatar: '',\n-       bio: 'First of the line born in America. Built an architecture practice in Los Angeles.',\n-       birth: 1955,\n-       born: 'brooklyn',\n-       branches: [\n-         'kaminski'\n-       ],\n-       children: [\n-         'sam',\n-         'ella'\n-       ],\n-       death: null,\n-       first: 'David',\n-       gender: 'm',\n-       id: 'david',\n-       last: 'Kaminski',\n-       parents: [\n-         'avram',\n-         'sara'\n-       ],\n-       residences: [\n-         {\n-           at: 'brooklyn',\n-           from: 1955\n-         },\n-         {\n-           at: 'la',\n-           from: 1980\n-         }\n-       ],\n-       spouses: [\n-         'maria'\n-       ]\n-     },\n-     {\n-       avatar: '',\n-       bio: 'N\u00e9e Alvarez. Born and raised in Los Angeles.',\n-       birth: 1958,\n-       born: 'la',\n-       branches: [\n-         'kaminski'\n-       ],\n-       children: [\n-         'sam',\n-         'ella'\n-       ],\n-       death: null,\n-       first: 'Maria',\n-       gender: 'f',\n-       id: 'maria',\n-       last: 'Kaminski',\n-       parents: [],\n-       residences: [\n-         {\n-           at: 'la',\n-           from: 1958\n-         }\n-       ],\n-       spouses: [\n-         'david'\n-       ]\n-     },\n-     {\n-       avatar: '',\n-       bio: 'A civil-rights attorney who still lives near the old print shop.',\n-       birth: 1960,\n-       born: 'brooklyn',\n-       branches: [\n-         'kaminski'\n-       ],\n-       children: [],\n-       death: null,\n-       first: 'Hannah',\n-       gender: 'f',\n-       id: 'hannah',\n-       last: 'Kaminski',\n-       parents: [\n-         'avram',\n-         'sara'\n-       ],\n-       residences: [\n-         {\n-           at: 'brooklyn',\n-           from: 1960\n-         }\n-       ],\n-       spouses: []\n-     },\n-     {\n-       avatar: '',\n-       bio: 'A documentary filmmaker who keeps the family in contact across continents.',\n-       birth: 1958,\n-       born: 'telaviv',\n-       branches: [\n-         'roth'\n-       ],\n-       children: [],\n-       death: null,\n-       first: 'Miriam',\n-       gender: 'f',\n-       id: 'miriam',\n-       last: 'Roth',\n-       parents: [\n-         'lena',\n-         'daniel'\n-       ],\n-       residences: [\n-         {\n-           at: 'telaviv',\n-           from: 1958\n-         }\n-       ],\n-       spouses: []\n-     },\n-     {\n-       avatar: '',\n-       bio: 'Moved to San Francisco for software work in 2010.',\n-       birth: 1985,\n-       born: 'la',\n-       branches: [\n-         'kaminski'\n-       ],\n-       children: [\n-         'noah'\n-       ],\n-       death: null,\n-       first: 'Sam',\n-       gender: 'm',\n-       id: 'sam',\n-       last: 'Kaminski',\n-       parents: [\n-         'david',\n-         'maria'\n-       ],\n-       residences: [\n-         {\n-           at: 'la',\n-           from: 1985\n-         },\n-         {\n-           at: 'sf',\n-           from: 2010\n-         }\n-       ],\n-       spouses: []\n-     },\n-     {\n-       avatar: '',\n-       bio: 'A marine biologist who began digitizing this archive in 2023.',\n-       birth: 1988,\n-       born: 'la',\n-       branches: [\n-         'kaminski'\n-       ],\n-       children: [],\n-       death: null,\n-       first: 'Ella',\n-       gender: 'f',\n-       id: 'ella',\n-       last: 'Kaminski',\n-       parents: [\n-         'david',\n-         'maria'\n-       ],\n-       residences: [\n-         {\n-           at: 'la',\n-           from: 1988\n-         },\n-         {\n-           at: 'sf',\n-           from: 2014\n-         }\n-       ],\n-       spouses: []\n-     },\n-     {\n-       avatar: '',\n-       bio: \"The youngest leaf \u2014 five generations from a bookbinder's workshop in Minsk.\",\n-       birth: 2016,\n-       born: 'sf',\n-       branches: [\n-         'kaminski'\n-       ],\n-       children: [],\n-       death: null,\n-       first: 'Noah',\n-       gender: 'm',\n-       id: 'noah',\n-       last: 'Kaminski',\n-       parents: [\n-         'sam'\n-       ],\n-       residences: [\n-         {\n-           at: 'sf',\n-           from: 2016\n-         }\n-       ],\n-       spouses: []\n-     }\n-   ]\n  }\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B17",
+      "name": "Storage failures must produce a visible persistence warning",
+      "status": "failed",
+      "durationMs": 574,
+      "detail": "No warning despite failed storage writes",
+      "pageErrors": []
+    },
+    {
+      "id": "B18",
+      "name": "Two tabs must synchronize rather than overwrite each other",
+      "status": "failed",
+      "durationMs": 1054,
+      "detail": "Second tab overwrote the first tab change",
+      "pageErrors": []
+    },
+    {
+      "id": "B19",
+      "name": "Deleting the selected branch must reset its global filter",
+      "status": "failed",
+      "durationMs": 951,
+      "detail": "Removed filter hides all remaining people\n\n0 !== 13\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B20",
+      "name": "People with unknown residences must not inflate place totals",
+      "status": "failed",
+      "durationMs": 372,
+      "detail": "Unknown location counted as a place",
+      "pageErrors": []
+    },
+    {
+      "id": "B21",
+      "name": "Keyboard activation of global search results must open profile",
+      "status": "failed",
+      "durationMs": 345,
+      "detail": "Enter does not activate search result\n\n0 !== 1\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B22",
+      "name": "Modal Escape closes and modal has accessible dialog semantics",
+      "status": "failed",
+      "durationMs": 545,
+      "detail": "No dialog role\n\n0 !== 1\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B23",
+      "name": "Tab focus stays inside open modal",
+      "status": "failed",
+      "durationMs": 589,
+      "detail": "Focus escaped behind modal",
+      "pageErrors": []
+    },
+    {
+      "id": "B24",
+      "name": "Interactive controls must have accessible names",
+      "status": "failed",
+      "durationMs": 474,
+      "detail": "Unnamed controls\n+ actual - expected\n\n+ [\n+   '<input placeholder=\"Search the family\u2026\" value=\"\" style=\"width: 100%; background: rgb(28, 33, 48); border: 1px solid rgb(39, 45, 61); color: rgb(236, 232, 223); ',\n+   '<button class=\"fa-click\" style=\"width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; background: rgba(224, 168, 90, 0.1); color: rgb(224, 168, 90); bo',\n+   '<input min=\"1896\" max=\"2026\" class=\"fa-range\" type=\"range\" value=\"1950\">'\n+ ]\n- []\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B25",
+      "name": "Empty multiselect can be reached and opened with the keyboard",
+      "status": "failed",
+      "durationMs": 697,
+      "detail": "Empty multiselect has no focusable control",
+      "pageErrors": []
+    },
+    {
+      "id": "B26-390",
+      "name": "Responsive 390px: all sidebar destinations remain named and layout fits",
+      "status": "failed",
+      "durationMs": 371,
+      "detail": "Icon-only navigation has no accessible names\n\n7 !== 0\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B26-768",
+      "name": "Responsive 768px: all sidebar destinations remain named and layout fits",
+      "status": "failed",
+      "durationMs": 323,
+      "detail": "Icon-only navigation has no accessible names\n\n7 !== 0\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B27",
+      "name": "Mobile year slider must remain within its visible container",
+      "status": "failed",
+      "durationMs": 480,
+      "detail": "The right end of the year slider is clipped off-screen",
+      "pageErrors": []
+    },
+    {
+      "id": "B28",
+      "name": "Mobile family search must have enough room to enter and read a name",
+      "status": "failed",
+      "durationMs": 385,
+      "detail": "Search is only 48px wide",
+      "pageErrors": []
+    },
+    {
+      "id": "B29",
+      "name": "Escape must close an edit modal",
+      "status": "failed",
+      "durationMs": 593,
+      "detail": "Escape ignored\n\n1 !== 0\n",
+      "pageErrors": []
+    },
+    {
+      "id": "B30",
+      "name": "Empty People search must provide a no-results message",
+      "status": "failed",
+      "durationMs": 439,
+      "detail": "Blank area instead of no-results guidance",
+      "pageErrors": []
+    },
+    {
+      "id": "B31",
+      "name": "Spouse generation alignment must also keep children below parents",
+      "status": "failed",
+      "durationMs": 266,
+      "detail": "Child is in generation 2, parent in 3",
+      "pageErrors": []
+    },
+    {
+      "id": "B32",
+      "name": "Saving a person biography must not remove existing branch assignments",
+      "status": "passed",
+      "durationMs": 642,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B33",
+      "name": "Clicking branch selector and cancelling must preserve draft tags",
+      "status": "failed",
+      "durationMs": 1528,
+      "detail": "Opening the selector removed an existing branch\n+ actual - expected\n\n+ []\n- [\n-   'kaminski'\n- ]\n",
+      "pageErrors": []
+    },
+    {
+      "id": "C13",
+      "name": "Person linked-event and linked-document fields update the related people arrays",
+      "status": "passed",
+      "durationMs": 1550,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R06",
+      "name": "Last populated branch cannot move members to a nonexistent branch",
+      "status": "passed",
+      "durationMs": 1326,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R07",
+      "name": "Relationship Add is disabled without a target person",
+      "status": "passed",
+      "durationMs": 601,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "D06",
+      "name": "Export failure shows an error without changing archive data",
+      "status": "passed",
+      "durationMs": 772,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N11",
+      "name": "Profile parent and child navigation and close icon",
+      "status": "passed",
+      "durationMs": 1049,
+      "detail": "",
+      "pageErrors": []
+    }
+  ],
+  "summary": {
+    "scenarios": 71,
+    "passed": 38,
+    "failed": 33,
+    "skipped": 0
+  },
+  "method": "Complete feature run plus targeted reruns of corrected audit selectors and added cases; same unchanged application revision. Failures assert desired behavior and remain unresolved."
+}

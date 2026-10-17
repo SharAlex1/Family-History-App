@@ -1,0 +1,1382 @@
+[
+  {
+    "width": 1440,
+    "view": "Overview",
+    "viewport": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 844,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    },
+    "content": {
+      "x": 224,
+      "y": 60,
+      "width": 1216,
+      "height": 784,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1216,
+      "clientWidth": 1216
+    },
+    "slider": null,
+    "range": null,
+    "search": {
+      "x": 248,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 608,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 0
+  },
+  {
+    "width": 1440,
+    "view": "Family Tree",
+    "viewport": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 844,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    },
+    "content": {
+      "x": 224,
+      "y": 60,
+      "width": 1216,
+      "height": 784,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1216,
+      "clientWidth": 1216
+    },
+    "slider": {
+      "x": 422,
+      "y": 756,
+      "width": 820,
+      "height": 70,
+      "right": 1242,
+      "bottom": 826,
+      "scrollWidth": 818,
+      "clientWidth": 818
+    },
+    "range": {
+      "x": 607,
+      "y": 782,
+      "width": 618,
+      "height": 6,
+      "right": 1225,
+      "bottom": 788,
+      "scrollWidth": 618,
+      "clientWidth": 618
+    },
+    "search": {
+      "x": 248,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 608,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 0
+  },
+  {
+    "width": 1440,
+    "view": "Timeline",
+    "viewport": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 844,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    },
+    "content": {
+      "x": 224,
+      "y": 60,
+      "width": 1216,
+      "height": 784,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1216,
+      "clientWidth": 1216
+    },
+    "slider": {
+      "x": 422,
+      "y": 756,
+      "width": 820,
+      "height": 70,
+      "right": 1242,
+      "bottom": 826,
+      "scrollWidth": 818,
+      "clientWidth": 818
+    },
+    "range": {
+      "x": 607,
+      "y": 782,
+      "width": 618,
+      "height": 6,
+      "right": 1225,
+      "bottom": 788,
+      "scrollWidth": 618,
+      "clientWidth": 618
+    },
+    "search": {
+      "x": 248,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 608,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 0
+  },
+  {
+    "width": 1440,
+    "view": "Map",
+    "viewport": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 844,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    },
+    "content": {
+      "x": 224,
+      "y": 60,
+      "width": 1216,
+      "height": 784,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1216,
+      "clientWidth": 1216
+    },
+    "slider": {
+      "x": 422,
+      "y": 756,
+      "width": 820,
+      "height": 70,
+      "right": 1242,
+      "bottom": 826,
+      "scrollWidth": 818,
+      "clientWidth": 818
+    },
+    "range": {
+      "x": 607,
+      "y": 782,
+      "width": 618,
+      "height": 6,
+      "right": 1225,
+      "bottom": 788,
+      "scrollWidth": 618,
+      "clientWidth": 618
+    },
+    "search": {
+      "x": 248,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 608,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 0
+  },
+  {
+    "width": 1440,
+    "view": "People",
+    "viewport": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 844,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    },
+    "content": {
+      "x": 224,
+      "y": 60,
+      "width": 1216,
+      "height": 784,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1216,
+      "clientWidth": 1216
+    },
+    "slider": {
+      "x": 422,
+      "y": 756,
+      "width": 820,
+      "height": 70,
+      "right": 1242,
+      "bottom": 826,
+      "scrollWidth": 818,
+      "clientWidth": 818
+    },
+    "range": {
+      "x": 607,
+      "y": 782,
+      "width": 618,
+      "height": 6,
+      "right": 1225,
+      "bottom": 788,
+      "scrollWidth": 618,
+      "clientWidth": 618
+    },
+    "search": {
+      "x": 248,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 608,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 0
+  },
+  {
+    "width": 1440,
+    "view": "Documents",
+    "viewport": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 844,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    },
+    "content": {
+      "x": 224,
+      "y": 60,
+      "width": 1216,
+      "height": 784,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1216,
+      "clientWidth": 1216
+    },
+    "slider": null,
+    "range": null,
+    "search": {
+      "x": 248,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 608,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 0
+  },
+  {
+    "width": 1440,
+    "view": "Manage Data",
+    "viewport": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 844,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1440,
+      "clientWidth": 1440
+    },
+    "content": {
+      "x": 224,
+      "y": 60,
+      "width": 1216,
+      "height": 784,
+      "right": 1440,
+      "bottom": 844,
+      "scrollWidth": 1216,
+      "clientWidth": 1216
+    },
+    "slider": null,
+    "range": null,
+    "search": {
+      "x": 248,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 608,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 0
+  },
+  {
+    "width": 1440,
+    "view": "Add person",
+    "scrollWidth": 718,
+    "clientWidth": 718,
+    "rectWidth": 720
+  },
+  {
+    "width": 768,
+    "view": "Overview",
+    "viewport": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 844,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 768,
+      "clientWidth": 768
+    },
+    "content": {
+      "x": 60,
+      "y": 60,
+      "width": 708,
+      "height": 784,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 708,
+      "clientWidth": 708
+    },
+    "slider": null,
+    "range": null,
+    "search": {
+      "x": 84,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 444,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 768,
+    "view": "Family Tree",
+    "viewport": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 844,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 768,
+      "clientWidth": 768
+    },
+    "content": {
+      "x": 60,
+      "y": 60,
+      "width": 708,
+      "height": 784,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 708,
+      "clientWidth": 708
+    },
+    "slider": {
+      "x": 84,
+      "y": 756,
+      "width": 660,
+      "height": 70,
+      "right": 744,
+      "bottom": 826,
+      "scrollWidth": 658,
+      "clientWidth": 658
+    },
+    "range": {
+      "x": 269,
+      "y": 782,
+      "width": 458,
+      "height": 6,
+      "right": 727,
+      "bottom": 788,
+      "scrollWidth": 458,
+      "clientWidth": 458
+    },
+    "search": {
+      "x": 84,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 444,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 768,
+    "view": "Timeline",
+    "viewport": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 844,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 768,
+      "clientWidth": 768
+    },
+    "content": {
+      "x": 60,
+      "y": 60,
+      "width": 708,
+      "height": 784,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 708,
+      "clientWidth": 708
+    },
+    "slider": {
+      "x": 84,
+      "y": 756,
+      "width": 660,
+      "height": 70,
+      "right": 744,
+      "bottom": 826,
+      "scrollWidth": 658,
+      "clientWidth": 658
+    },
+    "range": {
+      "x": 269,
+      "y": 782,
+      "width": 458,
+      "height": 6,
+      "right": 727,
+      "bottom": 788,
+      "scrollWidth": 458,
+      "clientWidth": 458
+    },
+    "search": {
+      "x": 84,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 444,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 768,
+    "view": "Map",
+    "viewport": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 844,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 768,
+      "clientWidth": 768
+    },
+    "content": {
+      "x": 60,
+      "y": 60,
+      "width": 708,
+      "height": 784,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 708,
+      "clientWidth": 708
+    },
+    "slider": {
+      "x": 84,
+      "y": 756,
+      "width": 660,
+      "height": 70,
+      "right": 744,
+      "bottom": 826,
+      "scrollWidth": 658,
+      "clientWidth": 658
+    },
+    "range": {
+      "x": 269,
+      "y": 782,
+      "width": 458,
+      "height": 6,
+      "right": 727,
+      "bottom": 788,
+      "scrollWidth": 458,
+      "clientWidth": 458
+    },
+    "search": {
+      "x": 84,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 444,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 768,
+    "view": "People",
+    "viewport": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 844,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 768,
+      "clientWidth": 768
+    },
+    "content": {
+      "x": 60,
+      "y": 60,
+      "width": 708,
+      "height": 784,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 708,
+      "clientWidth": 708
+    },
+    "slider": {
+      "x": 84,
+      "y": 756,
+      "width": 660,
+      "height": 70,
+      "right": 744,
+      "bottom": 826,
+      "scrollWidth": 658,
+      "clientWidth": 658
+    },
+    "range": {
+      "x": 269,
+      "y": 782,
+      "width": 458,
+      "height": 6,
+      "right": 727,
+      "bottom": 788,
+      "scrollWidth": 458,
+      "clientWidth": 458
+    },
+    "search": {
+      "x": 84,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 444,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 768,
+    "view": "Documents",
+    "viewport": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 844,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 768,
+      "clientWidth": 768
+    },
+    "content": {
+      "x": 60,
+      "y": 60,
+      "width": 708,
+      "height": 784,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 708,
+      "clientWidth": 708
+    },
+    "slider": null,
+    "range": null,
+    "search": {
+      "x": 84,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 444,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 768,
+    "view": "Manage Data",
+    "viewport": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 844,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 768,
+      "clientWidth": 768
+    },
+    "content": {
+      "x": 60,
+      "y": 60,
+      "width": 708,
+      "height": 784,
+      "right": 768,
+      "bottom": 844,
+      "scrollWidth": 708,
+      "clientWidth": 708
+    },
+    "slider": null,
+    "range": null,
+    "search": {
+      "x": 84,
+      "y": 12,
+      "width": 360,
+      "height": 35,
+      "right": 444,
+      "bottom": 47,
+      "scrollWidth": 358,
+      "clientWidth": 358
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 768,
+    "view": "Add person",
+    "scrollWidth": 718,
+    "clientWidth": 718,
+    "rectWidth": 720
+  },
+  {
+    "width": 390,
+    "view": "Overview",
+    "viewport": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 330,
+      "height": 757,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 330,
+      "clientWidth": 330
+    },
+    "slider": null,
+    "range": null,
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 390,
+    "view": "Family Tree",
+    "viewport": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 435,
+      "clientWidth": 390
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 330,
+      "height": 757,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 330,
+      "clientWidth": 330
+    },
+    "slider": {
+      "x": 84,
+      "y": 756,
+      "width": 282,
+      "height": 70,
+      "right": 366,
+      "bottom": 826,
+      "scrollWidth": 350,
+      "clientWidth": 280
+    },
+    "range": {
+      "x": 269,
+      "y": 782,
+      "width": 164.234375,
+      "height": 6,
+      "right": 433.234375,
+      "bottom": 788,
+      "scrollWidth": 164,
+      "clientWidth": 164
+    },
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 390,
+    "view": "Timeline",
+    "viewport": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 435,
+      "clientWidth": 390
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 330,
+      "height": 757,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 330,
+      "clientWidth": 330
+    },
+    "slider": {
+      "x": 84,
+      "y": 756,
+      "width": 282,
+      "height": 70,
+      "right": 366,
+      "bottom": 826,
+      "scrollWidth": 350,
+      "clientWidth": 280
+    },
+    "range": {
+      "x": 269,
+      "y": 782,
+      "width": 164.234375,
+      "height": 6,
+      "right": 433.234375,
+      "bottom": 788,
+      "scrollWidth": 164,
+      "clientWidth": 164
+    },
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 390,
+    "view": "Map",
+    "viewport": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 435,
+      "clientWidth": 390
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 330,
+      "height": 757,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 330,
+      "clientWidth": 330
+    },
+    "slider": {
+      "x": 84,
+      "y": 756,
+      "width": 282,
+      "height": 70,
+      "right": 366,
+      "bottom": 826,
+      "scrollWidth": 350,
+      "clientWidth": 280
+    },
+    "range": {
+      "x": 269,
+      "y": 782,
+      "width": 164.234375,
+      "height": 6,
+      "right": 433.234375,
+      "bottom": 788,
+      "scrollWidth": 164,
+      "clientWidth": 164
+    },
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 390,
+    "view": "People",
+    "viewport": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 435,
+      "clientWidth": 390
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 330,
+      "height": 757,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 330,
+      "clientWidth": 330
+    },
+    "slider": {
+      "x": 84,
+      "y": 756,
+      "width": 282,
+      "height": 70,
+      "right": 366,
+      "bottom": 826,
+      "scrollWidth": 350,
+      "clientWidth": 280
+    },
+    "range": {
+      "x": 269,
+      "y": 782,
+      "width": 164.234375,
+      "height": 6,
+      "right": 433.234375,
+      "bottom": 788,
+      "scrollWidth": 164,
+      "clientWidth": 164
+    },
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 390,
+    "view": "Documents",
+    "viewport": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 330,
+      "height": 757,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 330,
+      "clientWidth": 330
+    },
+    "slider": null,
+    "range": null,
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 390,
+    "view": "Manage Data",
+    "viewport": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 330,
+      "height": 757,
+      "right": 390,
+      "bottom": 844,
+      "scrollWidth": 330,
+      "clientWidth": 330
+    },
+    "slider": null,
+    "range": null,
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 390,
+    "view": "Add person",
+    "scrollWidth": 356,
+    "clientWidth": 356,
+    "rectWidth": 358
+  },
+  {
+    "width": 320,
+    "view": "Overview",
+    "viewport": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 844,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 260,
+      "height": 757,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 295,
+      "clientWidth": 260
+    },
+    "slider": null,
+    "range": null,
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 320,
+    "view": "Family Tree",
+    "viewport": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 844,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 435,
+      "clientWidth": 320
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 260,
+      "height": 757,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 260,
+      "clientWidth": 260
+    },
+    "slider": {
+      "x": 84,
+      "y": 756,
+      "width": 212,
+      "height": 70,
+      "right": 296,
+      "bottom": 826,
+      "scrollWidth": 350,
+      "clientWidth": 210
+    },
+    "range": {
+      "x": 269,
+      "y": 782,
+      "width": 164.234375,
+      "height": 6,
+      "right": 433.234375,
+      "bottom": 788,
+      "scrollWidth": 164,
+      "clientWidth": 164
+    },
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 320,
+    "view": "Timeline",
+    "viewport": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 844,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 435,
+      "clientWidth": 320
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 260,
+      "height": 757,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 308,
+      "clientWidth": 260
+    },
+    "slider": {
+      "x": 84,
+      "y": 756,
+      "width": 212,
+      "height": 70,
+      "right": 296,
+      "bottom": 826,
+      "scrollWidth": 350,
+      "clientWidth": 210
+    },
+    "range": {
+      "x": 269,
+      "y": 782,
+      "width": 164.234375,
+      "height": 6,
+      "right": 433.234375,
+      "bottom": 788,
+      "scrollWidth": 164,
+      "clientWidth": 164
+    },
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 320,
+    "view": "Map",
+    "viewport": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 844,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 435,
+      "clientWidth": 320
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 260,
+      "height": 757,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 260,
+      "clientWidth": 260
+    },
+    "slider": {
+      "x": 84,
+      "y": 756,
+      "width": 212,
+      "height": 70,
+      "right": 296,
+      "bottom": 826,
+      "scrollWidth": 350,
+      "clientWidth": 210
+    },
+    "range": {
+      "x": 269,
+      "y": 782,
+      "width": 164.234375,
+      "height": 6,
+      "right": 433.234375,
+      "bottom": 788,
+      "scrollWidth": 164,
+      "clientWidth": 164
+    },
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 320,
+    "view": "People",
+    "viewport": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 844,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 435,
+      "clientWidth": 320
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 260,
+      "height": 757,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 260,
+      "clientWidth": 260
+    },
+    "slider": {
+      "x": 84,
+      "y": 756,
+      "width": 212,
+      "height": 70,
+      "right": 296,
+      "bottom": 826,
+      "scrollWidth": 350,
+      "clientWidth": 210
+    },
+    "range": {
+      "x": 269,
+      "y": 782,
+      "width": 164.234375,
+      "height": 6,
+      "right": 433.234375,
+      "bottom": 788,
+      "scrollWidth": 164,
+      "clientWidth": 164
+    },
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 320,
+    "view": "Documents",
+    "viewport": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 844,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 260,
+      "height": 757,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 274,
+      "clientWidth": 260
+    },
+    "slider": null,
+    "range": null,
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 320,
+    "view": "Manage Data",
+    "viewport": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 844,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    "content": {
+      "x": 60,
+      "y": 87,
+      "width": 260,
+      "height": 757,
+      "right": 320,
+      "bottom": 844,
+      "scrollWidth": 298,
+      "clientWidth": 260
+    },
+    "slider": null,
+    "range": null,
+    "search": {
+      "x": 84,
+      "y": 25.5,
+      "width": 48,
+      "height": 35,
+      "right": 132,
+      "bottom": 60.5,
+      "scrollWidth": 46,
+      "clientWidth": 46
+    },
+    "unnamedNav": 7
+  },
+  {
+    "width": 320,
+    "view": "Add person",
+    "scrollWidth": 286,
+    "clientWidth": 286,
+    "rectWidth": 288
+  }
+]

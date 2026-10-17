@@ -1,6 +1,6 @@
 # Family Atlas
 
-An interactive family history explorer, organized from the original `FamilyAtlas_4.jsx` prototype. The existing interface, sample archive, editing behavior, time slider, and browser storage format are preserved.
+An interactive family history explorer, organized from the original `FamilyAtlas_4.jsx` prototype. The original views and sample archive remain, with validated editing, recoverable browser storage, keyboard-accessible controls, and responsive layouts.
 
 ## Develop locally
 
@@ -40,20 +40,20 @@ To use an existing Chromium installation, set `CHROMIUM_PATH` to its executable 
 - `src/state/`: the shared archive provider, CRUD actions, relationship operations, and context hook.
 - `src/data/`: sample family data and initial migration generation.
 - `src/config/`: theme, year bounds, event and document categories.
-- `src/lib/`: browser persistence and the external world map loader.
+- `src/lib/`: archive validation and relationship/history invariants, recoverable browser persistence, and the external world map loader.
 - `src/utils/`: identifiers and historical person calculations.
 - `src/styles/`: the original global styles, including responsive behavior.
-- `tests/`: unit checks and a browser workflow smoke test.
+- `tests/`: unit invariants, browser integrity workflows, and the full feature audit.
 - `docs/`: architecture, data model, and known limitations.
 
-Read [the architecture guide](docs/architecture.md) before making structural changes and [the data model](docs/data-model.md) before changing stored records. [Known limitations](docs/known-limitations.md) records existing behavior retained during this refactor.
+Read [the architecture guide](docs/architecture.md) before making structural changes and [the data model](docs/data-model.md) before changing stored records. [Known limitations](docs/known-limitations.md) describes the current feature boundaries. The [audit and fix verification](docs/audit/README.md) tracks the 25 corrected findings.
 
 ## Data and external resources
 
-Edits are saved under `familyAtlas.v2` in this browser's local storage. Export JSON from **Manage Data** to keep a backup or transfer the archive to another browser. Changing the hosting origin creates a separate browser storage area.
+Edits are saved under `familyAtlas.v2` in this browser's local storage. Imports are validated and previewed before replacement. A rolling previous-archive backup is kept under `familyAtlas.backup`; use **Restore previous archive** in Manage Data to restore it. Existing valid archives are upgraded with reciprocal links and backed up before migration. Invalid stored archives remain untouched, with recovery export offered. Save failures are shown visibly. Export JSON from **Manage Data** to keep a backup or transfer the archive to another browser. Changing the hosting origin creates a separate browser storage area.
 
 The map fetches Natural Earth land data from jsDelivr, with unpkg as a fallback. If these requests fail, the original stylized map remains available. Google Fonts supplies the display fonts, with local font fallbacks. There are no API keys, authentication services, uploads, or server database in this version.
 
 ## Scope
 
-This repository provides a maintainable frontend foundation. The original prototype was separated into modules; existing application defects were documented rather than silently changed. Future backend, real media storage, authentication, and collaboration should be designed when those features are implemented.
+This repository provides a maintainable frontend foundation. The original prototype was separated into modules, then its 25 audited issues were corrected with regression coverage. Future backend, real media storage, authentication, and collaboration should be designed when those features are implemented.

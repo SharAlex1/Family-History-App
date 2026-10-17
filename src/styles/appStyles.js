@@ -5,6 +5,13 @@ const CSS = `
 #fa-root { position: fixed; inset: 0; display: flex;
   background: radial-gradient(1100px 600px at 12% -8%, #15233055, transparent 60%), radial-gradient(900px 500px at 100% 0%, #2a1f1255, transparent 55%), ${C.bg};
   color: ${C.text}; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; }
+dialog, dialog * { box-sizing: border-box; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+dialog::backdrop { background: transparent; }
+dialog button { cursor: pointer; }
+.fa-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+:where(button,input,select,textarea,[tabindex]):focus-visible { outline: 2px solid ${C.amber}; outline-offset: 3px; }
+.fa-notice { padding: 12px 18px; background: ${C.panelSolid}; border-bottom: 1px solid ${C.danger}; color: ${C.text}; font-size: 13px; }
+.fa-notice button { margin: 6px 8px 0 0; padding: 5px 8px; background: ${C.panel2}; color: ${C.text}; border: 1px solid ${C.border}; border-radius: 6px; }
 #fa-root * { box-sizing: border-box; }
 #fa-root button { font-family: inherit; cursor: pointer; }
 .fa-input:focus { border-color: ${C.amber}99 !important; }
@@ -43,7 +50,17 @@ const CSS = `
   .fa-navbtn { justify-content: center; }
   .fa-dash-grid, .fa-rel-grid { grid-template-columns: 1fr !important; }
 }
-@media (prefers-reduced-motion: reduce) { .fa-flow, .fa-pulse { animation: none; } .fa-card { transition: none; } }
+@media (max-width: 600px) {
+  .fa-topbar { flex-wrap: wrap; padding: 10px 14px; }
+  .fa-search { flex-basis: 100% !important; max-width: none !important; min-width: 0; }
+  .fa-branch-filters { width: 100%; justify-content: flex-start !important; }
+  .fa-slider { width: calc(100% - 24px); bottom: 10px; padding: 10px; gap: 10px; flex-wrap: wrap; }
+  .fa-slider-track { flex-basis: 100% !important; }
+  .fa-modal-wrap { padding: 12px; }
+  .fa-modal { max-width: 100%; }
+  .fa-modal [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 `;
 
 export { CSS };

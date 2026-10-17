@@ -3,6 +3,8 @@ import { GitBranch, Clock, MapPin, Users, FileText, Search, ChevronRight, Plus, 
 import { C } from "../../config/theme.js";
 import { TYPE, DOC_ICON } from "../../config/eventTypes.js";
 import { fullName } from "../../utils/people.js";
+import { parseArchive } from "../../lib/storage.js";
+import { COLLECTIONS } from "../../lib/archive.js";
 import { useData } from "../../state/DataContext.jsx";
 import { Avatar, Btn, EmptyState } from "../../components/ui/Primitives.jsx";
 import { Modal, ConfirmDialog, BranchDeleteDialog } from "../../components/ui/Dialogs.jsx";
@@ -31,6 +33,8 @@ function ManageView({ openPerson }) {
   const [q, setQ] = useState("");
   const [editing, setEditing] = useState(null); // {kind, item|null}
   const [confirm, setConfirm] = useState(null); // {kind, id, name, refs}
+  const [pendingImport, setPendingImport] = useState(null);
+  const [importError, setImportError] = useState("");
   const [branchDel, setBranchDel] = useState(null); // {id, name, count}
   const fileRef = useRef(null);
 
@@ -39,7 +43,8 @@ function ManageView({ openPerson }) {
   function onImport(e) {
     const file = e.target.files?.[0]; if (!file) return;
     const r = new FileReader();
-    r.onload = () => { try { actions.importData(JSON.parse(r.result)); } catch (err) { alert("Could not read that file — make sure it's a Family Atlas JSON export."); } };
+    r.onload = () => { try { setPendingImport(parseArchive(r.result)); setImportError(""); } catch (err) { setImportError(`Could not read that file: ${err.message}`); } };
+    r.onerror = () => setImportError("Could not read that file. Try exporting it again.");
     r.readAsText(file); e.target.value = "";
   }
 
@@ -53,11 +58,13 @@ function ManageView({ openPerson }) {
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           <Btn kind="soft" small icon={Download} onClick={actions.exportData}>Export JSON</Btn>
           <Btn kind="soft" small icon={Upload} onClick={() => fileRef.current?.click()}>Import JSON</Btn>
+          <Btn kind="soft" small icon={RotateCcw} onClick={() => setConfirm({kind:"restore"})}>Restore previous archive</Btn>
           <Btn kind="danger" small icon={RotateCcw} onClick={() => setConfirm({ kind: "reset" })}>Reset to sample</Btn>
           <input ref={fileRef} type="file" accept="application/json,.json" onChange={onImport} style={{ display: "none" }} />
         </div>
       </div>
 
+      {importError && <p role="alert" style={{color:C.danger}}>{importError}</p>}
       <div style={{ display: "flex", gap: 6, flexWrap: "wrap", borderBottom: `1px solid ${C.border}`, marginTop: 16, marginBottom: 18 }}>
         {MANAGE_TABS.map(({ id, label, Icon }) => {
           const on = tab === id; const count = id === "relationships" ? null : (data[id] || []).length;
@@ -84,25 +91,31 @@ function ManageView({ openPerson }) {
           </>
         )}
 
+      {pendingImport && <Modal title="Replace the current archive?" onClose={() => setPendingImport(null)}>
+        <p>This import will replace your current archive. The previous archive will be backed up in this browser first.</p>
+        <ul>{COLLECTIONS.map(key => <li key={key}>{key}: {pendingImport[key].length}</li>)}</ul>
+        <div style={{display:'flex',gap:8,justifyContent:'flex-end'}}><Btn onClick={() => setPendingImport(null)}>Cancel</Btn><Btn kind="primary" onClick={async () => { if (await actions.importData(pendingImport)) setPendingImport(null); }}>Replace archive</Btn></div>
+      </Modal>}
+      {confirm?.kind === 'restore' && <ConfirmDialog title="Restore the previous archive?" message="Your current archive will be backed up before the previous archive is restored. Export a copy first if you want to keep additional history." confirmLabel="Restore archive" onCancel={() => setConfirm(null)} onConfirm={async () => { if (await actions.restoreBackup()) setConfirm(null); }} />}
       {editing && (
         <Modal wide={editing.kind === "people"} title={`${editing.item ? "Edit" : "Add"} ${singular(editing.kind)}`} subtitle={editing.kind === "people" ? "Fields marked * are required." : null} onClose={close}>
-          {editing.kind === "people" && <PersonForm value={editing.item} onSave={(payload) => { actions.savePerson(payload); close(); }} onCancel={close} />}
-          {editing.kind === "locations" && <LocationForm value={editing.item} onSave={(v) => { actions.save("locations", v); close(); }} onCancel={close} />}
-          {editing.kind === "events" && <EventForm value={editing.item} onSave={(v) => { actions.save("events", v); close(); }} onCancel={close} />}
-          {editing.kind === "migrations" && <MigrationForm value={editing.item} onSave={(v) => { actions.save("migrations", v); close(); }} onCancel={close} />}
-          {editing.kind === "documents" && <DocumentForm value={editing.item} onSave={(v) => { actions.save("documents", v); close(); }} onCancel={close} />}
-          {editing.kind === "branches" && <BranchForm value={editing.item} onSave={(v) => { actions.save("branches", v); close(); }} onCancel={close} />}
+          {editing.kind === "people" && <PersonForm value={editing.item} onSave={async (payload) => { if (await actions.savePerson(payload)) close(); }} onCancel={close} />}
+          {editing.kind === "locations" && <LocationForm value={editing.item} onSave={async (v) => { if (await actions.save("locations", v, editing.item)) close(); }} onCancel={close} />}
+          {editing.kind === "events" && <EventForm value={editing.item} onSave={async (v) => { if (await actions.save("events", v, editing.item)) close(); }} onCancel={close} />}
+          {editing.kind === "migrations" && <MigrationForm value={editing.item} onSave={async (v) => { if (await actions.save("migrations", v, editing.item)) close(); }} onCancel={close} />}
+          {editing.kind === "documents" && <DocumentForm value={editing.item} onSave={async (v) => { if (await actions.save("documents", v, editing.item)) close(); }} onCancel={close} />}
+          {editing.kind === "branches" && <BranchForm value={editing.item} onSave={async (v) => { if (await actions.save("branches", v, editing.item)) close(); }} onCancel={close} />}
         </Modal>
       )}
 
       {confirm && confirm.kind === "reset" && (
-        <ConfirmDialog title="Reset to sample data?" confirmLabel="Reset everything" message="This replaces all your current data with the original Kaminski–Roth sample. This cannot be undone." onCancel={() => setConfirm(null)} onConfirm={() => { actions.resetToSeed(); setConfirm(null); }} />
+        <ConfirmDialog title="Reset to sample data?" confirmLabel="Reset everything" message="This replaces all your current data with the original Kaminski–Roth sample. This cannot be undone." onCancel={() => setConfirm(null)} onConfirm={async () => { if (await actions.resetToSeed()) setConfirm(null); }} />
       )}
-      {confirm && confirm.kind !== "reset" && (
-        <ConfirmDialog title={`Delete "${confirm.name}"?`} message={refMessage(confirm)} onCancel={() => setConfirm(null)} onConfirm={() => { actions.remove(confirm.kind, confirm.id); setConfirm(null); }} />
+      {confirm && confirm.kind !== "reset" && confirm.kind !== "restore" && (
+        <ConfirmDialog title={`Delete "${confirm.name}"?`} message={refMessage(confirm)} onCancel={() => setConfirm(null)} onConfirm={async () => { if (await actions.remove(confirm.kind, confirm.id)) setConfirm(null); }} />
       )}
       {branchDel && (
-        <BranchDeleteDialog info={branchDel} onCancel={() => setBranchDel(null)} onConfirm={(mode, targetId) => { actions.deleteBranch(branchDel.id, mode, targetId); setBranchDel(null); }} />
+        <BranchDeleteDialog info={branchDel} onCancel={() => setBranchDel(null)} onConfirm={async (mode, targetId) => { if (await actions.deleteBranch(branchDel.id, mode, targetId)) setBranchDel(null); }} />
       )}
     </div>
   );
@@ -152,6 +165,7 @@ function EntityList({ kind, q, getL, getP, onEdit, onDelete, onOpenPerson }) {
 
 
 function EntityRow({ kind, row, getL, getP, onEdit, onDelete, onOpenPerson }) {
+  const {data} = useData();
   let lead, title, meta;
   if (kind === "people") {
     lead = <Avatar p={row} size={36} status="alive" />;
@@ -172,7 +186,7 @@ function EntityRow({ kind, row, getL, getP, onEdit, onDelete, onOpenPerson }) {
     title = row.title; meta = `${row.type} · ${row.year} · ${(row.people || []).length} linked`;
   } else if (kind === "branches") {
     lead = <div style={{ width: 36, height: 36, borderRadius: 9, background: `${row.color}22`, color: row.color, display: "flex", alignItems: "center", justifyContent: "center" }}><GitBranch size={17} /></div>;
-    title = row.name; meta = `${useData().data.people.filter((p) => (p.branches || []).includes(row.id)).length} members`;
+    title = row.name; meta = `${data.people.filter((p) => (p.branches || []).includes(row.id)).length} members`;
   }
   return (
     <div className="fa-card" style={{ display: "flex", alignItems: "center", gap: 12, padding: 12, borderRadius: 12, background: C.panelSolid, border: `1px solid ${C.border}` }}>
