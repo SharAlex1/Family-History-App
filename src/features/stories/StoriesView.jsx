@@ -1,3 +1,4 @@
+import { tr, formatDate } from "../../i18n/index.js";
 import React, { useState } from "react";
 import { useData } from "../../state/DataContext.jsx";
 import {
@@ -15,7 +16,7 @@ export function StoriesView() {
   const [people, setPeople] = useState(
       data.people[0] ? [data.people[0].id] : [],
     ),
-    [title, setTitle] = useState("Our family story"),
+    [title, setTitle] = useState(() => tr("Our family story")),
     [narrative, setNarrative] = useState(() =>
       biography(data, data.people[0]?.id),
     ),
@@ -27,7 +28,7 @@ export function StoriesView() {
     if (print) {
       popup = window.open("", "_blank");
       if (!popup) {
-        setError("Allow a print window to save the book as PDF.");
+        setError(tr("Allow a print window to save the book as PDF."));
         return;
       }
     }
@@ -64,18 +65,16 @@ export function StoriesView() {
   }
   return (
     <FeaturePage
-      title="Life stories & family books"
-      description="Generate factual drafts, edit the narrative, and produce an illustrated book with maps, timelines and citations."
+      title={tr("Life stories & family books")}
+      description={tr("Generate factual drafts, edit the narrative, and produce an illustrated book with maps, timelines and citations.")}
     >
       <ErrorNotice message={error} />
       <div className="feature-grid">
-        <Panel title="Book editor">
-          <label className="studio-field">
-            Book title
-            <input value={title} onChange={(e) => setTitle(e.target.value)} />
+        <Panel title={tr("Book editor")}>
+          <label className="studio-field">{tr("Book title")}<input value={title} onChange={(e) => setTitle(e.target.value)} />
           </label>
           <CheckPeople
-            label="People in this book"
+            label={tr("People in this book")}
             value={people}
             onChange={setPeople}
           />
@@ -85,7 +84,7 @@ export function StoriesView() {
               if (
                 !narrative ||
                 window.confirm(
-                  "Replace the edited narrative with a new draft from the selected records?",
+                  tr("Replace the edited narrative with a new draft from the selected records?"),
                 )
               )
                 setNarrative(
@@ -94,36 +93,24 @@ export function StoriesView() {
                     .join("\n\n──────────\n\n"),
                 );
             }}
-          >
-            Generate draft from records
-          </Btn>
-          <label className="studio-field">
-            Editable narrative
-            <textarea
+          >{tr("Generate draft from records")}</Btn>
+          <label className="studio-field">{tr("Editable narrative")}<textarea
               rows={16}
               value={narrative}
               onChange={(e) => setNarrative(e.target.value)}
             />
           </label>
-          <p className="feature-muted">
-            Drafts use recorded facts, without an AI service or invented
-            details. Review sources and edit uncertain statements. Photographs
-            must be available in this browser to appear in the book.
-          </p>
+          <p className="feature-muted">{tr("Drafts use recorded facts, without an AI service or invented details. Review sources and edit uncertain statements. Photographs must be available in this browser to appear in the book.")}</p>
           <div className="feature-actions">
             <Btn
               disabled={busy || !people.length || !title.trim()}
               kind="primary"
               onClick={() => output(true)}
-            >
-              Print / Save as PDF
-            </Btn>
+            >{tr("Print / Save as PDF")}</Btn>
             <Btn
               disabled={busy || !people.length}
               onClick={() => output(false)}
-            >
-              Download illustrated book
-            </Btn>
+            >{tr("Download illustrated book")}</Btn>
             <Btn
               disabled={!title.trim() || !people.length}
               onClick={() =>
@@ -135,18 +122,16 @@ export function StoriesView() {
                   createdAt: new Date().toISOString(),
                 })
               }
-            >
-              Save book draft
-            </Btn>
+            >{tr("Save book draft")}</Btn>
           </div>
         </Panel>
-        <Panel title="Saved drafts">
+        <Panel title={tr("Saved drafts")}>
           {(data.books || []).map((b) => (
             <article className="evidence-card" key={b.id}>
               <h4>{b.title}</h4>
               <p>
-                {b.people.length} people ·{" "}
-                {new Date(b.createdAt).toLocaleDateString()}
+                {b.people.length}{tr(" people ·")}{" "}
+                {formatDate(b.createdAt)}
               </p>
               <div className="feature-actions">
                 <Btn
@@ -156,26 +141,18 @@ export function StoriesView() {
                     setTitle(b.title);
                     setNarrative(b.narrative);
                   }}
-                >
-                  Open draft
-                </Btn>
+                >{tr("Open draft")}</Btn>
                 <Btn
                   small
                   onClick={() => {
-                    if (window.confirm("Delete this saved book draft?"))
+                    if (window.confirm(tr("Delete this saved book draft?")))
                       actions.remove("books", b.id);
                   }}
-                >
-                  Delete draft
-                </Btn>
+                >{tr("Delete draft")}</Btn>
               </div>
             </article>
           ))}
-          <p className="feature-muted">
-            The print window lets you choose your printer or your browser’s Save
-            as PDF destination. The HTML download includes available photos and
-            works offline.
-          </p>
+          <p className="feature-muted">{tr("The print window lets you choose your printer or your browser’s Save as PDF destination. The HTML download includes available photos and works offline.")}</p>
         </Panel>
       </div>
     </FeaturePage>

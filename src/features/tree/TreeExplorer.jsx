@@ -1,3 +1,4 @@
+import { tr } from "../../i18n/index.js";
 import React, { useMemo, useRef, useState } from "react";
 import { useData } from "../../state/DataContext.jsx";
 import { PersonPicker } from "../../components/ui/FeatureUI.jsx";
@@ -59,7 +60,7 @@ export function TreeExplorer({ year, openPerson, branchSel }) {
     <section className="tree-explorer">
       <div className="feature-grid">
         <PersonPicker
-          label="Focus person"
+          label={tr("Focus person")}
           value={root}
           onChange={(id) => {
             setRoot(id);
@@ -67,23 +68,19 @@ export function TreeExplorer({ year, openPerson, branchSel }) {
             setPan({ x: 30, y: 30 });
           }}
         />
-        <label className="studio-field">
-          Explore
-          <select
+        <label className="studio-field">{tr("Explore")}<select
             value={direction}
             onChange={(e) => {
               setDirection(e.target.value);
               setCollapsed([]);
             }}
           >
-            <option value="descendants">Descendants</option>
-            <option value="ancestors">Ancestors</option>
-            <option value="all">Entire archive</option>
+            <option value="descendants">{tr("Descendants")}</option>
+            <option value="ancestors">{tr("Ancestors")}</option>
+            <option value="all">{tr("Entire archive")}</option>
           </select>
         </label>
-        <label className="studio-field">
-          Generations
-          <input
+        <label className="studio-field">{tr("Generations")}<input
             type="number"
             min="1"
             max="12"
@@ -95,26 +92,20 @@ export function TreeExplorer({ year, openPerson, branchSel }) {
         </label>
       </div>
       <div className="feature-actions">
-        <Btn onClick={() => setZoom((z) => Math.min(3, z + 0.2))}>Zoom in</Btn>
-        <Btn onClick={() => setZoom((z) => Math.max(0.25, z - 0.2))}>
-          Zoom out
-        </Btn>
+        <Btn onClick={() => setZoom((z) => Math.min(3, z + 0.2))}>{tr("Zoom in")}</Btn>
+        <Btn onClick={() => setZoom((z) => Math.max(0.25, z - 0.2))}>{tr("Zoom out")}</Btn>
         <Btn
           onClick={() => {
             setZoom(1);
             setPan({ x: 30, y: 30 });
             setCollapsed([]);
           }}
-        >
-          Reset tree
-        </Btn>
+        >{tr("Reset tree")}</Btn>
         <span>
-          {positions.length} people · Drag to pan, or focus the canvas and use
-          arrow keys. Blue: parents; pink: spouses.
-        </span>
+          {positions.length}{tr(" people · Drag to pan, or focus the canvas and use arrow keys. Blue: parents; pink: spouses.")}</span>
       </div>
       <svg
-        aria-label="Interactive family tree"
+        aria-label={tr("Interactive family tree")}
         role="group"
         tabIndex={0}
         viewBox="0 0 1000 650"
@@ -178,7 +169,7 @@ export function TreeExplorer({ year, openPerson, branchSel }) {
                     }
                   />
                   <text x={x + 97} y={y - 6} fill={C.sky} fontSize="10">
-                    {p.parentTypes?.[id] || "parent"}
+                    {tr(p.parentTypes?.[id] || "parent")}
                   </text>
                 </g>
               );
@@ -215,7 +206,7 @@ export function TreeExplorer({ year, openPerson, branchSel }) {
               <g
                 role="button"
                 tabIndex={0}
-                aria-label={`Open ${fullName(p)}`}
+                aria-label={tr("Open {{v0}}", {v0: fullName(p)})}
                 onClick={() => openPerson(p.id)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
@@ -236,16 +227,16 @@ export function TreeExplorer({ year, openPerson, branchSel }) {
                   {fullName(p).slice(0, 23)}
                 </text>
                 <text x="12" y="46" fill={C.sub} fontSize="12">
-                  {p.birth ?? "?"} – {p.death ?? (p.deceased ? "?" : "present")}
+                  {p.birth ?? "?"} – {p.death ?? (p.deceased ? "?" : tr("present"))}
                 </text>
                 <text x="12" y="65" fill={C.teal} fontSize="11">
-                  {statusAt(p, year)} in {year}
+                  {tr(statusAt(p, year))}{tr(" in ")}{year}
                 </text>
               </g>
               <g
                 role="button"
                 tabIndex={0}
-                aria-label={`${collapsed.includes(p.id) ? "Expand" : "Collapse"} ${fullName(p)}`}
+                aria-label={tr("{{v0}} {{v1}}", {v0: tr(collapsed.includes(p.id) ? "Expand" : "Collapse"), v1: fullName(p)})}
                 transform="translate(164,88)"
                 onClick={() =>
                   setCollapsed((c) =>

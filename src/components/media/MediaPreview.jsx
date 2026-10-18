@@ -1,3 +1,4 @@
+import { tr } from "../../i18n/index.js";
 import React, { useEffect, useState } from "react";
 import { getMedia, downloadBlob } from "../../lib/media.js";
 export function useMediaUrl(id) {
@@ -30,12 +31,10 @@ export function MediaPreview({ file, thumbnail = false }) {
   if (!file) return null;
   if (missing)
     return (
-      <p role="status">
-        File not found in this browser. Import the full media ZIP or reattach “
-        {file.name}”.
+      <p role="status">{tr("File not found in this browser. Import the full media ZIP or reattach “")}{file.name}”.
       </p>
     );
-  if (!url) return <span role="status">Loading {file.name}…</span>;
+  if (!url) return <span role="status">{tr("Loading ")}{file.name}…</span>;
   if (file.type.startsWith("image/"))
     return (
       <img
@@ -47,12 +46,11 @@ export function MediaPreview({ file, thumbnail = false }) {
   if (thumbnail)
     return (
       <span className="media-file-kind">
-        {file.type.split("/")[0]} · {Math.ceil(file.size / 1024)} KB
-      </span>
+        {file.type.split("/")[0]} · {Math.ceil(file.size / 1024)}{tr(" KB")}</span>
     );
   if (file.type === "application/pdf")
     return (
-      <iframe title={`PDF: ${file.name}`} src={url} className="media-pdf" />
+      <iframe title={tr("PDF: {{v0}}", {v0: file.name})} src={url} className="media-pdf" />
     );
   if (file.type.startsWith("audio/"))
     return (
@@ -69,13 +67,12 @@ export function MediaPreview({ file, thumbnail = false }) {
       />
     );
   return (
-    <a href={url} download={file.name}>
-      Download {file.name}
+    <a href={url} download={file.name}>{tr("Download ")}{file.name}
     </a>
   );
 }
 export async function downloadMedia(file) {
   const record = await getMedia(file.id);
-  if (!record) throw new Error("That attachment is missing in this browser.");
+  if (!record) throw new Error(tr("That attachment is missing in this browser."));
   downloadBlob(record.blob, file.name);
 }

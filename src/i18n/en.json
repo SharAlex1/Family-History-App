@@ -1,0 +1,21 @@
+{
+  "memberCount_one": "{{count}} member",
+  "memberCount_other": "{{count}} members",
+  "personCount_one": "{{count}} person",
+  "personCount_other": "{{count}} people",
+  "placeCount_one": "{{count}} place",
+  "placeCount_other": "{{count}} places",
+  "livingCount_one": "{{count}} living",
+  "livingCount_other": "{{count}} living",
+  "yearsAgo_one": "{{count}} year ago",
+  "yearsAgo_other": "{{count}} years ago",
+  "ageYears_one": "{{count}} year old",
+  "ageYears_other": "{{count}} years old",
+  "Dashboard headline": "{{regions}} {{regionLabel}}, {{branches}} {{branchLabel}}, one story.",
+  "residenceCount_one": "{{count}} residence",
+  "residenceCount_other": "{{count}} residences",
+  "regionNoun_one": "region",
+  "regionNoun_other": "regions",
+  "branchNoun_one": "branch",
+  "branchNoun_other": "branches"
+}

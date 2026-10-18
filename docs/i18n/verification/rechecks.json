@@ -1,0 +1,62 @@
+{
+  "commit": "working tree based on 02c0433",
+  "environment": "Linux Chromium; isolated local browser storage",
+  "results": [
+    {
+      "id": "N01",
+      "name": "Overview statistics and all dashboard navigation cards",
+      "status": "passed",
+      "durationMs": 1529,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C01",
+      "name": "People: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 2640,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C02",
+      "name": "Locations: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 2389,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C03",
+      "name": "Events: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 1950,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C04",
+      "name": "Migrations: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 1767,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C05",
+      "name": "Documents: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 1622,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C06",
+      "name": "Branches: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 1556,
+      "detail": "",
+      "pageErrors": []
+    }
+  ]
+}

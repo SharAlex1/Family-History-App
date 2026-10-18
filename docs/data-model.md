@@ -57,3 +57,7 @@ A media ZIP includes `archive.json` and `media/file_<hash>` entries. Imports val
 Invitation and contribution JSON files use explicit `format`, `version: 1` and `{kind,id,title}` subject metadata. Contributions contain credited `memories`. Imports add new IDs only, validate matching subjects and reply links, and reject reply cycles. They never replace canonical person facts.
 
 GEDCOM imports generate fresh IDs, preserve input date wording, preview candidate matches and apply an explicit mapping. Person merges redirect people IDs throughout core collections and all feature collections, preserve alternative supported scalar facts as claims, then reconcile and validate the resulting archive. Source catalog years without historical dates are import years. The importer does not fetch external media or infer geographic coordinates.
+
+## Interface language preference
+
+`familyAtlas.language` is a separate browser preference (`en`/`ru`). It is not an archive field, does not change schema version or archive revisions, and is not included in JSON/media backups. Interface translations do not change stored identifiers, enum values, names or written records.

@@ -1,3 +1,4 @@
+import { tr } from "../../i18n/index.js";
 import React from "react";
 import { MapPin } from "lucide-react";
 import { C } from "../../config/theme.js";
@@ -32,17 +33,17 @@ function MapView({ year, selectedId, openPerson, branchSel }) {
   const occurred = data.migrations.filter(mg => !getL(mg.from).unmapped && !getL(mg.to).unmapped).filter((mg) => mg.startYear <= year).filter((mg) => branchSel.length === 0 || (mg.mode === "person" ? matchBranch(getP(mg.personId), branchSel) : branchSel.includes(mg.branch)));
   const sel = selectedId ? getP(selectedId) : null;
   const selSet = new Set((data.migrations).filter((mg) => sel && ((mg.mode === "person" && mg.personId === sel.id) || (mg.mode === "branch" && (sel.branches || []).includes(mg.branch)))).map((mg) => mg.id));
-  if (data.locations.length === 0) return <EmptyState icon={MapPin} title="No locations yet" msg="Add locations in Manage Data to populate the map." />;
+  if (data.locations.length === 0) return <EmptyState icon={MapPin} title={tr("No locations yet")} msg={tr("Add locations in Manage Data to populate the map.")} />;
   return (
     <div style={{ padding: "22px 24px 130px" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8, marginBottom: 6 }}>
-        <h2 style={{ fontFamily: "Fraunces, Georgia, serif", fontWeight: 600, fontSize: 22, color: C.text, margin: 0 }}>Migration Map</h2>
+        <h2 style={{ fontFamily: "Fraunces, Georgia, serif", fontWeight: 600, fontSize: 22, color: C.text, margin: 0 }}>{tr("Migration Map")}</h2>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 16, fontSize: 12, color: C.sub }}>
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style={{ width: 9, height: 9, borderRadius: "50%", background: C.teal }} />Living here in {year}</span>
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style={{ width: 16, height: 2, background: C.amber, display: "inline-block" }} />Migration path</span>
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style={{ width: 9, height: 9, borderRadius: "50%", background: C.teal }} />{tr("Living here in ")}{year}</span>
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style={{ width: 16, height: 2, background: C.amber, display: "inline-block" }} />{tr("Migration path")}</span>
         </div>
       </div>
-      <p style={{ color: C.faint, fontSize: 13, margin: "0 0 14px" }}>Pins show where living members were in {year}. {sel ? `Tracing ${fullName(sel)}'s paths.` : "Select a person to highlight their routes."}</p>
+      <p style={{ color: C.faint, fontSize: 13, margin: "0 0 14px" }}>{tr("Pins show where living members were in ")}{year}. {sel ? tr("Tracing {{v0}}'s paths.", {v0: fullName(sel)}) : tr("Select a person to highlight their routes.")}</p>
       <div style={{ borderRadius: 18, border: `1px solid ${C.border}`, background: "#0b0d13", overflow: "hidden" }}>
         <svg viewBox="0 0 1000 560" style={{ width: "100%", display: "block" }}>
           <defs>
@@ -76,7 +77,7 @@ function MapView({ year, selectedId, openPerson, branchSel }) {
         {Object.entries(clusters).sort((a, b) => b[1].length - a[1].length).map(([locId, ppl]) => (
           <div key={locId} className="fa-card" style={{ padding: 14, borderRadius: 13, background: C.panelSolid, border: `1px solid ${C.border}` }}>
             <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 9 }}>
-              <MapPin size={14} color={C.amber} /><span style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 15, color: C.text }}>{getL(locId).name}{getL(locId).unmapped ? " (needs coordinates)" : ""}</span>
+              <MapPin size={14} color={C.amber} /><span style={{ fontFamily: "Fraunces, Georgia, serif", fontSize: 15, color: C.text }}>{getL(locId).name}{getL(locId).unmapped ? tr(" (needs coordinates)") : ""}</span>
               <span style={{ marginLeft: "auto" }}><Pill color={C.teal}>{ppl.length}</Pill></span>
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
@@ -84,7 +85,7 @@ function MapView({ year, selectedId, openPerson, branchSel }) {
             </div>
           </div>
         ))}
-        {Object.keys(clusters).length === 0 && <div style={{ color: C.faint, fontSize: 13, padding: 20 }}>No family members were living in {year} — try a later year.</div>}
+        {Object.keys(clusters).length === 0 && <div style={{ color: C.faint, fontSize: 13, padding: 20 }}>{tr("No family members were living in ")}{year}{tr(" — try a later year.")}</div>}
       </div>
     </div>
   );

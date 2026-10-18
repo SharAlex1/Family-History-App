@@ -1,3 +1,4 @@
+import {tr} from "../i18n/index.js";
 import { zipSync, unzipSync, strToU8, strFromU8 } from "fflate";
 import { parseArchive, downloadArchive } from "./storage.js";
 export const MAX_MEDIA_BYTES = 100 * 1024 * 1024;
@@ -31,7 +32,7 @@ function db() {
         database = null;
         reject(
           new Error(
-            "Could not open media storage. Check browser storage permissions.",
+            tr("Could not open media storage. Check browser storage permissions."),
           ),
         );
       };
@@ -57,10 +58,10 @@ export async function putMediaBatch(records) {
     tx.onerror = () =>
       reject(
         new Error(
-          "Could not store media. Export a backup and free browser storage.",
+          tr("Could not store media. Export a backup and free browser storage."),
         ),
       );
-    tx.onabort = () => reject(new Error("Media storage was interrupted."));
+    tx.onabort = () => reject(new Error(tr("Media storage was interrupted.")));
   });
 }
 export const hashBytes = async (bytes) =>
@@ -72,10 +73,10 @@ export async function prepareFile(file) {
   const type = (file.type || "").split(";")[0];
   if (!TYPES.has(type))
     throw new Error(
-      "Choose a JPEG, PNG, WebP, GIF, AVIF, PDF, plain text, audio or video file. HTML and SVG files are not accepted.",
+      tr("Choose a JPEG, PNG, WebP, GIF, AVIF, PDF, plain text, audio or video file. HTML and SVG files are not accepted."),
     );
   if (!file.size || file.size > MAX_MEDIA_BYTES)
-    throw new Error("Each file must be nonempty and at most 100 MB.");
+    throw new Error(tr("Each file must be nonempty and at most 100 MB."));
   const bytes = new Uint8Array(await file.arrayBuffer()),
     sha256 = await hashBytes(bytes),
     id = `file_${sha256}`;
@@ -118,21 +119,21 @@ export async function exportMediaBundle(data) {
     const file = await getMedia(descriptor.id);
     if (!file)
       throw new Error(
-        `Missing media: ${descriptor.name}. Reattach it before exporting a complete bundle.`,
+        tr("Missing media: {{v0}}. Reattach it before exporting a complete bundle.", {v0: descriptor.name}),
       );
     const bytes = new Uint8Array(await file.blob.arrayBuffer());
     if ((await hashBytes(bytes)) !== descriptor.sha256)
-      throw new Error(`Media checksum failed: ${descriptor.name}`);
+      throw new Error(tr("Media checksum failed: {{v0}}", {v0: descriptor.name}));
     total += bytes.length;
     if (total > MAX_BUNDLE_BYTES)
       throw new Error(
-        "This bundle exceeds 500 MB. A smaller archive is required.",
+        tr("This bundle exceeds 500 MB. A smaller archive is required."),
       );
     files[`media/${descriptor.id}`] = bytes;
   }
   const zip = zipSync(files, { level: 0 });
   if (zip.length > MAX_BUNDLE_BYTES)
-    throw new Error("This ZIP exceeds 500 MB. A smaller archive is required.");
+    throw new Error(tr("This ZIP exceeds 500 MB. A smaller archive is required."));
   downloadBlob(
     new Blob([zip], { type: "application/zip" }),
     "family-atlas-with-media.zip",
@@ -140,7 +141,7 @@ export async function exportMediaBundle(data) {
 }
 export async function readMediaBundle(file) {
   if (file.size > MAX_BUNDLE_BYTES)
-    throw new Error("Bundles must be at most 500 MB.");
+    throw new Error(tr("Bundles must be at most 500 MB."));
   let total = 0;
   const files = unzipSync(new Uint8Array(await file.arrayBuffer()), {
     filter: (entry) => {
@@ -154,7 +155,7 @@ export async function readMediaBundle(file) {
     },
   });
   if (total > MAX_BUNDLE_BYTES || !files["archive.json"])
-    throw new Error("Invalid or oversized media bundle.");
+    throw new Error(tr("Invalid or oversized media bundle."));
   const data = parseArchive(strFromU8(files["archive.json"])),
     records = [];
   for (const descriptor of new Map(
@@ -166,9 +167,9 @@ export async function readMediaBundle(file) {
       bytes.length !== descriptor.size ||
       (await hashBytes(bytes)) !== descriptor.sha256
     )
-      throw new Error(`Missing or damaged attachment: ${descriptor.name}.`);
+      throw new Error(tr("Missing or damaged attachment: {{v0}}.", {v0: descriptor.name}));
     if (!TYPES.has(descriptor.type))
-      throw new Error("Unsupported attachment type in bundle.");
+      throw new Error(tr("Unsupported attachment type in bundle."));
     records.push({
       ...descriptor,
       blob: new Blob([bytes], { type: descriptor.type }),

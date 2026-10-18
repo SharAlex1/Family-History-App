@@ -1,3 +1,4 @@
+import { tr } from "../../i18n/index.js";
 import React, { useState } from "react";
 import { useData } from "../../state/DataContext.jsx";
 import {
@@ -12,7 +13,7 @@ import { fullName } from "../../utils/people.js";
 export function ResearchView({ openPerson }) {
   const { data, getP, actions } = useData();
   const [personId, setPersonId] = useState(data.people[0]?.id || ""),
-    [field, setField] = useState("Birth date"),
+    [field, setField] = useState(() => tr("Birth date")),
     [value, setValue] = useState(""),
     [documentId, setDocumentId] = useState(""),
     [page, setPage] = useState(""),
@@ -20,7 +21,8 @@ export function ResearchView({ openPerson }) {
     [notes, setNotes] = useState(""),
     [status, setStatus] = useState("unverified"),
     [question, setQuestion] = useState(""),
-    [error, setError] = useState("");
+    [error, setError] = useState(""),
+    [saving,setSaving] = useState(false);
   const claims = (data.claims || []).filter((c) => c.personId === personId);
   const groups = new Map();
   claims.forEach((c) => {
@@ -34,10 +36,12 @@ export function ResearchView({ openPerson }) {
     e.preventDefault();
     setError("");
     if (!personId) {
-      setError("Add a person before recording evidence.");
+      setError(tr("Add a person before recording evidence."));
       return;
     }
-    if (
+    if(saving)return;
+    setSaving(true);
+    try { if (
       await actions.save("claims", {
         id: uid("claim"),
         personId,
@@ -53,72 +57,61 @@ export function ResearchView({ openPerson }) {
       setValue("");
       setQuote("");
       setNotes("");
-    }
+    } } finally {setSaving(false);}
   }
   return (
     <FeaturePage
-      title="Research & evidence"
-      description="Keep citations, uncertainty and conflicting claims beside the people they describe."
+      title={tr("Research & evidence")}
+      description={tr("Keep citations, uncertainty and conflicting claims beside the people they describe.")}
     >
       <PersonPicker
-        label="Research person"
+        label={tr("Research person")}
         value={personId}
         onChange={setPersonId}
       />
       <ErrorNotice message={error} />
       {conflicts.length > 0 && (
-        <Panel title="Conflicting evidence">
-          <p>
-            These fields have different recorded values. None has automatically
-            overwritten the person’s profile.
-          </p>
+        <Panel title={tr("Conflicting evidence")}>
+          <p>{tr("These fields have different recorded values. None has automatically overwritten the person’s profile.")}</p>
           <ul>
             {conflicts.map((g) => (
               <li key={g[0].field}>
-                {g[0].field}: {g.map((c) => c.value).join(" versus ")}
+                {g[0].field}: {g.map((c) => c.value).join(tr(" versus "))}
               </li>
             ))}
           </ul>
         </Panel>
       )}
       <div className="feature-grid">
-        <Panel title="Record a claim and citation">
-          <form className="studio-form" onSubmit={saveClaim}>
-            <label className="studio-field">
-              Claim field
-              <input
+        <Panel title={tr("Record a claim and citation")}>
+          <form className="studio-form" onSubmit={saveClaim}><fieldset disabled={saving} style={{border:0,padding:0,margin:0,minWidth:0}}>
+            <label className="studio-field">{tr("Claim field")}<input
                 required
                 value={field}
                 onChange={(e) => setField(e.target.value)}
-                placeholder="Birth date, birthplace, occupation…"
+                placeholder={tr("Birth date, birthplace, occupation…")}
               />
             </label>
-            <label className="studio-field">
-              Claimed value
-              <input
+            <label className="studio-field">{tr("Claimed value")}<input
                 required
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
               />
             </label>
-            <label className="studio-field">
-              Evidence status
-              <select
+            <label className="studio-field">{tr("Evidence status")}<select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
               >
-                <option value="unverified">Unverified</option>
-                <option value="supported">Supported by source</option>
-                <option value="disputed">Disputed</option>
+                <option value="unverified">{tr("Unverified")}</option>
+                <option value="supported">{tr("Supported by source")}</option>
+                <option value="disputed">{tr("Disputed")}</option>
               </select>
             </label>
-            <label className="studio-field">
-              Source document
-              <select
+            <label className="studio-field">{tr("Source document")}<select
                 value={documentId}
                 onChange={(e) => setDocumentId(e.target.value)}
               >
-                <option value="">No source attached yet</option>
+                <option value="">{tr("No source attached yet")}</option>
                 {data.documents.map((d) => (
                   <option key={d.id} value={d.id}>
                     {d.title}
@@ -126,56 +119,46 @@ export function ResearchView({ openPerson }) {
                 ))}
               </select>
             </label>
-            <label className="studio-field">
-              Page / record locator
-              <input
+            <label className="studio-field">{tr("Page / record locator")}<input
                 value={page}
                 onChange={(e) => setPage(e.target.value)}
-                placeholder="Page 3, line 12; archive reference…"
+                placeholder={tr("Page 3, line 12; archive reference…")}
               />
             </label>
-            <label className="studio-field">
-              Quoted evidence
-              <textarea
+            <label className="studio-field">{tr("Quoted evidence")}<textarea
                 value={quote}
                 onChange={(e) => setQuote(e.target.value)}
               />
             </label>
-            <label className="studio-field">
-              Research notes
-              <textarea
+            <label className="studio-field">{tr("Research notes")}<textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
               />
             </label>
-            <Btn type="submit" kind="primary">
-              Save evidence
-            </Btn>
+            <Btn type="submit" kind="primary" disabled={saving}>{saving?tr("Saving evidence…"):tr("Save evidence")}</Btn></fieldset>
           </form>
         </Panel>
-        <Panel title="Recorded claims">
+        <Panel title={tr("Recorded claims")}>
           {claims.map((c) => (
             <article className="evidence-card" key={c.id}>
               <div className="feature-row">
                 <strong>
                   {c.field}: {c.value}
                 </strong>
-                <span className={`evidence-status ${c.status}`}>
-                  {c.status}
+                <span className={`evidence-status ${tr(c.status)}`}>
+                  {tr(c.status)}
                 </span>
               </div>
               <p>
                 {data.documents.find((d) => d.id === c.documentId)?.title ||
-                  "No source"}{" "}
-                {c.page && `· ${c.page}`}
+                  tr("No source")}{" "}
+                {c.page && tr("· {{v0}}", {v0: c.page})}
               </p>
               {c.quote && <blockquote>{c.quote}</blockquote>}
               <p>{c.notes}</p>
               <div className="feature-actions">
-                <label className="studio-field">
-                  Change evidence status
-                  <select
-                    value={c.status}
+                <label className="studio-field">{tr("Change evidence status")}<select
+                    value={tr(c.status)}
                     onChange={(e) =>
                       actions.save(
                         "claims",
@@ -184,33 +167,28 @@ export function ResearchView({ openPerson }) {
                       )
                     }
                   >
-                    <option value="unverified">Unverified</option>
-                    <option value="supported">Supported</option>
-                    <option value="disputed">Disputed</option>
+                    <option value="unverified">{tr("Unverified")}</option>
+                    <option value="supported">{tr("Supported")}</option>
+                    <option value="disputed">{tr("Disputed")}</option>
                   </select>
                 </label>
                 <Btn
                   small
                   onClick={() => {
-                    if (window.confirm("Delete this evidence claim?"))
+                    if (window.confirm(tr("Delete this evidence claim?")))
                       actions.remove("claims", c.id);
                   }}
-                >
-                  Delete claim
-                </Btn>
+                >{tr("Delete claim")}</Btn>
               </div>
             </article>
           ))}
           {!claims.length && (
-            <p>
-              No claims recorded for {getP(personId).first}. Record evidence
-              before deciding which profile facts to edit.
-            </p>
+            <p>{tr("No claims recorded for ")}{getP(personId).first}{tr(". Record evidence before deciding which profile facts to edit.")}</p>
           )}
-          <Btn onClick={() => openPerson(personId)}>Open profile</Btn>
+          <Btn onClick={() => openPerson(personId)}>{tr("Open profile")}</Btn>
         </Panel>
       </div>
-      <Panel title="Research questions">
+      <Panel title={tr("Research questions")}>
         <form
           className="feature-actions"
           onSubmit={async (e) => {
@@ -227,16 +205,14 @@ export function ResearchView({ openPerson }) {
               setQuestion("");
           }}
         >
-          <label className="studio-field grow">
-            New research question
-            <input
+          <label className="studio-field grow">{tr("New research question")}<input
               required
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
-              placeholder="Which passenger manifest lists this family?"
+              placeholder={tr("Which passenger manifest lists this family?")}
             />
           </label>
-          <Btn type="submit">Add question</Btn>
+          <Btn type="submit">{tr("Add question")}</Btn>
         </form>
         {(data.researchTasks || [])
           .filter((t) => !t.personId || t.personId === personId)
@@ -244,11 +220,9 @@ export function ResearchView({ openPerson }) {
             <article key={t.id} className="evidence-card">
               <strong>{t.title}</strong>
               <p className="feature-muted">
-                {t.personId ? fullName(getP(t.personId)) : "General research"}
+                {t.personId ? fullName(getP(t.personId)) : tr("General research")}
               </p>
-              <label className="studio-field">
-                Question status
-                <select
+              <label className="studio-field">{tr("Question status")}<select
                   value={t.status}
                   onChange={(e) =>
                     actions.save(
@@ -258,14 +232,12 @@ export function ResearchView({ openPerson }) {
                     )
                   }
                 >
-                  <option value="open">Open</option>
-                  <option value="in-progress">In progress</option>
-                  <option value="done">Done</option>
+                  <option value="open">{tr("Open")}</option>
+                  <option value="in-progress">{tr("In progress")}</option>
+                  <option value="done">{tr("Done")}</option>
                 </select>
               </label>
-              <label className="studio-field">
-                Question notes
-                <textarea
+              <label className="studio-field">{tr("Question notes")}<textarea
                   defaultValue={t.notes}
                   onBlur={(e) => {
                     if (e.target.value !== t.notes)
@@ -280,12 +252,10 @@ export function ResearchView({ openPerson }) {
               <Btn
                 small
                 onClick={() => {
-                  if (window.confirm("Delete this research question?"))
+                  if (window.confirm(tr("Delete this research question?")))
                     actions.remove("researchTasks", t.id);
                 }}
-              >
-                Delete question
-              </Btn>
+              >{tr("Delete question")}</Btn>
             </article>
           ))}
       </Panel>

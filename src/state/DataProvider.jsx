@@ -1,3 +1,4 @@
+import { tr } from "../i18n/index.js";
 import React, { useState, useRef, useEffect } from "react";
 import { DataCtx } from "./DataContext.jsx";
 import { cleanExtensions } from "../lib/extensions.js";
@@ -66,7 +67,7 @@ export function DataProvider({ children }) {
             ),
           );
         } catch (e) {
-          setNotice(`Could not save the archive: ${e.message}`);
+          setNotice(tr("Could not save the archive: {{v0}}", {v0: e.message}));
           unsaved(true);
         }
       });
@@ -80,7 +81,7 @@ export function DataProvider({ children }) {
       }
       if (dirtyRef.current) {
         setNotice(
-          "Another tab changed the archive while this tab has unsaved work. Export your work before loading the latest archive.",
+          tr("Another tab changed the archive while this tab has unsaved work. Export your work before loading the latest archive."),
         );
         return;
       }
@@ -105,7 +106,7 @@ export function DataProvider({ children }) {
       if (blocked.current && !replace) {
         setNotice(
           initial.error ||
-            "Recover or replace the unreadable archive before editing.",
+            tr("Recover or replace the unreadable archive before editing."),
         );
         return false;
       }
@@ -119,7 +120,7 @@ export function DataProvider({ children }) {
         (latest.data._revision || 0) !== (current.current._revision || 0)
       ) {
         setNotice(
-          "Another tab changed the archive. Export your unsaved work, then load the latest archive.",
+          tr("Another tab changed the archive. Export your unsaved work, then load the latest archive."),
         );
         return false;
       }
@@ -148,14 +149,14 @@ export function DataProvider({ children }) {
       } catch (e) {
         if (replace) {
           setNotice(
-            `Could not replace the archive: ${e.message} The current archive is unchanged.`,
+            tr("Could not replace the archive: {{v0}} The current archive is unchanged.", {v0: e.message}),
           );
           return false;
         }
         apply({ ...next, _revision: base._revision || 0 });
         unsaved(true);
         setNotice(
-          `Could not save the archive: ${e.message} Your changes are not saved. Export them or retry.`,
+          tr("Could not save the archive: {{v0}} Your changes are not saved. Export them or retry.", {v0: e.message}),
         );
       }
       return true;
@@ -165,7 +166,7 @@ export function DataProvider({ children }) {
     const actual = base[key].find((x) => x.id === item.id);
     if (expected && JSON.stringify(actual) !== JSON.stringify(expected))
       throw new Error(
-        "This record changed in another tab. Cancel and reopen the editor to use the latest version.",
+        tr("This record changed in another tab. Cancel and reopen the editor to use the latest version."),
       );
   }
   const actions = {
@@ -297,7 +298,7 @@ export function DataProvider({ children }) {
           mode === "move" &&
           !d.branches.some((b) => b.id === targetId && b.id !== id)
         )
-          throw new Error("Choose an existing destination branch.");
+          throw new Error(tr("Choose an existing destination branch."));
         return {
           ...d,
           branches: d.branches.filter((b) => b.id !== id),
@@ -361,7 +362,7 @@ export function DataProvider({ children }) {
       try {
         downloadArchive(current.current);
       } catch (e) {
-        setNotice(`Could not export: ${e.message}`);
+        setNotice(tr("Could not export: {{v0}}", {v0: e.message}));
       }
     },
     exportOriginal: () => {
@@ -371,7 +372,7 @@ export function DataProvider({ children }) {
           "family-atlas-recovery.json",
         );
       } catch (e) {
-        setNotice(`Could not export: ${e.message}`);
+        setNotice(tr("Could not export: {{v0}}", {v0: e.message}));
       }
     },
     retrySave: () => mutate((d) => d),

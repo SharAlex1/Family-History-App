@@ -17,10 +17,14 @@ dialog button { cursor: pointer; }
 .fa-input:focus { border-color: ${C.amber}99 !important; }
 .fa-select option { background: ${C.panelSolid}; color: ${C.text}; }
 .fa-sidebar { width: 224px; flex-shrink: 0; height: 100%; background: #0c0e14cc; backdrop-filter: blur(8px); border-right: 1px solid ${C.border}; padding: 18px 14px; display: flex; flex-direction: column; gap: 3px; overflow-y: auto; }
-.fa-navbtn { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; border: none; padding: 10px 12px; border-radius: 9px; font-size: 13.5px; transition: background .15s, color .15s; }
+.fa-navbtn { flex-shrink:0; display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; border: none; padding: 10px 12px; border-radius: 9px; font-size: 13.5px; transition: background .15s, color .15s; }
 .fa-navbtn:hover { color: ${C.text}; background: ${C.borderSoft}; }
+.fa-language { flex-shrink:0; color:${C.sub}; font-size:11px; }
+.fa-language label { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.fa-language select { color:${C.text}; background:${C.panel2}; border:1px solid ${C.border}; border-radius:8px; padding:7px 8px; font:12px Inter,system-ui,sans-serif; }
+.fa-language [role=status] { display:block; max-width:210px; font-size:11px; }
 .fa-main { flex: 1; min-width: 0; display: flex; flex-direction: column; height: 100%; position: relative; }
-.fa-topbar { min-height: 60px; flex-shrink: 0; display: flex; align-items: center; gap: 12px; padding: 8px 24px; border-bottom: 1px solid ${C.border}; background: #0c0e1499; backdrop-filter: blur(8px); z-index: 20; }
+.fa-topbar { flex-wrap:wrap; min-height: 60px; flex-shrink: 0; display: flex; align-items: center; gap: 12px; padding: 8px 24px; border-bottom: 1px solid ${C.border}; background: #0c0e1499; backdrop-filter: blur(8px); z-index: 20; }
 .fa-content { flex: 1; overflow: auto; }
 .fa-card { transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
 .fa-card:hover { transform: translateY(-2px); border-color: ${C.faint}; }
@@ -51,6 +55,7 @@ dialog button { cursor: pointer; }
   .fa-dash-grid, .fa-rel-grid { grid-template-columns: minmax(0,1fr) !important; }
 }
 @media (max-width: 600px) {
+  .fa-content button { max-width:100%; white-space:normal !important; }
   .timeline-event-header, .fa-entity-row { flex-wrap: wrap; }
   .fa-entity-row > div:nth-child(2) { flex-basis: calc(100% - 50px) !important; }
   .fa-topbar { flex-wrap: wrap; padding: 10px 14px; }
@@ -68,6 +73,7 @@ dialog button { cursor: pointer; }
 .feature-heading { display:flex; gap:18px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; margin-bottom:22px; }
 .feature-heading h2 { font: 600 28px Fraunces, Georgia, serif; margin:0 0 6px; }
 .feature-heading p, .feature-muted { color:${C.sub}; font-size:13px; line-height:1.6; }
+.feature-actions > button { white-space:normal !important; max-width:100%; }
 .feature-actions { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:10px 0; }
 .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:18px; margin:16px 0; }
 .feature-row { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }

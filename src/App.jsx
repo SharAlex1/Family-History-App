@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+import { tr } from "./i18n/index.js";
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import { timeBounds } from "./utils/time.js";
 import { ErrorBoundary } from "./components/ui/ErrorBoundary.jsx";
@@ -60,9 +62,9 @@ function AppShell() {
         <style>{CSS}</style>
         <Sidebar view={view} setView={setView} />
         <div className="fa-main">
-          {notice && <div role="alert" className="fa-notice"><span>{notice}</span><div><button onClick={actions.exportData}>Export current work</button><button onClick={actions.exportOriginal}>Export original</button>{dirty && <button onClick={actions.retrySave}>Retry save</button>}<button onClick={() => { if (!dirty || window.confirm('Discard unsaved changes and load the latest saved archive?')) actions.loadLatest(); }}>Load latest archive</button>{!dirty && <button onClick={actions.dismissNotice}>Dismiss</button>}</div></div>}
+          {notice && <div role="alert" className="fa-notice"><span>{tr(notice)}</span><div><button onClick={actions.exportData}>{tr("Export current work")}</button><button onClick={actions.exportOriginal}>{tr("Export original")}</button>{dirty && <button onClick={actions.retrySave}>{tr("Retry save")}</button>}<button onClick={() => { if (!dirty || window.confirm(tr("Discard unsaved changes and load the latest saved archive?"))) actions.loadLatest(); }}>{tr("Load latest archive")}</button>{!dirty && <button onClick={actions.dismissNotice}>{tr("Dismiss")}</button>}</div></div>}
           <TopBar branchSel={branchSel} setBranchSel={setBranchSel} query={query} setQuery={setQuery} openPerson={openPerson} />
-          <div className="fa-content"><Suspense fallback={<p role="status" style={{padding:28}}>Loading workspace…</p>}>
+          <div className="fa-content"><Suspense fallback={<p role="status" style={{padding:28}}>{tr("Loading workspace…")}</p>}>
             {view === "dashboard" && <DashboardView year={year} setView={setView} />}
             {view === "tree" && <FamilyTreeView year={year} selectedId={selectedId} openPerson={openPerson} branchSel={branchSel} />}
             {view === "timeline" && <TimelineView year={year} openPerson={openPerson} typeFilter={typeFilter} setTypeFilter={setTypeFilter} branchSel={branchSel} focusId={focusId} clearFocus={() => setFocusId(null)} />}
@@ -85,7 +87,7 @@ function AppShell() {
           <ProfilePanel id={panelId} year={year} onClose={() => setPanelId(null)} openPerson={openPerson} setView={setView} focusPerson={() => { setFocusId(panelId); setTypeFilter("all"); }} onEdit={(pid) => { setPanelId(null); setView("manage"); setEditPersonId(pid); }} />
         )}
         {editPersonId && (
-          <Modal wide title="Edit person" subtitle="Fields marked * are required." onClose={() => setEditPersonId(null)}>
+          <Modal wide title={tr("Edit person")} subtitle={tr("Fields marked * are required.")} onClose={() => setEditPersonId(null)}>
             <PersonForm value={getP(editPersonId)} onSave={async (payload) => { if (await actions.savePerson(payload)) setEditPersonId(null); }} onCancel={() => setEditPersonId(null)} />
           </Modal>
         )}
@@ -97,5 +99,6 @@ function AppShell() {
 /* ================================= CSS ================================= */
 
 export default function App() {
+  useTranslation();
   return <ErrorBoundary><DataProvider><AppShell /></DataProvider></ErrorBoundary>;
 }

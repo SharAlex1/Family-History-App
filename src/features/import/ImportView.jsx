@@ -1,3 +1,4 @@
+import { tr } from "../../i18n/index.js";
 import React, { useState } from "react";
 import { useData } from "../../state/DataContext.jsx";
 import {
@@ -32,52 +33,38 @@ export function ImportView() {
       const file = e.target.files[0];
       if (!file) return;
       if (file.size > 10 * 1024 * 1024)
-        throw new Error("GEDCOM files must be under 10 MB.");
+        throw new Error(tr("GEDCOM files must be under 10 MB."));
       const text = new TextDecoder("utf-8", { fatal: true }).decode(
         await file.arrayBuffer(),
       );
       setPending({ ...parseGedcom(text, file.name), revision: data._revision });
       setChoices({});
     } catch (err) {
-      setError(`Could not import GEDCOM: ${err.message}`);
+      setError(tr("Could not import GEDCOM: {{v0}}", {v0: err.message}));
     }
     e.target.value = "";
   }
   return (
     <FeaturePage
-      title="Import & merge"
-      description="Preview a GEDCOM tree, map possible duplicates, and merge only after review."
+      title={tr("Import & merge")}
+      description={tr("Preview a GEDCOM tree, map possible duplicates, and merge only after review.")}
     >
       <ErrorNotice message={error} />
-      {message && <p role="status">{message}</p>}
-      <Panel title="Bring a tree from another genealogy tool">
-        <p>
-          Import UTF-8 GEDCOM 5.5/5.5.1 or common GEDCOM 7 records. People,
-          parent/spouse links, adoption hints, dated residences,
-          birth/death/marriage events and source citations are previewed.
-          Unknown dates remain unknown; approximate dates keep their wording.
-        </p>
-        <label className="file-button">
-          Choose GEDCOM file
-          <input type="file" accept=".ged,.gedcom,text/plain" onChange={read} />
+      {message && <p role="status">{tr(message)}</p>}
+      <Panel title={tr("Bring a tree from another genealogy tool")}>
+        <p>{tr("Import UTF-8 GEDCOM 5.5/5.5.1 or common GEDCOM 7 records. People, parent/spouse links, adoption hints, dated residences, birth/death/marriage events and source citations are previewed. Unknown dates remain unknown; approximate dates keep their wording.")}</p>
+        <label className="file-button">{tr("Choose GEDCOM file")}<input type="file" accept=".ged,.gedcom,text/plain" onChange={read} />
         </label>
-        <p className="feature-muted">
-          Media references do not upload the referenced files. Imported places
-          are not geocoded; add coordinates before map placement. Unrecognized
-          tags are not a full lossless GEDCOM round trip—keep the original
-          export.
-        </p>
+        <p className="feature-muted">{tr("Media references do not upload the referenced files. Imported places are not geocoded; add coordinates before map placement. Unrecognized tags are not a full lossless GEDCOM round trip—keep the original export.")}</p>
       </Panel>
       {pending && (
-        <Panel title="GEDCOM preview">
+        <Panel title={tr("GEDCOM preview")}>
           <p>
-            {pending.data.people.length} people, {pending.data.locations.length}{" "}
-            places, {pending.data.events.length} events and{" "}
-            {pending.data.documents.length} sources/media references.
-          </p>
+            {pending.data.people.length}{tr(" people, ")}{pending.data.locations.length}{" "}{tr("places, ")}{pending.data.events.length}{tr(" events and")}{" "}
+            {pending.data.documents.length}{tr(" sources/media references.")}</p>
           {pending.warnings.length > 0 && (
             <details>
-              <summary>{pending.warnings.length} import notes</summary>
+              <summary>{pending.warnings.length}{tr(" import notes")}</summary>
               <ul>
                 {pending.warnings.map((w, i) => (
                   <li key={i}>{w}</li>
@@ -85,23 +72,18 @@ export function ImportView() {
               </ul>
             </details>
           )}
-          <label className="studio-field">
-            When merging fields
-            <select value={policy} onChange={(e) => setPolicy(e.target.value)}>
-              <option value="keep">Keep existing nonempty values</option>
-              <option value="incoming">Prefer imported nonempty values</option>
+          <label className="studio-field">{tr("When merging fields")}<select value={policy} onChange={(e) => setPolicy(e.target.value)}>
+              <option value="keep">{tr("Keep existing nonempty values")}</option>
+              <option value="incoming">{tr("Prefer imported nonempty values")}</option>
             </select>
           </label>
-          <p>
-            Relationships and sources are combined. Review conflicting dates
-            before merging; invalid family graphs will be rejected.
-          </p>
+          <p>{tr("Relationships and sources are combined. Review conflicting dates before merging; invalid family graphs will be rejected.")}</p>
           <div className="import-table">
             <table>
               <thead>
                 <tr>
-                  <th>Incoming person</th>
-                  <th>Possible matches and decision</th>
+                  <th>{tr("Incoming person")}</th>
+                  <th>{tr("Possible matches and decision")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -113,13 +95,12 @@ export function ImportView() {
                         {fullName(p)}
                         <br />
                         <small>
-                          {p.birthDate || p.birth || "Birth unknown"} —{" "}
-                          {p.deathDate || p.death || "Death not recorded"}
+                          {p.birthDate || p.birth || tr("Birth unknown")} —{" "}
+                          {p.deathDate || p.death || tr("Death not recorded")}
                         </small>
                       </td>
                       <td>
-                        <label className="studio-field">
-                          Match for {fullName(p)}
+                        <label className="studio-field">{tr("Match for ")}{fullName(p)}
                           <select
                             value={choices[p.id] || ""}
                             onChange={(e) =>
@@ -129,20 +110,15 @@ export function ImportView() {
                               }))
                             }
                           >
-                            <option value="">Create a separate person</option>
+                            <option value="">{tr("Create a separate person")}</option>
                             {candidates.map((x) => (
                               <option key={x.id} value={x.id}>
-                                {fullName(x)} · {x.birth ?? "?"} (possible
-                                match)
-                              </option>
+                                {fullName(x)} · {x.birth ?? "?"}{tr(" (possible match)")}</option>
                             ))}
                           </select>
                         </label>
                         {candidates.length === 0 && (
-                          <small>
-                            No close name/year match. Existing duplicate merging
-                            is available below.
-                          </small>
+                          <small>{tr("No close name/year match. Existing duplicate merging is available below.")}</small>
                         )}
                       </td>
                     </tr>
@@ -152,7 +128,7 @@ export function ImportView() {
             </table>
           </div>
           <div className="feature-actions">
-            <Btn onClick={() => setPending(null)}>Cancel GEDCOM import</Btn>
+            <Btn onClick={() => setPending(null)}>{tr("Cancel GEDCOM import")}</Btn>
             <Btn
               kind="primary"
               onClick={async () => {
@@ -160,32 +136,30 @@ export function ImportView() {
                 const ok = await actions.mergeData((d) => {
                   if (d._revision !== pending.revision)
                     throw new Error(
-                      "The archive changed since preview. Reopen the GEDCOM file before merging.",
+                      tr("The archive changed since preview. Reopen the GEDCOM file before merging."),
                     );
                   return mergeImported(d, pending.data, choices, policy);
                 });
                 if (ok) {
                   setMessage(
-                    "GEDCOM records merged. The previous archive was backed up. Reattach media files and position imported places before exploring the map.",
+                    tr("GEDCOM records merged. The previous archive was backed up. Reattach media files and position imported places before exploring the map."),
                   );
                   setPending(null);
                 }
               }}
-            >
-              Confirm GEDCOM merge
-            </Btn>
+            >{tr("Confirm GEDCOM merge")}</Btn>
           </div>
         </Panel>
       )}
-      <Panel title="Merge duplicates already in this archive">
+      <Panel title={tr("Merge duplicates already in this archive")}>
         <div className="feature-grid">
           <PersonPicker
-            label="Keep record"
+            label={tr("Keep record")}
             value={primary}
             onChange={setPrimary}
           />
           <PersonPicker
-            label="Merge duplicate record"
+            label={tr("Merge duplicate record")}
             value={secondary}
             onChange={setSecondary}
           />
@@ -195,9 +169,9 @@ export function ImportView() {
             <table>
               <thead>
                 <tr>
-                  <th>Field</th>
-                  <th>Kept record</th>
-                  <th>Other record</th>
+                  <th>{tr("Field")}</th>
+                  <th>{tr("Kept record")}</th>
+                  <th>{tr("Other record")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -212,17 +186,17 @@ export function ImportView() {
                   "bio",
                 ].map((key) => (
                   <tr key={key}>
-                    <th>{key}</th>
+                    <th>{tr(key)}</th>
                     <td>
                       {String(
                         data.people.find((p) => p.id === primary)?.[key] ??
-                          "Unknown",
+                          tr("Unknown"),
                       )}
                     </td>
                     <td>
                       {String(
                         data.people.find((p) => p.id === secondary)?.[key] ??
-                          "Unknown",
+                          tr("Unknown"),
                       )}
                     </td>
                   </tr>
@@ -231,36 +205,23 @@ export function ImportView() {
             </table>
           </div>
         )}
-        <label className="studio-field">
-          Field preference
-          <select value={policy} onChange={(e) => setPolicy(e.target.value)}>
-            <option value="keep">
-              Keep the first record’s nonempty fields
-            </option>
-            <option value="incoming">
-              Prefer the second record’s nonempty fields
-            </option>
+        <label className="studio-field">{tr("Field preference")}<select value={policy} onChange={(e) => setPolicy(e.target.value)}>
+            <option value="keep">{tr("Keep the first record’s nonempty fields")}</option>
+            <option value="incoming">{tr("Prefer the second record’s nonempty fields")}</option>
           </select>
         </label>
         <Btn
           disabled={!primary || !secondary || primary === secondary}
           onClick={() => setConfirm(true)}
-        >
-          Review duplicate merge
-        </Btn>
+        >{tr("Review duplicate merge")}</Btn>
       </Panel>
       {confirm && (
         <Modal
-          title="Merge these two people?"
+          title={tr("Merge these two people?")}
           onClose={() => setConfirm(false)}
         >
-          <p>
-            This replaces the second person with the first, redirects their
-            relationships, documents and contributions, and retains conflicting
-            dates/biographies as research evidence. An archive backup is saved
-            first.
-          </p>
-          <Btn onClick={() => setConfirm(false)}>Cancel</Btn>
+          <p>{tr("This replaces the second person with the first, redirects their relationships, documents and contributions, and retains conflicting dates/biographies as research evidence. An archive backup is saved first.")}</p>
+          <Btn onClick={() => setConfirm(false)}>{tr("Cancel")}</Btn>
           <Btn
             kind="primary"
             onClick={async () => {
@@ -270,13 +231,11 @@ export function ImportView() {
                 )
               ) {
                 setConfirm(false);
-                setMessage("Duplicate merged and references updated.");
+                setMessage(tr("Duplicate merged and references updated."));
                 setSecondary("");
               }
             }}
-          >
-            Merge people
-          </Btn>
+          >{tr("Merge people")}</Btn>
         </Modal>
       )}
     </FeaturePage>

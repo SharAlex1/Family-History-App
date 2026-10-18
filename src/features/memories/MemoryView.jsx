@@ -1,3 +1,4 @@
+import { tr, formatDate } from "../../i18n/index.js";
 import React, { useState } from "react";
 import { useData } from "../../state/DataContext.jsx";
 import {
@@ -65,7 +66,7 @@ export function MemoryView() {
       const f = e.target.files[0];
       if (!f) return;
       if (f.size > 2 * 1024 * 1024)
-        throw new Error("Contribution files must be under 2 MB.");
+        throw new Error(tr("Contribution files must be under 2 MB."));
       const input = JSON.parse(await f.text());
       if (
         input.version !== 1 ||
@@ -73,7 +74,7 @@ export function MemoryView() {
         typeof input.subject.id !== "string" ||
         typeof input.subject.title !== "string"
       )
-        throw new Error("Invalid invitation or contribution subject.");
+        throw new Error(tr("Invalid invitation or contribution subject."));
       if (input.format === "family-atlas-invitation") {
         setInvitation(input);
         setReply("");
@@ -83,7 +84,7 @@ export function MemoryView() {
       ) {
         if (!data[input.subject.kind].some((x) => x.id === input.subject.id))
           throw new Error(
-            "This contribution belongs to a subject that is not in this archive. Import the matching family archive first.",
+            tr("This contribution belongs to a subject that is not in this archive. Import the matching family archive first."),
           );
         if (
           input.memories.some(
@@ -95,11 +96,11 @@ export function MemoryView() {
               typeof m.text !== "string",
           )
         )
-          throw new Error("Invalid contribution entry.");
+          throw new Error(tr("Invalid contribution entry."));
         setPending(input);
       } else
         throw new Error(
-          "Choose a Family Atlas invitation or contribution file.",
+          tr("Choose a Family Atlas invitation or contribution file."),
         );
     } catch (err) {
       setError(err.message);
@@ -130,41 +131,28 @@ export function MemoryView() {
   }
   return (
     <FeaturePage
-      title="Family memories"
-      description="Collect credited recollections, questions and corrections without overwriting anyone’s account."
+      title={tr("Family memories")}
+      description={tr("Collect credited recollections, questions and corrections without overwriting anyone’s account.")}
       actions={
         <>
-          <label className="file-button">
-            Open invitation / contribution
-            <input type="file" accept=".json" onChange={openFile} />
+          <label className="file-button">{tr("Open invitation / contribution")}<input type="file" accept=".json" onChange={openFile} />
           </label>
           {!invitation && (
-            <Btn disabled={!subject.id} onClick={invite}>
-              Create invitation file
-            </Btn>
+            <Btn disabled={!subject.id} onClick={invite}>{tr("Create invitation file")}</Btn>
           )}
         </>
       }
     >
       <ErrorNotice message={error} />
-      <p className="feature-muted">
-        Local-first collaboration: send files using a channel you choose. This
-        app does not send invitations or sync accounts. Contributor names are
-        self-reported, not verified identities.
-      </p>
+      <p className="feature-muted">{tr("Local-first collaboration: send files using a channel you choose. This app does not send invitations or sync accounts. Contributor names are self-reported, not verified identities.")}</p>
       {invitation ? (
-        <Panel title={`Invited to remember: ${subject.title}`}>
-          <p>
-            Write a contribution below and return the downloaded file to the
-            sender. No matching archive is needed to write a reply.
-          </p>
-          <Btn onClick={() => setInvitation(null)}>Return to my archive</Btn>
+        <Panel title={tr("Invited to remember: {{v0}}", {v0: subject.title})}>
+          <p>{tr("Write a contribution below and return the downloaded file to the sender. No matching archive is needed to write a reply.")}</p>
+          <Btn onClick={() => setInvitation(null)}>{tr("Return to my archive")}</Btn>
         </Panel>
       ) : (
         <div className="feature-grid">
-          <label className="studio-field">
-            Memory subject type
-            <select
+          <label className="studio-field">{tr("Memory subject type")}<select
               value={subjectKind}
               onChange={(e) => {
                 setKind(e.target.value);
@@ -172,14 +160,12 @@ export function MemoryView() {
                 setReply("");
               }}
             >
-              <option value="people">Person</option>
-              <option value="events">Event</option>
-              <option value="documents">Photograph or document</option>
+              <option value="people">{tr("Person")}</option>
+              <option value="events">{tr("Event")}</option>
+              <option value="documents">{tr("Photograph or document")}</option>
             </select>
           </label>
-          <label className="studio-field">
-            Memory subject
-            <select
+          <label className="studio-field">{tr("Memory subject")}<select
               value={subjectId}
               onChange={(e) => {
                 setSubject(e.target.value);
@@ -196,84 +182,73 @@ export function MemoryView() {
         </div>
       )}
       <div className="feature-grid">
-        <Panel title={replyTo ? "Reply to a memory" : "Contribute a memory"}>
+        <Panel title={replyTo ? tr("Reply to a memory") : tr("Contribute a memory")}>
           <form className="studio-form" onSubmit={submit}>
-            <label className="studio-field">
-              Contributor name
-              <input
+            <label className="studio-field">{tr("Contributor name")}<input
                 required
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
               />
             </label>
-            <label className="studio-field">
-              Contribution type
-              <select
+            <label className="studio-field">{tr("Contribution type")}<select
                 value={kind}
                 onChange={(e) => setMemoryKind(e.target.value)}
               >
-                <option value="memory">Recollection</option>
-                <option value="correction">Suggested correction</option>
-                <option value="question">Question</option>
+                <option value="memory">{tr("Recollection")}</option>
+                <option value="correction">{tr("Suggested correction")}</option>
+                <option value="question">{tr("Question")}</option>
               </select>
             </label>
-            <label className="studio-field">
-              Your memory
-              <textarea
+            <label className="studio-field">{tr("Your memory")}<textarea
                 required
                 rows={7}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
             </label>
-            {replyTo && <Btn onClick={() => setReply("")}>Cancel reply</Btn>}
+            {replyTo && <Btn onClick={() => setReply("")}>{tr("Cancel reply")}</Btn>}
             <Btn type="submit" kind="primary" disabled={!subject.id}>
               {invitation
-                ? "Export contribution for sender"
-                : "Save contribution"}
+                ? tr("Export contribution for sender")
+                : tr("Save contribution")}
             </Btn>
           </form>
         </Panel>
-        <Panel title="Collected memories">
+        <Panel title={tr("Collected memories")}>
           {memories.map((m) => (
             <article className="evidence-card" key={m.id}>
               <strong>{m.author}</strong>
               <small>
                 {" "}
-                · {m.kind} · {new Date(m.createdAt).toLocaleDateString()}
+                · {tr(m.kind)} · {formatDate(m.createdAt)}
               </small>
               {m.replyTo && (
-                <p className="feature-muted">
-                  Reply to{" "}
+                <p className="feature-muted">{tr("Reply to")}{" "}
                   {memories.find((x) => x.id === m.replyTo)?.author ||
-                    "an earlier contribution"}
+                    tr("an earlier contribution")}
                 </p>
               )}
               <p style={{ whiteSpace: "pre-wrap" }}>{m.text}</p>
               {!invitation && (
                 <div className="feature-actions">
-                  <Btn small onClick={() => setReply(m.id)}>
-                    Reply
-                  </Btn>
+                  <Btn small onClick={() => setReply(m.id)}>{tr("Reply")}</Btn>
                   <Btn
                     small
                     onClick={() => {
                       if (
                         window.confirm(
-                          "Remove this contribution from your local archive?",
+                          tr("Remove this contribution from your local archive?"),
                         )
                       )
                         actions.remove("memories", m.id);
                     }}
-                  >
-                    Remove contribution
-                  </Btn>
+                  >{tr("Remove contribution")}</Btn>
                 </div>
               )}
             </article>
           ))}
           {!memories.length && (
-            <p>No memories collected for this subject yet.</p>
+            <p>{tr("No memories collected for this subject yet.")}</p>
           )}
           {!!memories.length && (
             <Btn
@@ -288,23 +263,17 @@ export function MemoryView() {
                   "family-memory-contributions.json",
                 )
               }
-            >
-              Export collected contributions
-            </Btn>
+            >{tr("Export collected contributions")}</Btn>
           )}
         </Panel>
       </div>
       {pending && (
         <Modal
-          title="Review incoming contributions"
+          title={tr("Review incoming contributions")}
           onClose={() => setPending(null)}
         >
           <p>
-            {pending.memories.length} entries for {pending.subject.title}. New
-            entries will be added. Existing IDs will be kept unchanged,
-            including conflicting revisions; ask the author to submit a new
-            correction instead.
-          </p>
+            {pending.memories.length}{tr(" entries for ")}{pending.subject.title}{tr(". New entries will be added. Existing IDs will be kept unchanged, including conflicting revisions; ask the author to submit a new correction instead.")}</p>
           <ul>
             {pending.memories.map((m, i) => (
               <li key={i}>
@@ -313,7 +282,7 @@ export function MemoryView() {
               </li>
             ))}
           </ul>
-          <Btn onClick={() => setPending(null)}>Cancel</Btn>
+          <Btn onClick={() => setPending(null)}>{tr("Cancel")}</Btn>
           <Btn
             kind="primary"
             onClick={async () => {
@@ -329,7 +298,7 @@ export function MemoryView() {
                       m.subjectKind !== pending.subject.kind,
                   )
                 )
-                  throw new Error("A contribution does not match its subject.");
+                  throw new Error(tr("A contribution does not match its subject."));
                 return { ...d, memories: [...d.memories, ...incoming] };
               });
               if (ok) {
@@ -338,9 +307,7 @@ export function MemoryView() {
                 setPending(null);
               }
             }}
-          >
-            Import new contributions
-          </Btn>
+          >{tr("Import new contributions")}</Btn>
         </Modal>
       )}
     </FeaturePage>

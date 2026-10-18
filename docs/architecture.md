@@ -70,3 +70,7 @@ A remote database would replace or augment the persistence boundary and require 
 - `lib/discoveries.js`: local-calendar occasions and deterministic daily archive selections.
 
 New mutations use the existing provider; no second archive store is introduced. Bulk merges save a rolling metadata backup. Files and metadata use separate browser stores, with files committed first. Content addressing avoids overwriting different bytes; leftover unreferenced files preserve local recovery. Map and story generation never invent coordinates or dates for imported unknown facts.
+
+## Languages
+
+The interface uses i18next/react-i18next with English and Russian catalogs in `src/i18n/`. The language control stores a separate browser preference, updates document language/title, and rerenders without remounting the archive provider. UI strings are explicitly translated; names and archive prose are interpolated or rendered verbatim. See [localization guidance](i18n/README.md).

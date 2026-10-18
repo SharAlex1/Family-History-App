@@ -1,3 +1,4 @@
+import { tr } from "../../i18n/index.js";
 import React from "react";
 import { MapPin } from "lucide-react";
 import { C } from "../../config/theme.js";
@@ -16,13 +17,13 @@ function PersonCard({ p, year, onClick, selected, dim }) {
         <Avatar p={p} size={40} status={status} selected={selected} />
         <div style={{ minWidth: 0 }}>
           <div style={{ fontFamily: "Fraunces, Georgia, serif", fontWeight: 600, fontSize: 15, color: C.text, lineHeight: 1.15, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{fullName(p)}</div>
-          <div style={{ fontSize: 11.5, color: C.faint, marginTop: 2 }}>{p.birth ?? "?"}{p.death != null ? ` – ${p.death}` : ""}</div>
+          <div style={{ fontSize: 11.5, color: C.faint, marginTop: 2 }}>{p.birth ?? "?"}{p.death != null ? tr(" – {{v0}}", {v0: p.death}) : ""}</div>
         </div>
       </div>
       <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 6 }}>
         {status === "alive" && (
           <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: C.text }}>
-            <span style={{ color: C.amber, fontWeight: 600 }}>{age}</span><span style={{ color: C.sub }}>years old</span>
+            <span style={{ color: C.amber, fontWeight: 600 }}>{age}</span><span style={{ color: C.sub }}>{tr("years old")}</span>
             {where && <span style={{ color: C.faint, display: "inline-flex", alignItems: "center", gap: 3, marginLeft: "auto" }}><MapPin size={11} />{getL(where).name}</span>}
           </div>
         )}

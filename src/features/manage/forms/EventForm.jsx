@@ -1,3 +1,4 @@
+import { tr } from "../../../i18n/index.js";
 import React, { useState } from "react";
 import { parseFamilyDate } from "../../../lib/dates.js";
 import { isYear, yearError } from "../../../lib/archive.js";
@@ -14,26 +15,26 @@ function EventForm({ value, onSave, onCancel }) {
   const [f, setF] = useState(init); const [err, setErr] = useState({});
   const up = (k, v) => setF((s) => ({ ...s, [k]: v }));
   function save() {
-    const e = {}; if (!f.title.trim()) e.title = "Required"; if (!isYear(f.year)) e.year = yearError; if (!f.at) e.at = "Location required";
-    if(f.date){try{if(parseFamilyDate(f.date).year!==Number(f.year))e.year="Date and year must agree";}catch(error){e.year=error.message;}}
+    const e = {}; if (!f.title.trim()) e.title = tr("Required"); if (!isYear(f.year)) e.year = yearError; if (!f.at) e.at = tr("Location required");
+    if(f.date){try{if(parseFamilyDate(f.date).year!==Number(f.year))e.year=tr("Date and year must agree");}catch(error){e.year=error.message;}}
     setErr(e); if (Object.keys(e).length) return;
     onSave({ ...f, year: Number(f.year) });
   }
   return (
     <>
-      <Field label="Event title" required error={err.title}><TextInput value={f.title} onChange={(v) => up("title", v)} error={err.title} placeholder="e.g. Emigration to Canada" /></Field>
+      <Field label={tr("Event title")} required error={err.title}><TextInput value={f.title} onChange={(v) => up("title", v)} error={err.title} placeholder={tr("e.g. Emigration to Canada")} /></Field>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }}>
-        <Field label="Type" required><SelectInput value={f.type} onChange={(v) => up("type", v)} options={Object.entries(TYPE).map(([k, m]) => ({ value: k, label: m.label }))} /></Field>
-        <Field label="Year" required error={err.year}><NumberInput value={f.year} onChange={(v) => up("year", v)} error={err.year} placeholder="e.g. 1952" /></Field>
-        <Field label="Location" required error={err.at}><SelectInput value={f.at} onChange={(v) => up("at", v)} options={data.locations.map((l) => ({ value: l.id, label: l.name }))} placeholder="—" error={err.at} /></Field>
+        <Field label={tr("Type")} required><SelectInput value={f.type} onChange={(v) => up("type", v)} options={Object.entries(TYPE).map(([k, m]) => ({ value: k, label: tr(m.label) }))} /></Field>
+        <Field label={tr("Year")} required error={err.year}><NumberInput value={f.year} onChange={(v) => up("year", v)} error={err.year} placeholder={tr("e.g. 1952")} /></Field>
+        <Field label={tr("Location")} required error={err.at}><SelectInput value={f.at} onChange={(v) => up("at", v)} options={data.locations.map((l) => ({ value: l.id, label: l.name }))} placeholder="—" error={err.at} /></Field>
       </div>
-<Field label="Event date (optional)"><TextInput value={f.date||""} onChange={v=>{up("date",v);try{const d=parseFamilyDate(v);if(d.year!=null)up("year",d.year);}catch{/* validate on save */}}} placeholder="1947-06-18 or ABT 1947"/></Field>
-      <Field label="Description"><TextArea value={f.desc} onChange={(v) => up("desc", v)} rows={2} /></Field>
+<Field label={tr("Event date (optional)")}><TextInput value={f.date||""} onChange={v=>{up("date",v);try{const d=parseFamilyDate(v);if(d.year!=null)up("year",d.year);}catch{/* validate on save */}}} placeholder={tr("1947-06-18 or ABT 1947")}/></Field>
+      <Field label={tr("Description")}><TextArea value={f.desc} onChange={(v) => up("desc", v)} rows={2} /></Field>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-        <Field label="Related people"><MultiSelect value={f.people} onChange={(v) => up("people", v)} options={data.people.map((p) => ({ value: p.id, label: fullName(p) }))} /></Field>
-        <Field label="Related documents"><MultiSelect value={f.docs} onChange={(v) => up("docs", v)} options={data.documents.map((d) => ({ value: d.id, label: d.title }))} /></Field>
+        <Field label={tr("Related people")}><MultiSelect value={f.people} onChange={(v) => up("people", v)} options={data.people.map((p) => ({ value: p.id, label: fullName(p) }))} /></Field>
+        <Field label={tr("Related documents")}><MultiSelect value={f.docs} onChange={(v) => up("docs", v)} options={data.documents.map((d) => ({ value: d.id, label: d.title }))} /></Field>
       </div>
-      <Field label="Historical context"><Toggle value={f.historical} onChange={(v) => up("historical", v)} label="Show as background historical context" /></Field>
+      <Field label={tr("Historical context")}><Toggle value={f.historical} onChange={(v) => up("historical", v)} label={tr("Show as background historical context")} /></Field>
       <FormFooter onCancel={onCancel} onSave={save} />
     </>
   );

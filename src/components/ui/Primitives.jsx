@@ -1,3 +1,4 @@
+import {tr} from "../../i18n/index.js";
 import React from "react";
 import { C } from "../../config/theme.js";
 import { useMediaUrl } from "../media/MediaPreview.jsx";
@@ -15,7 +16,7 @@ function Avatar({ p, size = 38, status = "alive", selected = false }) {
 function StatusDot({ status }) {
   const m = { unknown: [C.faint, "Dates unknown"], alive: [C.teal, "Living"], deceased: [C.gray, "Deceased"], unborn: [C.faint, "Not yet born"] };
   const [col, label] = m[status];
-  return <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 11.5, color: C.sub }}><span style={{ width: 7, height: 7, borderRadius: "50%", background: col }} />{label}</span>;
+  return <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 11.5, color: C.sub }}><span style={{ width: 7, height: 7, borderRadius: "50%", background: col }} />{tr(label)}</span>;
 }
 
 function Pill({ children, color = C.sub, bg = C.panel2 }) {

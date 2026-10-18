@@ -1,3 +1,4 @@
+import { tr } from "../../i18n/index.js";
 import React, { useState, useId, useRef } from "react";
 import { X } from "lucide-react";
 import { C } from "../../config/theme.js";
@@ -47,7 +48,7 @@ function Field({ label, required, error, hint, children }) {
             marginTop: 4,
           }}
         >
-          {error || hint}
+          {error ? tr(error) : hint}
         </div>
       )}
     </div>
@@ -172,7 +173,7 @@ function Toggle({ value, onChange, label, ...props }) {
           }}
         />
       </span>
-      <span style={{ fontSize: 13, color: C.text }}>{label}</span>
+      <span style={{ fontSize: 13, color: C.text }}>{tr(label)}</span>
     </button>
   );
 }
@@ -180,7 +181,7 @@ function MultiSelect({
   value,
   onChange,
   options,
-  placeholder = "Add…",
+  placeholder = tr("Add…"),
   error,
   id: providedId,
   ...props
@@ -253,7 +254,7 @@ function MultiSelect({
               {option?.label || selected}
               <button
                 type="button"
-                aria-label={`Remove ${option?.label || selected}`}
+                aria-label={tr("Remove {{v0}}", {v0: option?.label || selected})}
                 onClick={(e) => {
                   e.stopPropagation();
                   onChange(sel.filter((x) => x !== selected));
@@ -296,7 +297,7 @@ function MultiSelect({
             flex: 1,
           }}
         >
-          {sel.length ? "Add…" : placeholder}
+          {sel.length ? tr("Add…") : placeholder}
         </button>
       </div>
       {open && (
@@ -325,7 +326,7 @@ function MultiSelect({
               ref={searchInput}
               autoFocus
               role="combobox"
-              aria-label="Search choices"
+              aria-label={tr("Search choices")}
               aria-controls={`${id}-list`}
               aria-expanded="true"
               aria-autocomplete="list"
@@ -335,23 +336,21 @@ function MultiSelect({
                 if (e.key === "ArrowDown") move(e, 1);
                 if (e.key === "ArrowUp") move(e, -1);
               }}
-              placeholder="Search…"
+              placeholder={tr("Search…")}
               style={{ ...inputStyle(false), marginBottom: 6 }}
             />
             <div
               ref={list}
               id={`${id}-list`}
               role="listbox"
-              aria-label="Available choices"
+              aria-label={tr("Available choices")}
               aria-multiselectable="true"
             >
               {filtered.length === 0 && (
                 <div
                   role="status"
                   style={{ fontSize: 12, color: C.sub, padding: 8 }}
-                >
-                  No matches.
-                </div>
+                >{tr("No matches.")}</div>
               )}
               {filtered.map((o) => (
                 <button

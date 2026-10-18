@@ -1,3 +1,4 @@
+import {tr} from "../i18n/index.js";
 import { useState, useEffect } from "react";
 import * as d3 from "d3";
 
@@ -73,7 +74,7 @@ function loadWorld() {
   _worldPromise = (async () => {
     for (const url of WORLD_SOURCES) {
       try {
-        const topo = await fetch(url).then((r) => { if (!r.ok) throw new Error("http"); return r.json(); });
+        const topo = await fetch(url).then((r) => { if (!r.ok) throw new Error(tr("http")); return r.json(); });
         const land = topoFeature(topo, topo.objects.land);
         const proj = d3.geoNaturalEarth1().fitExtent([[16, 18], [984, 542]], land);
         _worldCache = { landPath: d3.geoPath(proj)(land), proj };

@@ -1,0 +1,582 @@
+{
+  "commit": "working tree based on 02c0433",
+  "environment": "Linux Chromium; isolated local browser storage",
+  "results": [
+    {
+      "id": "N01",
+      "name": "Overview statistics and all dashboard navigation cards",
+      "status": "passed",
+      "durationMs": 1529,
+      "detail": "",
+      "pageErrors": [],
+      "rechecked": true
+    },
+    {
+      "id": "N02",
+      "name": "All seven sidebar views and historical person states",
+      "status": "passed",
+      "durationMs": 1267,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N03",
+      "name": "Global search, mouse selection, profile relatives and dismiss",
+      "status": "passed",
+      "durationMs": 633,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N04",
+      "name": "Branch filter toggles, People filtering and tree dimming",
+      "status": "passed",
+      "durationMs": 752,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N05",
+      "name": "All timeline type filters, historical context and empty matches",
+      "status": "passed",
+      "durationMs": 1132,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N06",
+      "name": "Playback starts, pauses, reaches final year and stops",
+      "status": "passed",
+      "durationMs": 1455,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N07",
+      "name": "Map fallback, historical pins, route highlights and person buttons",
+      "status": "passed",
+      "durationMs": 759,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N08",
+      "name": "Accurate world map and inverse-coordinate location picker",
+      "status": "passed",
+      "durationMs": 1009,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N09",
+      "name": "Profile map/focus/edit actions and focused timeline clear",
+      "status": "passed",
+      "durationMs": 1123,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N10",
+      "name": "Documents sorted by year and linked people open profiles",
+      "status": "passed",
+      "durationMs": 609,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C01",
+      "name": "People: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 2640,
+      "detail": "",
+      "pageErrors": [],
+      "rechecked": true
+    },
+    {
+      "id": "C02",
+      "name": "Locations: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 2389,
+      "detail": "",
+      "pageErrors": [],
+      "rechecked": true
+    },
+    {
+      "id": "C03",
+      "name": "Events: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 1950,
+      "detail": "",
+      "pageErrors": [],
+      "rechecked": true
+    },
+    {
+      "id": "C04",
+      "name": "Migrations: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 1767,
+      "detail": "",
+      "pageErrors": [],
+      "rechecked": true
+    },
+    {
+      "id": "C05",
+      "name": "Documents: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 1622,
+      "detail": "",
+      "pageErrors": [],
+      "rechecked": true
+    },
+    {
+      "id": "C06",
+      "name": "Branches: required validation, create, reload, edit, search, delete cancel/confirm",
+      "status": "passed",
+      "durationMs": 1556,
+      "detail": "",
+      "pageErrors": [],
+      "rechecked": true
+    },
+    {
+      "id": "C07",
+      "name": "Person death-before-birth validation",
+      "status": "passed",
+      "durationMs": 1098,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C08",
+      "name": "Residence rows: add, change location/year, remove and save",
+      "status": "passed",
+      "durationMs": 1091,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C09",
+      "name": "All event/document type choices persist and render",
+      "status": "passed",
+      "durationMs": 5868,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C10",
+      "name": "Branch-wide migration and required-empty selectors",
+      "status": "passed",
+      "durationMs": 784,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C11",
+      "name": "Modal cancel, close icon, and backdrop discard drafts",
+      "status": "passed",
+      "durationMs": 1004,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C12",
+      "name": "Empty multiselect search/no-match, select and keyboard-remove chip",
+      "status": "passed",
+      "durationMs": 821,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R01",
+      "name": "Dedicated parent, child and spouse add/remove updates both people",
+      "status": "passed",
+      "durationMs": 1593,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R02",
+      "name": "Deleting people removes relationships, document/event links and personal routes",
+      "status": "passed",
+      "durationMs": 661,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R03",
+      "name": "Deleting events and documents cleans reciprocal links",
+      "status": "passed",
+      "durationMs": 929,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R04",
+      "name": "Delete populated branch: remove members, preserve people and routes",
+      "status": "passed",
+      "durationMs": 923,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R05",
+      "name": "Delete populated branch: move members, preserve people and routes",
+      "status": "passed",
+      "durationMs": 925,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "D01",
+      "name": "JSON export/import round-trip retains all collections",
+      "status": "passed",
+      "durationMs": 771,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "D02",
+      "name": "Invalid JSON rejected without replacing archive",
+      "status": "passed",
+      "durationMs": 724,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "D03",
+      "name": "Reset cancellation preserves data; confirmation restores sample",
+      "status": "passed",
+      "durationMs": 1069,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "D04",
+      "name": "Empty archive: all screens, management tabs, and first-person setup",
+      "status": "passed",
+      "durationMs": 1284,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "D05",
+      "name": "HTML-like user text is displayed as text, not executed",
+      "status": "passed",
+      "durationMs": 638,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B01",
+      "name": "Person form relationship changes must update the other person",
+      "status": "passed",
+      "durationMs": 785,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B02",
+      "name": "Adding a residence must keep the migration route collection synchronized",
+      "status": "passed",
+      "durationMs": 768,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B03",
+      "name": "Event document selector must update the document event links",
+      "status": "passed",
+      "durationMs": 816,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B04",
+      "name": "Document event selector must update event document links",
+      "status": "passed",
+      "durationMs": 725,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B05",
+      "name": "Deleting a location must clean event location references",
+      "status": "passed",
+      "durationMs": 655,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B06",
+      "name": "Reject ancestor cycles",
+      "status": "passed",
+      "durationMs": 662,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B07",
+      "name": "Changing relationship person must clear the target and reject self-links",
+      "status": "passed",
+      "durationMs": 561,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B08",
+      "name": "Adding siblings without parents must not silently do nothing",
+      "status": "passed",
+      "durationMs": 686,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B09",
+      "name": "Reject latitude and longitude outside geographic bounds",
+      "status": "passed",
+      "durationMs": 726,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B10",
+      "name": "Reject a migration ending before it starts or going to its origin",
+      "status": "passed",
+      "durationMs": 694,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B11",
+      "name": "Reject fractional years",
+      "status": "passed",
+      "durationMs": 703,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B12",
+      "name": "Residence year must not precede birth",
+      "status": "passed",
+      "durationMs": 767,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B13",
+      "name": "A person outside fixed year bounds must be explorable in time",
+      "status": "passed",
+      "durationMs": 825,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B14",
+      "name": "Structurally invalid JSON must be rejected without changing the archive",
+      "status": "passed",
+      "durationMs": 647,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B15",
+      "name": "Malformed person records must not crash the application",
+      "status": "passed",
+      "durationMs": 830,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B16",
+      "name": "Valid import replacing existing data must require confirmation",
+      "status": "passed",
+      "durationMs": 719,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B17",
+      "name": "Storage failures must produce a visible persistence warning",
+      "status": "passed",
+      "durationMs": 708,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B18",
+      "name": "Two tabs must synchronize rather than overwrite each other",
+      "status": "passed",
+      "durationMs": 4251,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B19",
+      "name": "Deleting the selected branch must reset its global filter",
+      "status": "passed",
+      "durationMs": 808,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B20",
+      "name": "People with unknown residences must not inflate place totals",
+      "status": "passed",
+      "durationMs": 483,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B21",
+      "name": "Keyboard activation of global search results must open profile",
+      "status": "passed",
+      "durationMs": 498,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B22",
+      "name": "Modal Escape closes and modal has accessible dialog semantics",
+      "status": "passed",
+      "durationMs": 587,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B23",
+      "name": "Tab focus stays inside open modal",
+      "status": "passed",
+      "durationMs": 614,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B24",
+      "name": "Interactive controls must have accessible names",
+      "status": "passed",
+      "durationMs": 481,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B25",
+      "name": "Empty multiselect can be reached and opened with the keyboard",
+      "status": "passed",
+      "durationMs": 616,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B26-390",
+      "name": "Responsive 390px: all sidebar destinations remain named and layout fits",
+      "status": "passed",
+      "durationMs": 435,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B26-768",
+      "name": "Responsive 768px: all sidebar destinations remain named and layout fits",
+      "status": "passed",
+      "durationMs": 427,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B27",
+      "name": "Mobile year slider must remain within its visible container",
+      "status": "passed",
+      "durationMs": 508,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B28",
+      "name": "Mobile family search must have enough room to enter and read a name",
+      "status": "passed",
+      "durationMs": 445,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B29",
+      "name": "Escape must close an edit modal",
+      "status": "passed",
+      "durationMs": 694,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B30",
+      "name": "Empty People search must provide a no-results message",
+      "status": "passed",
+      "durationMs": 528,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B31",
+      "name": "Spouse generation alignment must also keep children below parents",
+      "status": "passed",
+      "durationMs": 377,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B32",
+      "name": "Saving a person biography must not remove existing branch assignments",
+      "status": "passed",
+      "durationMs": 773,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "B33",
+      "name": "Clicking branch selector and cancelling must preserve draft tags",
+      "status": "passed",
+      "durationMs": 796,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "C13",
+      "name": "Person linked-event and linked-document fields update the related people arrays",
+      "status": "passed",
+      "durationMs": 1067,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R06",
+      "name": "Last populated branch cannot move members to a nonexistent branch",
+      "status": "passed",
+      "durationMs": 927,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "R07",
+      "name": "Relationship Add is disabled without a target person",
+      "status": "passed",
+      "durationMs": 565,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "D06",
+      "name": "Export failure shows an error without changing archive data",
+      "status": "passed",
+      "durationMs": 620,
+      "detail": "",
+      "pageErrors": []
+    },
+    {
+      "id": "N11",
+      "name": "Profile parent and child navigation and close icon",
+      "status": "passed",
+      "durationMs": 703,
+      "detail": "",
+      "pageErrors": []
+    }
+  ],
+  "verificationNote": "64 scenarios passed initially. One scenario was interrupted by development hot reload; six CRUD checks caught changed English empty-search wording. Original English wording was restored and all seven affected scenarios were rerun successfully on the stable build."
+}

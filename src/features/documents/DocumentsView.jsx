@@ -1,3 +1,4 @@
+import { tr } from "../../i18n/index.js";
 import React, { useState } from "react";
 import { FileText } from "lucide-react";
 import { C } from "../../config/theme.js";
@@ -47,7 +48,7 @@ function DocumentEditor({ value, onClose }) {
     setBusy(true);
     setError("");
     try {
-      if (!draft.title.trim()) throw new Error("Give the record a title.");
+      if (!draft.title.trim()) throw new Error(tr("Give the record a title."));
       const added = await storeFiles(files);
       const next = {
         ...draft,
@@ -67,24 +68,20 @@ function DocumentEditor({ value, onClose }) {
   }
   return (
     <Modal
-      title={value ? "Edit archive record" : "Upload to archive"}
+      title={value ? tr("Edit archive record") : tr("Upload to archive")}
       wide
       onClose={onClose}
     >
       <form onSubmit={save} className="studio-form">
         <ErrorNotice message={error} />
-        <label className="studio-field">
-          Record title
-          <input
+        <label className="studio-field">{tr("Record title")}<input
             required
             value={draft.title}
             onChange={(e) => set("title", e.target.value)}
           />
         </label>
         <div className="feature-grid">
-          <label className="studio-field">
-            Record year
-            <input
+          <label className="studio-field">{tr("Record year")}<input
               required
               type="number"
               step="1"
@@ -94,9 +91,7 @@ function DocumentEditor({ value, onClose }) {
               onChange={(e) => set("year", e.target.value)}
             />
           </label>
-          <label className="studio-field">
-            Record type
-            <select
+          <label className="studio-field">{tr("Record type")}<select
               value={draft.type}
               onChange={(e) => set("type", e.target.value)}
             >
@@ -110,29 +105,23 @@ function DocumentEditor({ value, onClose }) {
                 "audio",
                 "video",
               ].map((t) => (
-                <option key={t}>{t}</option>
+                <option key={t} value={t}>{tr(t)}</option>
               ))}
             </select>
           </label>
         </div>
-        <label className="studio-field">
-          Caption
-          <textarea
+        <label className="studio-field">{tr("Caption")}<textarea
             value={draft.caption || ""}
             onChange={(e) => set("caption", e.target.value)}
           />
         </label>
-        <label className="studio-field">
-          Description / transcription
-          <textarea
+        <label className="studio-field">{tr("Description / transcription")}<textarea
             value={draft.desc || ""}
             onChange={(e) => set("desc", e.target.value)}
           />
         </label>
         <CheckPeople value={draft.people} onChange={(v) => set("people", v)} />
-        <label className="studio-field">
-          Related events
-          <select
+        <label className="studio-field">{tr("Related events")}<select
             multiple
             size={4}
             value={draft.events}
@@ -150,19 +139,14 @@ function DocumentEditor({ value, onClose }) {
             ))}
           </select>
         </label>
-        <label className="studio-field">
-          Attachments
-          <input
+        <label className="studio-field">{tr("Attachments")}<input
             type="file"
             multiple
             accept="image/jpeg,image/png,image/webp,image/gif,image/avif,application/pdf,text/plain,audio/*,video/mp4,video/webm,video/ogg"
             onChange={(e) => setFiles([...e.target.files])}
           />
         </label>
-        <small>
-          Up to 100 MB per file. Files stay in this browser; export a media ZIP
-          for a complete backup.
-        </small>
+        <small>{tr("Up to 100 MB per file. Files stay in this browser; export a media ZIP for a complete backup.")}</small>
         {(draft.files || []).map((f) => (
           <div key={f.id} className="feature-row">
             <span>{f.name}</span>
@@ -174,15 +158,13 @@ function DocumentEditor({ value, onClose }) {
                   draft.files.filter((x) => x.id !== f.id),
                 )
               }
-            >
-              Detach file
-            </Btn>
+            >{tr("Detach file")}</Btn>
           </div>
         ))}
         <div className="feature-actions">
-          <Btn onClick={onClose}>Cancel</Btn>
+          <Btn onClick={onClose}>{tr("Cancel")}</Btn>
           <Btn type="submit" kind="primary" disabled={busy}>
-            {busy ? "Storing files…" : "Save record"}
+            {busy ? tr("Storing files…") : tr("Save record")}
           </Btn>
         </div>
       </form>
@@ -230,41 +212,30 @@ function DocumentsView({ openPerson }) {
   }
   return (
     <FeaturePage
-      title="Documents & Media"
-      description="Photographs, records, letters and recordings, linked to people and events."
+      title={tr("Documents & Media")}
+      description={tr("Photographs, records, letters and recordings, linked to people and events.")}
       actions={
         <>
-          <Btn kind="primary" onClick={() => setEditing(null)}>
-            Upload records
-          </Btn>
+          <Btn kind="primary" onClick={() => setEditing(null)}>{tr("Upload records")}</Btn>
           <Btn disabled={busy} onClick={bundle}>
-            {busy ? "Packaging…" : "Export archive with media"}
+            {busy ? tr("Packaging…") : tr("Export archive with media")}
           </Btn>
-          <label className="file-button">
-            Import media ZIP
-            <input type="file" accept=".zip" onChange={importBundle} />
+          <label className="file-button">{tr("Import media ZIP")}<input type="file" accept=".zip" onChange={importBundle} />
           </label>
         </>
       }
     >
       <ErrorNotice message={error} />
-      <p className="feature-muted">
-        Media stays in this browser. JSON contains metadata only; the ZIP
-        includes the files. Detached files are retained for backup recovery.
-      </p>
+      <p className="feature-muted">{tr("Media stays in this browser. JSON contains metadata only; the ZIP includes the files. Detached files are retained for backup recovery.")}</p>
       <div className="feature-grid">
-        <label className="studio-field">
-          Search archive
-          <input
+        <label className="studio-field">{tr("Search archive")}<input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Title, caption, person or transcription"
+            placeholder={tr("Title, caption, person or transcription")}
           />
         </label>
-        <label className="studio-field">
-          Media type
-          <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <option value="all">All records</option>
+        <label className="studio-field">{tr("Media type")}<select value={filter} onChange={(e) => setFilter(e.target.value)}>
+            <option value="all">{tr("All records")}</option>
             {[
               "photo",
               "certificate",
@@ -275,7 +246,7 @@ function DocumentsView({ openPerson }) {
               "audio",
               "video",
             ].map((t) => (
-              <option key={t}>{t}</option>
+              <option key={t} value={t}>{tr(t)}</option>
             ))}
           </select>
         </label>
@@ -310,12 +281,8 @@ function DocumentsView({ openPerson }) {
                   ))}
                 </div>
                 <div className="feature-actions">
-                  <Btn small onClick={() => setViewing(d)}>
-                    Open record
-                  </Btn>
-                  <Btn small onClick={() => setEditing(d)}>
-                    Edit record
-                  </Btn>
+                  <Btn small onClick={() => setViewing(d)}>{tr("Open record")}</Btn>
+                  <Btn small onClick={() => setEditing(d)}>{tr("Edit record")}</Btn>
                 </div>
               </div>
             </article>
@@ -325,10 +292,10 @@ function DocumentsView({ openPerson }) {
       {!docs.length && (
         <Panel
           title={
-            data.documents.length ? "No records match" : "No documents yet"
+            data.documents.length ? tr("No records match") : tr("No documents yet")
           }
         >
-          <p>Upload your first photograph or clear the filters.</p>
+          <p>{tr("Upload your first photograph or clear the filters.")}</p>
         </Panel>
       )}
       {editing !== undefined && (
@@ -347,27 +314,22 @@ function DocumentsView({ openPerson }) {
                 onClick={() =>
                   downloadMedia(f).catch((e) => setError(e.message))
                 }
-              >
-                Download attachment
-              </Btn>
+              >{tr("Download attachment")}</Btn>
             </section>
           ))}
           {!viewing.files?.length && (
-            <p>This is a metadata record. Edit it to attach a file.</p>
+            <p>{tr("This is a metadata record. Edit it to attach a file.")}</p>
           )}
         </Modal>
       )}
       {pending && (
         <Modal
-          title="Replace archive and import media?"
+          title={tr("Replace archive and import media?")}
           onClose={() => setPending(null)}
         >
           <p>
-            {pending.data.people.length} people, {pending.data.documents.length}{" "}
-            records and {pending.records.length} files. Your previous archive
-            metadata will be backed up first; its files remain in this browser.
-          </p>
-          <Btn onClick={() => setPending(null)}>Cancel</Btn>
+            {pending.data.people.length}{tr(" people, ")}{pending.data.documents.length}{" "}{tr("records and ")}{pending.records.length}{tr(" files. Your previous archive metadata will be backed up first; its files remain in this browser.")}</p>
+          <Btn onClick={() => setPending(null)}>{tr("Cancel")}</Btn>
           <Btn
             kind="primary"
             disabled={busy}
@@ -382,9 +344,7 @@ function DocumentsView({ openPerson }) {
                 setBusy(false);
               }
             }}
-          >
-            Import complete archive
-          </Btn>
+          >{tr("Import complete archive")}</Btn>
         </Modal>
       )}
     </FeaturePage>

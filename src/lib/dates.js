@@ -1,3 +1,4 @@
+import {tr} from "../i18n/index.js";
 const MONTHS = [
   "JAN",
   "FEB",
@@ -41,10 +42,10 @@ export function parseFamilyDate(input = "") {
     const range = value.match(
       /^(?:BET (-?\d{1,4}) AND (-?\d{1,4})|FROM (-?\d{1,4}) TO (-?\d{1,4}))$/,
     );
-    if (!range) throw new Error("Use a year range such as BET 1900 AND 1905.");
+    if (!range) throw new Error(tr("Use a year range such as BET 1900 AND 1905."));
     const start = Number(range[1] ?? range[3]),
       end = Number(range[2] ?? range[4]);
-    if (start > end) throw new Error("Date range ends before it starts.");
+    if (start > end) throw new Error(tr("Date range ends before it starts."));
     return { text, year: start, month: null, day: null, qualifier: "range" };
   }
   let year,
@@ -62,7 +63,7 @@ export function parseFamilyDate(input = "") {
     day = ged[1] ? Number(ged[1]) : null;
   } else
     throw new Error(
-      "Use YYYY, YYYY-MM-DD, a GEDCOM date such as 12 MAY 1900, or ABT/BEF/AFT YYYY.",
+      tr("Use YYYY, YYYY-MM-DD, a GEDCOM date such as 12 MAY 1900, or ABT/BEF/AFT YYYY."),
     );
   if (
     Math.abs(year) > 9999 ||
@@ -78,7 +79,7 @@ export function parseFamilyDate(input = "") {
               ? 30
               : 31)))
   )
-    throw new Error("This date is not valid.");
+    throw new Error(tr("This date is not valid."));
   return { text, year, month, day, qualifier };
 }
 export function exactAnniversary(text) {
@@ -90,5 +91,5 @@ export function exactAnniversary(text) {
   }
 }
 export function dateLabel(p, kind = "birth") {
-  return p[`${kind}Date`] || (p[kind] ?? "Unknown");
+  return p[`${kind}Date`] || (p[kind] ?? tr("Unknown"));
 }

@@ -2,6 +2,10 @@
 
 An interactive family history explorer, organized from the original `FamilyAtlas_4.jsx` prototype. The original views and sample archive remain, with a real media archive, connected tree, guided journeys, oral histories, printable family books, kinship search, research evidence, portable family contributions, anniversaries and GEDCOM merging. See the [feature guide](docs/features/README.md).
 
+## Language
+
+Choose **English** or **Русский** using **Language / Язык** in the top bar. Your preference is saved in this browser. The interface and generated book labels change language; family records remain as entered. See [English and Russian support](docs/i18n/README.md).
+
 ## Develop locally
 
 Use Node.js 24 LTS (Node 22.12 or newer is supported).

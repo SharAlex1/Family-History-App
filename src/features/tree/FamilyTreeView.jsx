@@ -1,3 +1,4 @@
+import { tr } from "../../i18n/index.js";
 import React, { useMemo, useState } from "react";
 import { TreeExplorer } from "./TreeExplorer.jsx";
 import { Btn } from "../../components/ui/Primitives.jsx";
@@ -22,26 +23,26 @@ function FamilyTreeView({ year, selectedId, openPerson, branchSel }) {
     return null;
   };
   const dimmed = (p) => branchSel.length > 0 && !matchBranch(p, branchSel);
-  if (people.length === 0) return <EmptyState icon={GitBranch} title="No people yet" msg="Add family members in Manage Data to build the tree." />;
-  if(explore) return <div className="feature-page"><div className="feature-heading"><h2>Family Tree</h2><Btn onClick={()=>setExplore(false)}>Generation cards</Btn></div><TreeExplorer year={year} openPerson={openPerson} branchSel={branchSel}/></div>;
+  if (people.length === 0) return <EmptyState icon={GitBranch} title={tr("No people yet")} msg={tr("Add family members in Manage Data to build the tree.")} />;
+  if(explore) return <div className="feature-page"><div className="feature-heading"><h2>{tr("Family Tree")}</h2><Btn onClick={()=>setExplore(false)}>{tr("Generation cards")}</Btn></div><TreeExplorer year={year} openPerson={openPerson} branchSel={branchSel}/></div>;
   return (
     <div style={{ padding: "22px 24px 130px", overflow: "auto" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
-        <h2 style={{ fontFamily: "Fraunces, Georgia, serif", fontWeight: 600, fontSize: 22, color: C.text, margin: 0 }}>Family Tree</h2>
+        <h2 style={{ fontFamily: "Fraunces, Georgia, serif", fontWeight: 600, fontSize: 22, color: C.text, margin: 0 }}>{tr("Family Tree")}</h2>
         {sel && (
           <div style={{ display: "flex", gap: 14, fontSize: 12, color: C.sub }}>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style={{ width: 9, height: 9, borderRadius: "50%", background: C.sky }} />Parent</span>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style={{ width: 9, height: 9, borderRadius: "50%", background: C.rose }} />Spouse</span>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style={{ width: 9, height: 9, borderRadius: "50%", background: C.teal }} />Child</span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style={{ width: 9, height: 9, borderRadius: "50%", background: C.sky }} />{tr("Parent")}</span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style={{ width: 9, height: 9, borderRadius: "50%", background: C.rose }} />{tr("Spouse")}</span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}><span style={{ width: 9, height: 9, borderRadius: "50%", background: C.teal }} />{tr("Child")}</span>
           </div>
         )}
       </div>
-      <Btn onClick={()=>setExplore(true)}>Explore connected tree</Btn>
-      <p style={{ color: C.faint, fontSize: 13, margin: "0 0 18px" }}>Cards reflect {year}. Select anyone to trace their relations through the generations.</p>
+      <Btn onClick={()=>setExplore(true)}>{tr("Explore connected tree")}</Btn>
+      <p style={{ color: C.faint, fontSize: 13, margin: "0 0 18px" }}>{tr("Cards reflect ")}{year}{tr(". Select anyone to trace their relations through the generations.")}</p>
       <div style={{ display: "flex", flexDirection: "column", gap: 30, minWidth: "fit-content" }}>
         {gens.map((row, gi) => (
           <div key={gi}>
-            <div style={{ fontSize: 11, letterSpacing: 1.5, textTransform: "uppercase", color: C.faint, marginBottom: 10 }}>Generation {gi + 1}</div>
+            <div style={{ fontSize: 11, letterSpacing: 1.5, textTransform: "uppercase", color: C.faint, marginBottom: 10 }}>{tr("Generation ")}{gi + 1}</div>
             <div style={{ display: "flex", gap: 28, flexWrap: "wrap", alignItems: "stretch" }}>
               {groupUnions(row, getP).map((unit, ui) => (
                 <div key={ui} style={{ display: "flex", alignItems: "center" }}>

@@ -1,10 +1,11 @@
+import {tr} from "../i18n/index.js";
 import { uid, uniq } from "../utils/ids.js";
 import { parseFamilyDate } from "./dates.js";
 import { reconcile, validateArchive } from "./archive.js";
 import { ancestorDistances } from "./relationships.js";
-export function parseGedcom(text, label = "Imported family") {
+export function parseGedcom(text, label = tr("Imported family")) {
   if (text.length > 10 * 1024 * 1024)
-    throw new Error("GEDCOM files must be under 10 MB.");
+    throw new Error(tr("GEDCOM files must be under 10 MB."));
   const roots = [],
     stack = [],
     warnings = [],
@@ -22,14 +23,14 @@ export function parseGedcom(text, label = "Imported family") {
     );
   }
   const lines = text.replace(/^\uFEFF/, "").split(/\r?\n/);
-  if (lines.length > 200000) throw new Error("GEDCOM contains too many lines.");
+  if (lines.length > 200000) throw new Error(tr("GEDCOM contains too many lines."));
   lines.forEach((line, i) => {
     if (!line.trim()) return;
     const m = line.match(/^(\d+)\s+(?:(@[^@]+@)\s+)?([A-Z0-9_]+)(?:\s(.*))?$/);
-    if (!m) throw new Error(`Invalid GEDCOM syntax on line ${i + 1}.`);
+    if (!m) throw new Error(tr("Invalid GEDCOM syntax on line {{v0}}.", {v0: i + 1}));
     const level = Number(m[1]);
     if (level > 30 || level > stack.length)
-      throw new Error(`Invalid GEDCOM nesting on line ${i + 1}.`);
+      throw new Error(tr("Invalid GEDCOM nesting on line {{v0}}.", {v0: i + 1}));
     const n = { xref: m[2] || "", tag: m[3], value: m[4] || "", children: [] };
     if (level === 0) roots.push(n);
     else stack[level - 1].children.push(n);
@@ -41,7 +42,7 @@ export function parseGedcom(text, label = "Imported family") {
     !roots.some((n) => n.tag === "INDI")
   )
     throw new Error(
-      "Choose a GEDCOM genealogy file with a HEAD and at least one INDI record.",
+      tr("Choose a GEDCOM genealogy file with a HEAD and at least one INDI record."),
     );
   const head = roots.find((n) => n.tag === "HEAD"),
     encoding = value(node(head, "CHAR"));
@@ -50,7 +51,7 @@ export function parseGedcom(text, label = "Imported family") {
     !["UTF-8", "UNICODE", "ASCII"].includes(encoding.toUpperCase())
   )
     throw new Error(
-      `Export the GEDCOM as UTF-8; ${encoding} is not supported.`,
+      tr("Export the GEDCOM as UTF-8; {{v0}} is not supported.", {v0: encoding}),
     );
   const date = (n) => {
     const t = value(node(n, "DATE"));
@@ -454,7 +455,7 @@ export function mergeImported(base, incoming, choices = {}, policy = "keep") {
   );
   if (new Set(Object.values(mapping)).size !== incoming.people.length)
     throw new Error(
-      "Map each incoming person to a different existing record, or create a separate person.",
+      tr("Map each incoming person to a different existing record, or create a separate person."),
     );
   const locationMap = Object.fromEntries(
     incoming.locations.map((l) => [
@@ -511,10 +512,10 @@ export function mergeImported(base, incoming, choices = {}, policy = "keep") {
 }
 export function mergeExisting(base, primaryId, secondaryId, policy = "keep") {
   if (primaryId === secondaryId)
-    throw new Error("Choose two different records.");
+    throw new Error(tr("Choose two different records."));
   const primary = base.people.find((p) => p.id === primaryId),
     secondary = base.people.find((p) => p.id === secondaryId);
-  if (!primary || !secondary) throw new Error("Choose two existing people.");
+  if (!primary || !secondary) throw new Error(tr("Choose two existing people."));
   if (
     ancestorDistances(base.people, primaryId).has(secondaryId) ||
     ancestorDistances(base.people, secondaryId).has(primaryId) ||
@@ -522,7 +523,7 @@ export function mergeExisting(base, primaryId, secondaryId, policy = "keep") {
     (primary.siblings || []).includes(secondaryId)
   )
     throw new Error(
-      "These records are already connected as distinct relatives. Resolve that relationship before merging them.",
+      tr("These records are already connected as distinct relatives. Resolve that relationship before merging them."),
     );
   const mapped = remapPeople(base, { [secondaryId]: primaryId });
   const combined = combinePeople(primary, secondary, policy);

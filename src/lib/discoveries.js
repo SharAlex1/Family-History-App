@@ -1,3 +1,4 @@
+import {tr} from "../i18n/index.js";
 import { exactAnniversary } from "./dates.js";
 import { fullName } from "../utils/people.js";
 export function discoveries(data, now = new Date()) {
@@ -27,7 +28,7 @@ export function discoveries(data, now = new Date()) {
       if (date && date.year <= year)
         add(
           date,
-          `${fullName(p)} — ${kind === "birth" ? "birthday" : "remembrance"}`,
+          tr(kind === "birth"?"{{name}} — birthday":"{{name}} — remembrance",{name:fullName(p)}),
           p.id,
           date.year,
           `${p.id}-${kind}`,

@@ -1,0 +1,36 @@
+{
+  "unit": {
+    "passed": 65,
+    "files": 4
+  },
+  "browser": {
+    "passed": 26,
+    "newLanguageWorkflows": 5
+  },
+  "russianResponsive": {
+    "viewChecks": 60,
+    "views": 15,
+    "widths": [
+      1440,
+      768,
+      390,
+      320
+    ]
+  },
+  "legacyAudit": {
+    "distinctScenariosPassed": 71,
+    "initialPassed": 64,
+    "targetedRechecksPassed": 7
+  },
+  "production": {
+    "language": "ru",
+    "views": 15,
+    "externalRequests": "blocked",
+    "pageErrors": 0
+  },
+  "lint": "passed",
+  "build": "passed",
+  "dependencyAuditVulnerabilities": 0,
+  "archiveSchemaChanged": false,
+  "preferenceStorageKey": "familyAtlas.language"
+}

@@ -1,3 +1,4 @@
+import {tr} from "../i18n/index.js";
 import { EXTRA_COLLECTIONS, validateExtensions, cleanExtensions } from "./extensions.js";
 import { TYPE, DOC_TYPES } from "../config/eventTypes.js";
 import { uid, uniq } from "../utils/ids.js";
@@ -25,26 +26,26 @@ const strings = (value) =>
   Array.isArray(value) && value.every((x) => typeof x === "string");
 const text = (value, label, required = false) => {
   if (typeof value !== "string" || (required && !value.trim()))
-    fail(`${label} must be ${required ? "nonempty " : ""}text.`);
+    fail(tr("{{v0}} must be {{v1}}text.", {v0: tr(label), v1: required ? "nonempty " : ""}));
 };
 const year = (value, label) => {
   if (typeof value !== "number" || !isYear(value))
-    fail(`${label}: ${yearError}.`);
+    fail(tr("{{v0}}: {{v1}}.", {v0: tr(label), v1: tr(yearError)}));
 };
 
 export function validateArchive(d) {
   if (!record(d))
-    fail("Choose a Family Atlas archive, not an unrelated JSON file.");
+    fail(tr("Choose a Family Atlas archive, not an unrelated JSON file."));
   if (d.schemaVersion != null && ![1, 2].includes(d.schemaVersion))
-    fail("This archive version is not supported.");
+    fail(tr("This archive version is not supported."));
   for (const key of COLLECTIONS) {
     if (!Array.isArray(d[key]))
-      fail(`Archive is missing the ${key} collection.`);
+      fail(tr("Archive is missing the {{v0}} collection.", {v0: tr(key)}));
     const seen = new Set();
     for (const row of d[key]) {
-      if (!record(row)) fail(`Invalid record in ${key}.`);
+      if (!record(row)) fail(tr("Invalid record in {{v0}}.", {v0: tr(key)}));
       text(row.id, `${key} ID`, true);
-      if (seen.has(row.id)) fail(`Duplicate ${key} ID: ${row.id}.`);
+      if (seen.has(row.id)) fail(tr("Duplicate {{v0}} ID: {{v1}}.", {v0: tr(key), v1: row.id}));
       seen.add(row.id);
     }
   }
@@ -54,10 +55,10 @@ export function validateArchive(d) {
   const ref = (value, key, label, optional = false) => {
     if (optional && (value === "" || value == null)) return;
     if (!ids[key].has(value))
-      fail(`${label} refers to a missing ${key} record.`);
+      fail(tr("{{v0}} refers to a missing {{v1}} record.", {v0: tr(label), v1: tr(key)}));
   };
   const refs = (value, key, label) => {
-    if (!strings(value)) fail(`${label} must be a list of IDs.`);
+    if (!strings(value)) fail(tr("{{v0}} must be a list of IDs.", {v0: tr(label)}));
     value.forEach((x) => ref(x, key, label));
   };
   for (const p of d.people) {
@@ -66,7 +67,7 @@ export function validateArchive(d) {
     if (p.birth != null) year(p.birth, "Birth year");
     if (p.death != null) {
       year(p.death, "Death year");
-      if (p.birth != null && p.death < p.birth) fail("Death precedes birth.");
+      if (p.birth != null && p.death < p.birth) fail(tr("Death precedes birth."));
     }
     for (const key of ["gender", "bio", "avatar"])
       if (p[key] != null) text(p[key], key);
@@ -74,17 +75,17 @@ export function validateArchive(d) {
       if (key === "siblings" && p[key] == null) continue;
       refs(p[key], "people", key);
       if (p[key].includes(p.id))
-        fail("A person cannot be related to themselves.");
+        fail(tr("A person cannot be related to themselves."));
     }
     refs(p.branches, "branches", "Person branches");
     ref(p.born, "locations", "Birthplace", true);
-    if (!Array.isArray(p.residences)) fail("Residences must be a list.");
+    if (!Array.isArray(p.residences)) fail(tr("Residences must be a list."));
     for (const r of p.residences) {
-      if (!record(r)) fail("Invalid residence record.");
+      if (!record(r)) fail(tr("Invalid residence record."));
       ref(r.at, "locations", "Residence");
       year(r.from, "Residence year");
       if ((p.birth != null && r.from < p.birth) || (p.death != null && r.from > p.death))
-        fail("Residence year must be within the person’s lifetime.");
+        fail(tr("Residence year must be within the person’s lifetime."));
     }
   }
   for (const l of d.locations) {
@@ -99,9 +100,9 @@ export function validateArchive(d) {
       l.y < 0 ||
       l.y > 560
     )
-      fail("Invalid map position.");
+      fail(tr("Invalid map position."));
     if ((l.lat == null) !== (l.lng == null))
-      fail("Supply both latitude and longitude, or leave both blank.");
+      fail(tr("Supply both latitude and longitude, or leave both blank."));
     if (
       l.lat != null &&
       (!Number.isFinite(l.lat) ||
@@ -109,10 +110,10 @@ export function validateArchive(d) {
         !Number.isFinite(l.lng) ||
         Math.abs(l.lng) > 180)
     )
-      fail("Latitude or longitude is outside geographic bounds.");
+      fail(tr("Latitude or longitude is outside geographic bounds."));
   }
   for (const e of d.events) {
-    if (!Object.hasOwn(TYPE, e.type)) fail("Unknown event type.");
+    if (!Object.hasOwn(TYPE, e.type)) fail(tr("Unknown event type."));
     text(e.title, "Event title", true);
     text(e.type, "Event type", true);
     year(e.year, "Event year");
@@ -121,10 +122,10 @@ export function validateArchive(d) {
     refs(e.docs, "documents", "Event documents");
     ref(e.at, "locations", "Event location", true);
     if (typeof e.historical !== "boolean")
-      fail("Historical context must be true or false.");
+      fail(tr("Historical context must be true or false."));
   }
   for (const doc of d.documents) {
-    if (!DOC_TYPES.includes(doc.type)) fail("Unknown document type.");
+    if (!DOC_TYPES.includes(doc.type)) fail(tr("Unknown document type."));
     text(doc.title, "Document title", true);
     text(doc.type, "Document type", true);
     year(doc.year, "Document year");
@@ -135,17 +136,17 @@ export function validateArchive(d) {
   for (const b of d.branches) {
     text(b.name, "Branch name", true);
     if (!/^#[0-9a-f]{6}$/i.test(b.color))
-      fail("Branch color must be a six-digit hex color.");
+      fail(tr("Branch color must be a six-digit hex color."));
   }
   for (const m of d.migrations) {
-    if (!["person", "branch"].includes(m.mode)) fail("Invalid migration mode.");
+    if (!["person", "branch"].includes(m.mode)) fail(tr("Invalid migration mode."));
     ref(m.from, "locations", "Migration origin");
     ref(m.to, "locations", "Migration destination");
-    if (m.from === m.to) fail("Migration origin and destination must differ.");
+    if (m.from === m.to) fail(tr("Migration origin and destination must differ."));
     year(m.startYear, "Migration start year");
     if (m.endYear != null) {
       year(m.endYear, "Migration end year");
-      if (m.endYear < m.startYear) fail("Migration ends before it starts.");
+      if (m.endYear < m.startYear) fail(tr("Migration ends before it starts."));
     }
     if (m.mode === "person") {
       ref(m.personId, "people", "Migration person");
@@ -155,12 +156,12 @@ export function validateArchive(d) {
         (p.death != null && m.startYear > p.death) ||
         (m.endYear != null && p.death != null && m.endYear > p.death)
       )
-        fail("A personal migration must be within the person’s lifetime.");
+        fail(tr("A personal migration must be within the person’s lifetime."));
     }
     // An unassigned branch is retained when a branch is deleted.
     if (m.branch) ref(m.branch, "branches", "Migration branch");
     if (m.mode === "branch" && !m.branch)
-      fail("Choose a branch for a branch-wide migration.");
+      fail(tr("Choose a branch for a branch-wide migration."));
     text(m.description ?? "", "Migration description");
   }
   validateExtensions(d);
@@ -177,16 +178,16 @@ export function validateRelationships(people) {
   const active = new Set(),
     done = new Set();
   function visit(id) {
-    if (active.has(id)) fail("This relationship creates an ancestry cycle.");
+    if (active.has(id)) fail(tr("This relationship creates an ancestry cycle."));
     if (done.has(id)) return;
     active.add(id);
     for (const parentId of parents.get(id) || []) {
-      if (parentId === id) fail("A person cannot be their own parent.");
+      if (parentId === id) fail(tr("A person cannot be their own parent."));
       const p = byId.get(parentId),
         child = byId.get(id);
-      if (!p) fail("Parent does not exist.");
+      if (!p) fail(tr("Parent does not exist."));
       if (p.birth != null && child.birth != null && p.birth >= child.birth)
-        fail("A parent must be born before their child.");
+        fail(tr("A parent must be born before their child."));
       visit(parentId);
     }
     active.delete(id);
@@ -346,7 +347,7 @@ export function saveEntity(d, key, item) {
         item.from !== previous.from
       )
         fail(
-          "For a generated route, edit the person’s residences to change the origin or person.",
+          tr("For a generated route, edit the person’s residences to change the origin or person."),
         );
       const residences = person.residences.map((r) =>
         r.at === previous.to && r.from === previous.startYear
@@ -363,12 +364,12 @@ export function saveEntity(d, key, item) {
 }
 
 export function changeRelationship(d, aId, type, bId, remove = false) {
-  if (aId === bId) fail("A person cannot be related to themselves.");
+  if (aId === bId) fail(tr("A person cannot be related to themselves."));
   if (
     !d.people.some((p) => p.id === aId) ||
     !d.people.some((p) => p.id === bId)
   )
-    fail("Choose two existing people.");
+    fail(tr("Choose two existing people."));
   const a = structuredClone(d.people.find((p) => p.id === aId)),
     b = d.people.find((p) => p.id === bId);
   const key = {
@@ -377,7 +378,7 @@ export function changeRelationship(d, aId, type, bId, remove = false) {
     spouse: "spouses",
     sibling: "siblings",
   }[type];
-  if (!key) fail("Unknown relationship type.");
+  if (!key) fail(tr("Unknown relationship type."));
   a[key] = remove
     ? (a[key] || []).filter((id) => id !== bId)
     : uniq([...(a[key] || []), bId]);

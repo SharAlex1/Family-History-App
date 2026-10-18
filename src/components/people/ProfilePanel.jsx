@@ -1,3 +1,4 @@
+import { tr } from "../../i18n/index.js";
 import React from "react";
 import { Clock, MapPin, FileText, X, ArrowRight, Pencil } from "lucide-react";
 import { C } from "../../config/theme.js";
@@ -16,7 +17,7 @@ function ProfilePanel({ id, year, onClose, openPerson, setView, focusPerson, onE
   const docs = data.documents.filter((d) => (d.people || []).includes(id));
   const relList = (ids, label) => (ids || []).length > 0 && (
     <div style={{ marginBottom: 12 }}>
-      <div style={{ fontSize: 11, letterSpacing: 0.8, textTransform: "uppercase", color: C.faint, marginBottom: 6 }}>{label}</div>
+      <div style={{ fontSize: 11, letterSpacing: 0.8, textTransform: "uppercase", color: C.faint, marginBottom: 6 }}>{tr(label)}</div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
         {ids.map((rid) => { const rp = getP(rid); return (
           <button key={rid} onClick={() => openPerson(rid)} className="fa-click" style={{ display: "inline-flex", alignItems: "center", gap: 7, background: C.panel2, border: `1px solid ${C.border}`, borderRadius: 999, padding: "4px 10px 4px 4px" }}>
@@ -33,26 +34,26 @@ function ProfilePanel({ id, year, onClose, openPerson, setView, focusPerson, onE
           <Avatar p={p} size={56} status={status} selected />
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontFamily: "Fraunces, Georgia, serif", fontWeight: 600, fontSize: 21, color: C.text, lineHeight: 1.1 }}>{fullName(p)}</div>
-            <div style={{ fontSize: 12.5, color: C.sub, marginTop: 4 }}>{p.birthDate || (p.birth ?? "Unknown")} – {p.deathDate || (p.death != null ? p.death : p.deceased ? "Unknown" : "present")} · born {getL(p.born).name}</div>
+            <div style={{ fontSize: 12.5, color: C.sub, marginTop: 4 }}>{p.birthDate || (p.birth ?? tr("Unknown"))} – {p.deathDate || (p.death != null ? p.death : p.deceased ? tr("Unknown") : tr("present"))}{tr(" · born ")}{getL(p.born).name}</div>
             <div style={{ marginTop: 8 }}>
-              {status === "alive" && <Pill color={C.teal} bg={`${C.teal}1a`}>{age} in {year} · {where ? getL(where).name : "—"}</Pill>}
-              {status === "deceased" && <Pill color={C.gray}>Deceased before {year}</Pill>}
-              {status === "unknown" && <Pill>Dates unknown</Pill>}
-              {status === "unborn" && <Pill color={C.faint}>Not yet born in {year}</Pill>}
+              {status === "alive" && <Pill color={C.teal} bg={`${C.teal}1a`}>{age}{tr(" in ")}{year} · {where ? getL(where).name : "—"}</Pill>}
+              {status === "deceased" && <Pill color={C.gray}>{tr("Deceased before ")}{year}</Pill>}
+              {status === "unknown" && <Pill>{tr("Dates unknown")}</Pill>}
+              {status === "unborn" && <Pill color={C.faint}>{tr("Not yet born in ")}{year}</Pill>}
             </div>
           </div>
-          <button aria-label="Close profile" onClick={onClose} className="fa-click" style={{ background: "transparent", border: "none", color: C.sub, padding: 4 }}><X size={20} /></button>
+          <button aria-label={tr("Close profile")} onClick={onClose} className="fa-click" style={{ background: "transparent", border: "none", color: C.sub, padding: 4 }}><X size={20} /></button>
         </div>
         <div style={{ padding: "16px 20px 40px" }}>
           {p.bio && <p style={{ fontSize: 13.5, color: C.sub, lineHeight: 1.6, margin: "0 0 18px" }}>{p.bio}</p>}
           <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
-            <button onClick={() => setView("map")} className="fa-click" style={{ flex: 1, minWidth: 110, display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6, fontSize: 12.5, color: C.amber, background: `${C.amber}12`, border: `1px solid ${C.amberSoft}`, padding: "9px", borderRadius: 10 }}><MapPin size={14} /> View on map</button>
-            <button onClick={() => { focusPerson(); setView("timeline"); }} className="fa-click" style={{ flex: 1, minWidth: 110, display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6, fontSize: 12.5, color: C.violet, background: `${C.violet}12`, border: `1px solid ${C.violet}33`, padding: "9px", borderRadius: 10 }}><Clock size={14} /> Focus timeline</button>
+            <button onClick={() => setView("map")} className="fa-click" style={{ flex: 1, minWidth: 110, display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6, fontSize: 12.5, color: C.amber, background: `${C.amber}12`, border: `1px solid ${C.amberSoft}`, padding: "9px", borderRadius: 10 }}><MapPin size={14} />{tr(" View on map")}</button>
+            <button onClick={() => { focusPerson(); setView("timeline"); }} className="fa-click" style={{ flex: 1, minWidth: 110, display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6, fontSize: 12.5, color: C.violet, background: `${C.violet}12`, border: `1px solid ${C.violet}33`, padding: "9px", borderRadius: 10 }}><Clock size={14} />{tr(" Focus timeline")}</button>
           </div>
-          <button onClick={() => onEdit(p.id)} className="fa-click" style={{ width: "100%", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6, fontSize: 12.5, color: C.text, background: C.panel2, border: `1px solid ${C.border}`, padding: "9px", borderRadius: 10, marginBottom: 20 }}><Pencil size={14} /> Edit this person</button>
+          <button onClick={() => onEdit(p.id)} className="fa-click" style={{ width: "100%", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6, fontSize: 12.5, color: C.text, background: C.panel2, border: `1px solid ${C.border}`, padding: "9px", borderRadius: 10, marginBottom: 20 }}><Pencil size={14} />{tr(" Edit this person")}</button>
           {(p.branches || []).length > 0 && (
             <div style={{ marginBottom: 16 }}>
-              <div style={{ fontSize: 11, letterSpacing: 0.8, textTransform: "uppercase", color: C.faint, marginBottom: 7 }}>Branches</div>
+              <div style={{ fontSize: 11, letterSpacing: 0.8, textTransform: "uppercase", color: C.faint, marginBottom: 7 }}>{tr("Branches")}</div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
                 {(p.branches || []).map((bid) => { const b = data.branches.find((x) => x.id === bid); if (!b) return null; return (
                   <span key={bid} style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `${b.color}18`, border: `1px solid ${b.color}55`, borderRadius: 999, padding: "4px 11px", fontSize: 12.5, color: C.text }}>
@@ -68,7 +69,7 @@ function ProfilePanel({ id, year, onClose, openPerson, setView, focusPerson, onE
           {relList(p.siblings || [], "Recorded siblings")}
           {places.length > 0 && (
             <div style={{ marginBottom: 18 }}>
-              <div style={{ fontSize: 11, letterSpacing: 0.8, textTransform: "uppercase", color: C.faint, marginBottom: 7 }}>Places lived</div>
+              <div style={{ fontSize: 11, letterSpacing: 0.8, textTransform: "uppercase", color: C.faint, marginBottom: 7 }}>{tr("Places lived")}</div>
               <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
                 {places.map((c, i) => <React.Fragment key={i}><span style={{ fontSize: 13, color: C.text }}>{c}</span>{i < places.length - 1 && <ArrowRight size={12} color={C.faint} />}</React.Fragment>)}
               </div>
@@ -76,7 +77,7 @@ function ProfilePanel({ id, year, onClose, openPerson, setView, focusPerson, onE
           )}
           {lifeEvents.length > 0 && (
             <div style={{ marginBottom: 18 }}>
-              <div style={{ fontSize: 11, letterSpacing: 0.8, textTransform: "uppercase", color: C.faint, marginBottom: 9 }}>Life timeline</div>
+              <div style={{ fontSize: 11, letterSpacing: 0.8, textTransform: "uppercase", color: C.faint, marginBottom: 9 }}>{tr("Life timeline")}</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 {lifeEvents.map((e) => { const m = TYPE[e.type] || TYPE.milestone; return (
                   <div key={e.id} style={{ display: "flex", gap: 10, alignItems: "center" }}>
@@ -89,7 +90,7 @@ function ProfilePanel({ id, year, onClose, openPerson, setView, focusPerson, onE
           )}
           {docs.length > 0 && (
             <div>
-              <div style={{ fontSize: 11, letterSpacing: 0.8, textTransform: "uppercase", color: C.faint, marginBottom: 9 }}>Documents</div>
+              <div style={{ fontSize: 11, letterSpacing: 0.8, textTransform: "uppercase", color: C.faint, marginBottom: 9 }}>{tr("Documents")}</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 {docs.map((d) => { const Dn = DOC_ICON[d.type] || FileText; return (
                   <div key={d.id} style={{ display: "flex", gap: 10, alignItems: "center", background: C.panel2, borderRadius: 10, padding: "8px 11px" }}>

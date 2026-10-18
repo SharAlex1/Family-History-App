@@ -1,3 +1,5 @@
+import { tr } from "../../i18n/index.js";
+import {kinshipLabel} from "../../i18n/kinship.js";
 import React, { useState } from "react";
 import { useData } from "../../state/DataContext.jsx";
 import {
@@ -14,22 +16,21 @@ export function RelationshipView({ openPerson }) {
   const result = findRelationship(data.people, from, to);
   return (
     <FeaturePage
-      title="Relationship finder"
-      description="Find the connecting path and shared ancestors between two relatives."
+      title={tr("Relationship finder")}
+      description={tr("Find the connecting path and shared ancestors between two relatives.")}
     >
       <div className="feature-grid">
-        <PersonPicker label="From person" value={from} onChange={setFrom} />
-        <PersonPicker label="To person" value={to} onChange={setTo} />
+        <PersonPicker label={tr("From person")} value={from} onChange={setFrom} />
+        <PersonPicker label={tr("To person")} value={to} onChange={setTo} />
       </div>
-      <Panel title={result.label}>
+      <Panel title={kinshipLabel(result.label)}>
         <p>
-          {getP(to).first} is related to {getP(from).first} as shown above.
-        </p>
-        <p className="feature-muted">{result.basis}</p>
+          {getP(to).first}{tr(" is related to ")}{getP(from).first}{tr(" as shown above.")}</p>
+        <p className="feature-muted">{tr(result.basis)}</p>
         <ol className="relationship-path">
           {result.path.map((node) => (
             <li key={node.id}>
-              <small>{node.label}</small>
+              <small>{tr(node.label)}</small>
               <button
                 className="person-chip"
                 onClick={() => openPerson(node.id)}
@@ -40,7 +41,7 @@ export function RelationshipView({ openPerson }) {
           ))}
         </ol>
       </Panel>
-      <Panel title="Shared recorded ancestors">
+      <Panel title={tr("Shared recorded ancestors")}>
         {result.common.length ? (
           <ul>
             {result.common.map((a) => (
@@ -48,15 +49,11 @@ export function RelationshipView({ openPerson }) {
                 <button className="text-link" onClick={() => openPerson(a.id)}>
                   {fullName(getP(a.id))}
                 </button>{" "}
-                — {a.from} generation(s) from the first person, {a.to} from the
-                second
-              </li>
+                — {a.from}{tr(" generation(s) from the first person, ")}{a.to}{tr(" from the second")}</li>
             ))}
           </ul>
         ) : (
-          <p>
-            No shared ancestor is recorded. That does not prove there is none.
-          </p>
+          <p>{tr("No shared ancestor is recorded. That does not prove there is none.")}</p>
         )}
       </Panel>
     </FeaturePage>

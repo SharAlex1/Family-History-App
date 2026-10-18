@@ -1,3 +1,4 @@
+import { tr } from "../../i18n/index.js";
 import React from "react";
 import { useData } from "../../state/DataContext.jsx";
 import { fullName } from "../../utils/people.js";
@@ -26,15 +27,15 @@ export function Panel({ title, children, ...props }) {
 export function PersonPicker({
   value,
   onChange,
-  label = "Person",
+  label = tr("Person"),
   optional = false,
 }) {
   const { data } = useData();
   return (
     <label className="studio-field">
-      {label}
+      {tr(label)}
       <select value={value} onChange={(e) => onChange(e.target.value)}>
-        {optional && <option value="">All / unspecified</option>}
+        {optional && <option value="">{tr("All / unspecified")}</option>}
         {data.people.map((p) => (
           <option key={p.id} value={p.id}>
             {fullName(p)}
@@ -47,15 +48,15 @@ export function PersonPicker({
 export function ErrorNotice({ message }) {
   return message ? (
     <p role="alert" className="feature-error">
-      {message}
+      {tr(message)}
     </p>
   ) : null;
 }
-export function CheckPeople({ value, onChange, label = "People tagged" }) {
+export function CheckPeople({ value, onChange, label = tr("People tagged") }) {
   const { data } = useData();
   return (
     <label className="studio-field">
-      {label}
+      {tr(label)}
       <select
         multiple
         size={Math.min(5, Math.max(2, data.people.length))}
@@ -70,7 +71,7 @@ export function CheckPeople({ value, onChange, label = "People tagged" }) {
           </option>
         ))}
       </select>
-      <small>Use Ctrl/Command or Shift to select multiple people.</small>
+      <small>{tr("Use Ctrl/Command or Shift to select multiple people.")}</small>
     </label>
   );
 }

@@ -1,3 +1,4 @@
+import { tr } from "../../i18n/index.js";
 import React, { useEffect, useState } from "react";
 import { useData } from "../../state/DataContext.jsx";
 import {
@@ -58,11 +59,11 @@ export function JourneyView({ setYear, openPerson }) {
   );
   return (
     <FeaturePage
-      title="Follow their journey"
-      description="A guided trip through a relative’s recorded residences, with evidence at each stop."
+      title={tr("Follow their journey")}
+      description={tr("A guided trip through a relative’s recorded residences, with evidence at each stop.")}
     >
       <PersonPicker
-        label="Journey person"
+        label={tr("Journey person")}
         value={id}
         onChange={(value) => {
           setId(value);
@@ -72,7 +73,7 @@ export function JourneyView({ setYear, openPerson }) {
       />
       <div className="feature-actions">
         <Btn disabled={!stops.length} onClick={() => setPlaying((v) => !v)}>
-          {playing ? "Pause journey" : "Play journey"}
+          {playing ? tr("Pause journey") : tr("Play journey")}
         </Btn>
         <Btn
           disabled={index === 0}
@@ -80,23 +81,19 @@ export function JourneyView({ setYear, openPerson }) {
             setPlaying(false);
             setIndex((i) => i - 1);
           }}
-        >
-          Previous stop
-        </Btn>
+        >{tr("Previous stop")}</Btn>
         <Btn
           disabled={index >= stops.length - 1}
           onClick={() => {
             setPlaying(false);
             setIndex((i) => i + 1);
           }}
-        >
-          Next stop
-        </Btn>
-        <Btn onClick={() => openPerson(id)}>Open traveler profile</Btn>
+        >{tr("Next stop")}</Btn>
+        <Btn onClick={() => openPerson(id)}>{tr("Open traveler profile")}</Btn>
         <span>
           {stops.length
-            ? `Stop ${index + 1} of ${stops.length}`
-            : "No residences recorded"}
+            ? tr("Stop {{v0}} of {{v1}}", {v0: index + 1, v1: stops.length})
+            : tr("No residences recorded")}
         </span>
       </div>
       <div className="journey-map">
@@ -105,8 +102,8 @@ export function JourneyView({ setYear, openPerson }) {
           role="img"
           aria-label={
             at
-              ? `${fullName(p)} in ${getL(at.at).name}, ${at.from}`
-              : "No journey stops"
+              ? tr("{{v0}} in {{v1}}, {{v2}}", {v0: fullName(p), v1: getL(at.at).name, v2: at.from})
+              : tr("No journey stops")
           }
         >
           <rect width="1000" height="400" fill="#0b0d13" />
@@ -158,22 +155,19 @@ export function JourneyView({ setYear, openPerson }) {
       </div>
       {at ? (
         <div className="feature-grid">
-          <Panel title={`${at.from} · ${getL(at.at).name}`}>
+          <Panel title={tr("{{v0}} · {{v1}}", {v0: at.from, v1: getL(at.at).name})}>
             <p>
               {fullName(p)}{" "}
-              {index === 0 ? "is first recorded living" : "arrives"} in{" "}
+              {index === 0 ? tr("is first recorded living") : tr("arrives")}{tr(" in")}{" "}
               {getL(at.at).name}
               {stops[index + 1]
-                ? `, until the next recorded move in ${stops[index + 1].from}`
+                ? tr(", until the next recorded move in {{v0}}", {v0: stops[index + 1].from})
                 : ""}
               .
             </p>
             <p>{getL(at.at).desc}</p>
             {getL(at.at).unmapped && (
-              <p>
-                Coordinates are not recorded for this stop; no geographic pin is
-                shown.
-              </p>
+              <p>{tr("Coordinates are not recorded for this stop; no geographic pin is shown.")}</p>
             )}
             <ol>
               {events.map((e) => (
@@ -186,12 +180,10 @@ export function JourneyView({ setYear, openPerson }) {
               ))}
             </ol>
             {!events.length && (
-              <p className="feature-muted">
-                No linked events are recorded for this stop yet.
-              </p>
+              <p className="feature-muted">{tr("No linked events are recorded for this stop yet.")}</p>
             )}
           </Panel>
-          <Panel title="Evidence at this stop">
+          <Panel title={tr("Evidence at this stop")}>
             {docs.map((doc) => (
               <article key={doc.id}>
                 <h4>{doc.title}</h4>
@@ -202,19 +194,13 @@ export function JourneyView({ setYear, openPerson }) {
               </article>
             ))}
             {!docs.length && (
-              <p>
-                Add and tag photographs or records from these years in the
-                archive.
-              </p>
+              <p>{tr("Add and tag photographs or records from these years in the archive.")}</p>
             )}
           </Panel>
         </div>
       ) : (
-        <Panel title="Start with a residence">
-          <p>
-            Edit this person and record where they lived and when. The journey
-            uses those records, without inventing missing stops.
-          </p>
+        <Panel title={tr("Start with a residence")}>
+          <p>{tr("Edit this person and record where they lived and when. The journey uses those records, without inventing missing stops.")}</p>
         </Panel>
       )}
       <ol className="journey-stops">

@@ -1,3 +1,4 @@
+import {tr} from "../i18n/index.js";
 export function relativeIds(people, root, direction = "ancestors", depth = 5) {
   const byId = new Map(people.map((p) => [p.id, p])),
     seen = new Set([root]);
@@ -55,7 +56,7 @@ function ancestorLabel(distance, gender) {
 export function findRelationship(people, from, to) {
   const byId = new Map(people.map((p) => [p.id, p]));
   if (!byId.has(from) || !byId.has(to))
-    return { label: "Choose two people", path: [], common: [] };
+    return { label: tr("Choose two people"), path: [], common: [] };
   const a = byId.get(from),
     b = byId.get(to),
     da = ancestorDistances(people, from),
@@ -66,14 +67,14 @@ export function findRelationship(people, from, to) {
   const edges = (p) => [
     ...p.parents.map((id) => ({
       id,
-      label: `${p.parentTypes?.[id] || "recorded"} parent`,
+      label: tr("{{v0}} parent", {v0: p.parentTypes?.[id] || "recorded"}),
     })),
     ...p.children.map((id) => ({
       id,
-      label: `child (${byId.get(id)?.parentTypes?.[p.id] || "recorded"})`,
+      label: tr("child ({{v0}})", {v0: byId.get(id)?.parentTypes?.[p.id] || "recorded"}),
     })),
-    ...p.spouses.map((id) => ({ id, label: "spouse" })),
-    ...(p.siblings || []).map((id) => ({ id, label: "recorded sibling" })),
+    ...p.spouses.map((id) => ({ id, label: tr("spouse") })),
+    ...(p.siblings || []).map((id) => ({ id, label: tr("recorded sibling") })),
   ];
   const queue = [from],
     previous = new Map([[from, null]]);
@@ -93,7 +94,7 @@ export function findRelationship(people, from, to) {
       path.unshift({ id, label: prev.label });
       id = prev.id;
     }
-    path.unshift({ id: from, label: "start" });
+    path.unshift({ id: from, label: tr("start") });
   }
   let label = "No recorded connection";
   if (from === to) label = "Same person";

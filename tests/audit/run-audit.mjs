@@ -44,6 +44,7 @@ const upload = async (p, raw) => {
  await p.locator('input[type=file]').setInputFiles({ name: 'archive.json', mimeType: 'application/json', buffer: Buffer.from(typeof raw === 'string' ? raw : JSON.stringify(raw)) });
 };
 async function run(id, name, fn, options = {}) {
+ if (process.env.AUDIT_FILTER && !process.env.AUDIT_FILTER.split(',').includes(id)) return;
  if (process.env.AUDIT_IDS && !process.env.AUDIT_IDS.split(',').includes(id)) return;
  const context = await browser.newContext({ viewport: options.viewport || { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
  const page = await context.newPage();

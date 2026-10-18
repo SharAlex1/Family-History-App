@@ -1,3 +1,4 @@
+import {tr} from "../i18n/index.js";
 import { makeSeed } from "../data/seed.js";
 import { validateArchive, reconcile } from "./archive.js";
 
@@ -34,12 +35,12 @@ export function parseArchive(raw) {
       Array.isArray(d[k]),
     )
   )
-    throw new Error("Choose a complete Family Atlas JSON archive.");
+    throw new Error(tr("Choose a complete Family Atlas JSON archive."));
   if (
     d._revision != null &&
     (!Number.isSafeInteger(d._revision) || d._revision < 0)
   )
-    throw new Error("Invalid archive revision.");
+    throw new Error(tr("Invalid archive revision."));
   const normalized = normalize(d);
   validateArchive(normalized);
   return validateArchive(reconcile(normalized));
@@ -57,7 +58,7 @@ export function readArchive() {
     return {
       data: reconcile(makeSeed()),
       raw,
-      error: `Could not read the saved archive: ${error.message}. The original has not been overwritten. Export it for recovery, or import a valid archive.`,
+      error: tr("Could not read the saved archive: {{message}}. The original has not been overwritten. Export it for recovery, or import a valid archive.",{message:error.message}),
     };
   }
 }
@@ -66,7 +67,7 @@ export function backupArchive(raw) {
 }
 export function readBackup() {
   const raw = window.localStorage.getItem(BACKUP_KEY);
-  if (!raw) throw new Error("No previous archive backup is available.");
+  if (!raw) throw new Error(tr("No previous archive backup is available."));
   return parseArchive(raw);
 }
 export function writeArchive(data, expectedRevision, backup = false) {
@@ -74,7 +75,7 @@ export function writeArchive(data, expectedRevision, backup = false) {
   const current = raw ? JSON.parse(raw) : null;
   if ((current?._revision || 0) !== expectedRevision)
     throw new Error(
-      "Another tab changed this archive. Export your unsaved work, then load the latest archive.",
+      tr("Another tab changed this archive. Export your unsaved work, then load the latest archive."),
     );
   if (backup) backupArchive(raw);
   const saved = { ...data, schemaVersion: 2, _revision: expectedRevision + 1 };

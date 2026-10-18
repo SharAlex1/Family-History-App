@@ -1,3 +1,4 @@
+import { tr, locale } from "../../i18n/index.js";
 import React, { useEffect, useRef, useState } from "react";
 import { useData } from "../../state/DataContext.jsx";
 import {
@@ -47,7 +48,7 @@ export function InterviewView() {
     setError("");
     if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
       setError(
-        "Recording is unavailable in this browser. Upload an existing audio file below.",
+        tr("Recording is unavailable in this browser. Upload an existing audio file below."),
       );
       return;
     }
@@ -85,7 +86,7 @@ export function InterviewView() {
       r.onerror = () => {
         if (mounted.current) {
           setError(
-            "Recording stopped unexpectedly. Review the audio before saving or try recording again.",
+            tr("Recording stopped unexpectedly. Review the audio before saving or try recording again."),
           );
           setRecording(false);
         }
@@ -95,7 +96,7 @@ export function InterviewView() {
       setRecording(true);
     } catch (e) {
       stream.current?.getTracks().forEach((t) => t.stop());
-      setError(`Microphone could not start: ${e.message}`);
+      setError(tr("Microphone could not start: {{v0}}", {v0: e.message}));
     } finally {
       if (mounted.current) setBusy(false);
     }
@@ -105,6 +106,7 @@ export function InterviewView() {
     const recognition = new Speech();
     recognizer.current = recognition;
     recognition.continuous = true;
+    recognition.lang = locale();
     recognition.interimResults = false;
     recognition.onresult = (e) => {
       let text = "";
@@ -114,7 +116,7 @@ export function InterviewView() {
     };
     recognition.onerror = (e) => {
       setError(
-        `Live transcription stopped (${e.error}). The recording is separate; edit or type its transcript below.`,
+        tr("Live transcription stopped ({{v0}}). The recording is separate; edit or type its transcript below.", {v0: e.error}),
       );
       setSpeech(false);
     };
@@ -131,7 +133,7 @@ export function InterviewView() {
   async function save(e) {
     e.preventDefault();
     if (recording) {
-      setError("Stop the recording before saving.");
+      setError(tr("Stop the recording before saving."));
       return;
     }
     setBusy(true);
@@ -142,8 +144,8 @@ export function InterviewView() {
       const interview = {
         id: uid("interview"),
         personId,
-        title: title.trim() || prompt,
-        prompt,
+        title: title.trim() || tr(prompt),
+        prompt: tr(prompt),
         transcript,
         documentId,
         createdAt: new Date().toISOString(),
@@ -181,83 +183,62 @@ export function InterviewView() {
   }
   return (
     <FeaturePage
-      title="Oral history studio"
-      description="Capture a relative’s voice, keep the original recording, and link an editable transcript to their profile."
+      title={tr("Oral history studio")}
+      description={tr("Capture a relative’s voice, keep the original recording, and link an editable transcript to their profile.")}
     >
       <ErrorNotice message={error} />
       <div className="feature-grid">
-        <Panel title="Interview recorder">
+        <Panel title={tr("Interview recorder")}>
           <form className="studio-form" onSubmit={save}>
             <PersonPicker
-              label="Interview subject"
+              label={tr("Interview subject")}
               value={personId}
               onChange={setPersonId}
             />
-            <label className="studio-field">
-              Interview title
-              <input value={title} onChange={(e) => setTitle(e.target.value)} />
+            <label className="studio-field">{tr("Interview title")}<input value={title} onChange={(e) => setTitle(e.target.value)} />
             </label>
-            <label className="studio-field">
-              Interview prompt
-              <select
+            <label className="studio-field">{tr("Interview prompt")}<select
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
               >
                 {PROMPTS.map((p) => (
-                  <option key={p}>{p}</option>
+                  <option key={p} value={p}>{tr(p)}</option>
                 ))}
               </select>
             </label>
             <div className="feature-actions">
-              <Btn disabled={recording || busy} onClick={start}>
-                Start recording
-              </Btn>
+              <Btn disabled={recording || busy} onClick={start}>{tr("Start recording")}</Btn>
               <Btn
                 disabled={!recording}
                 onClick={() => recorder.current?.stop()}
-              >
-                Stop recording
-              </Btn>
+              >{tr("Stop recording")}</Btn>
               {Speech && (
-                <Btn disabled={speech} onClick={startSpeech}>
-                  Start live transcription
-                </Btn>
+                <Btn disabled={speech} onClick={startSpeech}>{tr("Start live transcription")}</Btn>
               )}
               {speech && (
-                <Btn onClick={() => recognizer.current?.stop()}>
-                  Stop transcription
-                </Btn>
+                <Btn onClick={() => recognizer.current?.stop()}>{tr("Stop transcription")}</Btn>
               )}
             </div>
             <p role="status">
               {recording
-                ? "Recording microphone…"
+                ? tr("Recording microphone…")
                 : file
-                  ? `Recording ready: ${file.name}`
-                  : "No recording selected."}
+                  ? tr("Recording ready: {{v0}}", {v0: file.name})
+                  : tr("No recording selected.")}
             </p>
-            <label className="studio-field">
-              Or upload an existing recording
-              <input
+            <label className="studio-field">{tr("Or upload an existing recording")}<input
                 type="file"
                 accept="audio/*"
                 disabled={recording}
                 onChange={(e) => setFile(e.target.files[0] || null)}
               />
             </label>
-            <p className="feature-muted">
-              Live transcription is optional and browser-dependent; your browser
-              may use its speech service. It is never started automatically.
-              Uploaded recordings require a typed transcript here; no background
-              transcription service is configured.
-            </p>
-            <label className="studio-field">
-              Transcript
-              <textarea
+            <p className="feature-muted">{tr("Live transcription is optional and browser-dependent; your browser may use its speech service. It is never started automatically. Uploaded recordings require a typed transcript here; no background transcription service is configured.")}</p>
+            <label className="studio-field">{tr("Transcript")}<textarea
                 rows={9}
                 value={transcript}
                 onChange={(e) => setTranscript(e.target.value)}
-                placeholder="Type, paste, or review the transcript. Identify uncertain words rather than guessing."
+                placeholder={tr("Type, paste, or review the transcript. Identify uncertain words rather than guessing.")}
               />
             </label>
             <Btn
@@ -267,11 +248,11 @@ export function InterviewView() {
                 busy || recording || !personId || (!transcript.trim() && !file)
               }
             >
-              {busy ? "Saving interview…" : "Save interview"}
+              {busy ? tr("Saving interview…") : tr("Save interview")}
             </Btn>
           </form>
         </Panel>
-        <Panel title="Saved interviews">
+        <Panel title={tr("Saved interviews")}>
           {(data.interviews || [])
             .filter((i) => i.personId === personId)
             .map((i) => (
@@ -286,9 +267,7 @@ export function InterviewView() {
                     }
                   />
                 )}
-                <label className="studio-field">
-                  Edit transcript
-                  <textarea
+                <label className="studio-field">{tr("Edit transcript")}<textarea
                     rows={5}
                     defaultValue={i.transcript}
                     onBlur={async (e) => {
@@ -300,7 +279,7 @@ export function InterviewView() {
                               ?.transcript !== i.transcript
                           )
                             throw new Error(
-                              "This transcript changed in another tab. Reopen Oral History before editing it.",
+                              tr("This transcript changed in another tab. Reopen Oral History before editing it."),
                             );
                           return {
                             ...d,
@@ -319,30 +298,23 @@ export function InterviewView() {
                   />
                 </label>
                 <div className="feature-actions">
-                  <Btn small onClick={() => exportTranscript(i)}>
-                    Export transcript
-                  </Btn>
+                  <Btn small onClick={() => exportTranscript(i)}>{tr("Export transcript")}</Btn>
                   <Btn
                     small
                     onClick={() => {
                       if (
                         window.confirm(
-                          "Delete this interview? Its archive recording will be retained.",
+                          tr("Delete this interview? Its archive recording will be retained."),
                         )
                       )
                         actions.remove("interviews", i.id);
                     }}
-                  >
-                    Delete interview
-                  </Btn>
+                  >{tr("Delete interview")}</Btn>
                 </div>
               </article>
             ))}
           {!(data.interviews || []).some((i) => i.personId === personId) && (
-            <p>
-              Record or upload an interview, or save a written answer to get
-              started.
-            </p>
+            <p>{tr("Record or upload an interview, or save a written answer to get started.")}</p>
           )}
         </Panel>
       </div>

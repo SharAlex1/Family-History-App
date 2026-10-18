@@ -1,3 +1,4 @@
+import {tr} from "../i18n/index.js";
 import { parseFamilyDate } from "./dates.js";
 export const EXTRA_COLLECTIONS = [
   "interviews",
@@ -13,22 +14,22 @@ export function validateExtensions(d) {
   };
   const string = (x, name, required = false) => {
     if (typeof x !== "string" || (required && !x.trim()))
-      fail(`${name} must be text${required ? " and cannot be empty" : ""}.`);
+      fail(tr("{{v0}} must be text{{v1}}.", {v0: tr(name), v1: required ? " and cannot be empty" : ""}));
   };
   const has = (key, id) => d[key].some((row) => row.id === id);
   const ref = (key, id, name, optional = false) => {
     if (optional && !id) return;
-    if (!has(key, id)) fail(`${name} refers to a missing record.`);
+    if (!has(key, id)) fail(tr("{{v0}} refers to a missing record.", {v0: tr(name)}));
   };
   for (const key of EXTRA_COLLECTIONS) {
     if (d[key] === undefined) continue;
-    if (!Array.isArray(d[key])) fail(`Invalid ${key} collection.`);
+    if (!Array.isArray(d[key])) fail(tr("Invalid {{v0}} collection.", {v0: tr(key)}));
     const ids = new Set();
     for (const r of d[key]) {
       if (!r || typeof r !== "object" || Array.isArray(r))
-        fail(`Invalid ${key} record.`);
+        fail(tr("Invalid {{v0}} record.", {v0: tr(key)}));
       string(r.id, "ID", true);
-      if (ids.has(r.id)) fail(`Duplicate ${key} ID.`);
+      if (ids.has(r.id)) fail(tr("Duplicate {{v0}} ID.", {v0: tr(key)}));
       ids.add(r.id);
     }
   }
@@ -37,7 +38,7 @@ export function validateExtensions(d) {
       if (p[`${kind}Date`]) {
         string(p[`${kind}Date`], `${kind} date`);
         const parsed = parseFamilyDate(p[`${kind}Date`]);
-        if (parsed.year !== p[kind]) fail(`${kind} date and year disagree.`);
+        if (parsed.year !== p[kind]) fail(tr("{{v0}} date and year disagree.", {v0: kind}));
       }
     if (p.parentTypes !== undefined) {
       if (
@@ -45,24 +46,24 @@ export function validateExtensions(d) {
         typeof p.parentTypes !== "object" ||
         Array.isArray(p.parentTypes)
       )
-        fail("Invalid parentage types.");
+        fail(tr("Invalid parentage types."));
       for (const [id, type] of Object.entries(p.parentTypes))
         if (
           !p.parents.includes(id) ||
           !["biological", "adoptive", "step", "unknown"].includes(type)
         )
-          fail("Invalid parentage link.");
+          fail(tr("Invalid parentage link."));
     }
   }
   for (const e of d.events)
     if (e.date) {
       const parsed = parseFamilyDate(e.date);
-      if (parsed.year !== e.year) fail("Event date and year disagree.");
+      if (parsed.year !== e.year) fail(tr("Event date and year disagree."));
     }
   const attachments = new Map();
   for (const doc of d.documents) {
     if (doc.files !== undefined && !Array.isArray(doc.files))
-      fail("Invalid attachment list.");
+      fail(tr("Invalid attachment list."));
     for (const f of doc.files || []) {
       string(f.id, "Attachment ID", true);
       string(f.name, "Attachment name", true);
@@ -74,10 +75,10 @@ export function validateExtensions(d) {
         !/^[a-f0-9]{64}$/.test(f.sha256) ||
         f.id !== `file_${f.sha256}`
       )
-        fail("Invalid attachment metadata.");
+        fail(tr("Invalid attachment metadata."));
       const previous = attachments.get(f.id);
       if (previous && (previous.type !== f.type || previous.size !== f.size))
-        fail("Conflicting attachment metadata.");
+        fail(tr("Conflicting attachment metadata."));
       attachments.set(f.id, f);
     }
     if (doc.caption != null) string(doc.caption, "Caption");
@@ -87,7 +88,7 @@ export function validateExtensions(d) {
       p.photoFileId &&
       !attachments.get(p.photoFileId)?.type.startsWith("image/")
     )
-      fail("Profile photograph must reference an attached image.");
+      fail(tr("Profile photograph must reference an attached image."));
   for (const r of d.interviews || []) {
     ref("people", r.personId, "Interview person");
     ref("documents", r.documentId, "Interview recording", true);
@@ -100,26 +101,26 @@ export function validateExtensions(d) {
     for (const k of ["field", "value", "page", "quote", "notes"])
       string(r[k], k, ["field", "value"].includes(k));
     if (!["unverified", "supported", "disputed"].includes(r.status))
-      fail("Invalid evidence status.");
+      fail(tr("Invalid evidence status."));
   }
   for (const r of d.researchTasks || []) {
     ref("people", r.personId, "Research person", true);
     string(r.title, "Research question", true);
     string(r.notes, "Research notes");
     if (!["open", "in-progress", "done"].includes(r.status))
-      fail("Invalid research status.");
+      fail(tr("Invalid research status."));
   }
   for (const r of d.memories || []) {
     if (!["people", "events", "documents"].includes(r.subjectKind))
-      fail("Invalid memory subject.");
+      fail(tr("Invalid memory subject."));
     ref(r.subjectKind, r.subjectId, "Memory subject");
     string(r.author, "Contributor", true);
     string(r.text, "Memory", true);
     string(r.createdAt, "Contribution date", true);
     if (!Number.isFinite(Date.parse(r.createdAt)))
-      fail("Invalid contribution date.");
+      fail(tr("Invalid contribution date."));
     if (!["memory", "correction", "question"].includes(r.kind))
-      fail("Invalid memory kind.");
+      fail(tr("Invalid memory kind."));
     if (
       r.replyTo &&
       !(d.memories || []).some(
@@ -129,7 +130,7 @@ export function validateExtensions(d) {
           m.subjectKind === r.subjectKind,
       )
     )
-      fail("Missing parent memory.");
+      fail(tr("Missing parent memory."));
   }
   const memories = new Map((d.memories || []).map((m) => [m.id, m])),
     visited = new Set();
@@ -137,7 +138,7 @@ export function validateExtensions(d) {
     const active = new Set();
     let current = memory;
     while (current && !visited.has(current.id)) {
-      if (active.has(current.id)) fail("Contribution replies contain a cycle.");
+      if (active.has(current.id)) fail(tr("Contribution replies contain a cycle."));
       active.add(current.id);
       current = memories.get(current.replyTo);
     }
@@ -147,7 +148,7 @@ export function validateExtensions(d) {
     string(r.title, "Book title", true);
     string(r.narrative, "Book narrative");
     string(r.createdAt, "Book date", true);
-    if (!Array.isArray(r.people)) fail("Invalid book people.");
+    if (!Array.isArray(r.people)) fail(tr("Invalid book people."));
     r.people.forEach((id) => ref("people", id, "Book person"));
   }
   for (const r of d.reminders || []) {
@@ -161,7 +162,7 @@ export function validateExtensions(d) {
       r.day < 1 ||
       r.day > new Date(Date.UTC(2000, r.month, 0)).getUTCDate()
     )
-      fail("Invalid reminder date.");
+      fail(tr("Invalid reminder date."));
   }
 }
 export function cleanExtensions(d, kind, id) {
