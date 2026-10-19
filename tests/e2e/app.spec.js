@@ -22,6 +22,7 @@ test('all views render, time changes, and edited data survives reload', async ({
   await page.getByRole('textbox', {name:'Last name',exact:true}).fill('Relative');
   await page.getByRole('spinbutton', {name:'Birth year',exact:true}).fill('1990');
   await page.locator('.fa-modal').getByRole('button', { name: /Save/ }).click();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
   await page.reload();
   await page.locator('nav').getByRole('button', { name: 'People', exact: true }).click();
   await expect(page.getByText('Test Relative', { exact: true })).toBeVisible();
